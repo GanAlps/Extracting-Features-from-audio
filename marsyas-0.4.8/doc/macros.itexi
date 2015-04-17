@@ -1,0 +1,89 @@
+@c -*- coding: latin-1; mode: texinfo; -*-
+
+@c Different figure types
+
+@macro imgfigure{REF,CAPTION,IMG}
+@float Figure,\REF\
+@image{\IMG\}
+@caption{\CAPTION\}
+@end float
+@end macro
+
+@macro examplefilefigure{REF,CAPTION,FILENAME}
+@float Figure,\REF\
+@examplefile{\FILENAME\}
+@caption{\CAPTION\}
+@end float
+@end macro
+
+@macro examplefile{FILENAME}
+@ifhtml
+@html
+@verbatiminclude source-doc/\FILENAME\.html
+@end html
+@end ifhtml
+@ifnothtml
+@subsubheading \FILENAME\
+@include source-doc/\FILENAME\.texinfo
+@end ifnothtml
+@end macro
+
+@macro examplefilenewpage{FILENAME}
+@ifhtml
+@uref{../examples/\FILENAME\.html, \FILENAME\}
+@end ifhtml
+@ifnothtml
+@subsubheading \FILENAME\
+@include source-doc/\FILENAME\.texinfo
+@end ifnothtml
+@end macro
+
+@macro qq{TEXT}
+@ifhtml
+@html
+&ldquo;\TEXT\&rdquo;
+@end html
+@end ifhtml
+@ifnothtml
+``\TEXT\''
+@end ifnothtml
+@end macro
+
+@macro userref{TEXT}
+@ref{\TEXT\,,,marsyas-user,Marsyas User Manual}
+@end macro
+
+@macro develref{TEXT}
+@ref{\TEXT\,,,marsyas-devel,Marsyas Developer's Manual}
+@end macro
+
+@macro WANTED{TEXT}
+@c no particular reason why we use "vr" for this.
+@vindex \TEXT\
+@quotation
+@quotation
+@cartouche
+@subsubheading Help wanted: missing info!
+
+@quotation
+\TEXT\
+@end quotation
+
+@emph{If you can fill in any details, please see
+@develref{Contributing documentation}.}
+
+@end cartouche
+@end quotation
+@end quotation
+@end macro
+
+@macro warning{TEXT}
+@quotation
+@cartouche
+@strong{Warning:} \TEXT\
+@end cartouche
+@end quotation
+@end macro
+
+
+

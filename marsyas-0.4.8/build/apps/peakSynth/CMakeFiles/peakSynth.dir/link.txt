@@ -1,0 +1,1 @@
+/usr/bin/c++   -Wall -Wextra -fPIC -O3 -DNDEBUG    CMakeFiles/peakSynth.dir/peakSynth.cpp.o  -o ../../bin/peakSynth -rdynamic ../../lib/libmarsyas.so -lasound -lpthread -Wl,-rpath,/home/oshogupta/Desktop/HLTCPro/marsyas-0.4.8/build/lib: 

@@ -1,0 +1,4 @@
+LIBRARY ibt_.mxe
+
+EXPORTS
+	main

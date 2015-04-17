@@ -1,0 +1,781 @@
+@node Architecture concepts
+@chapter Architecture concepts
+
+In order to fully take advantage of the capabilities of Marsyas it is
+important to understand how it works internally. The architecture of
+Marsyas reflects an underlying dataflow model that we have found
+useful in implementing real and non-real time audio analysis and
+synthesis systems. In marsyas 0.2 a lot of things can be accomplished
+by assembling complex networks of basic building blocks called
+MarSystems that process data. This is the so
+called @qq{Black-Box} functionality of the framework. In addition the
+programmer can also write directly her/his own building blocks directly
+in C++ following a certain API and coding conventions offering the so
+called @qq{White-Box} functionality.  Building networks is described in
+@ref{Writing applications}, and writing new MarSystems is described
+in @ref{Programming MarSystems}.
+
+@menu
+* Architecture overview::       
+* Implicit patching::           
+* MarSystem composites::        
+* Linking of controls::         
+* Scheduling::                  
+@end menu
+
+
+
+@node Architecture overview
+@section Architecture overview
+
+@menu
+* Building MarSystems::         
+* Dataflow model::              
+@end menu
+
+
+@node Building MarSystems
+@subsection Building MarSystems
+
+The basic idea behind the design of Marsyas is that any audio
+analysis/synthesis computation can be expressed as some type of
+processing object, which we call MarSystem, that reads data from an
+input slice of floating point numbers, performs some
+computation/transformation based on data, and writes the results to
+another slice of floating point numbers.  Networks of MarSystems can
+be combined and encapsulated as one MarSystem.
+
+For example consider an
+audio processing series of computations consisting of reading samples
+from a soundfile, performing an short-time fourier transform (STFT) to
+calculate the complex spectrum, performing an inverse STFT to convert
+back from the frequency domain to time domain, then applying a gain to
+the amplitude of the samples and writing the result to a soundfile.
+
+As is very frequently the case with audio processing networks objects
+the input of each stage is the output of the previous stage.  This way
+of assembling MarSystems is called a Series composite.  Once a Series
+Composite is formed it can basically be used as one MarSystem that
+does the whole thing. A figure showing a block diagram-like
+presentation of this network is shown in the next section.
+
+
+@node Dataflow model
+@subsection Dataflow model
+
+Marsyas follows a dataflow model of audio computation.
+
+@image{images/dataflow,,5cm}
+
+Marsyas uses general matrices instead of 1-D arrays.  This allows
+slices to be semantically correct.
+
+@image{images/slices,,5cm}
+
+
+
+@node Implicit patching
+@section Implicit patching
+
+@menu
+* Implicit patching vs. explicit patching::  
+* Implicit patching advantages::  
+* Patching example of Feature extraction::  
+@end menu
+
+
+@node Implicit patching vs. explicit patching
+@subsection Implicit patching vs. explicit patching
+
+Many audio analysis programs require the user to explicitly (manually)
+connect every processing block,
+
+@example
+# EXPLICIT PATCHING: block definitions
+source, F1, F2, F3, destination;
+# connect the in/out ports of the blocks
+connect(source, F1);
+connect(source, F2);
+connect(source, F3);
+connect(F1, destination);
+connect(F2, destination);
+connect(F3, destination);
+@end example
+
+@image{images/explicit-patching,,4cm}
+
+Marsyas uses @emph{implicit patching}: connections are made
+automagically when blocks are created,
+
+@example
+# IMPLICIT PATCHING
+source, F1, F2, F3, destination;
+Fanout(F1, F2, F3);
+Series(source, Fanout, destination);
+@end example
+
+@image{images/implicit-patching,,5cm}
+
+
+@node Implicit patching advantages
+@subsection Implicit patching advantages 
+
+Creating a neural network with explicit patching soon becomes
+a mess,
+
+@image{images/neural-explicit,,5cm}
+
+With implicit patching, this is much more manageable.
+
+@example
+# IMPLICIT PATCHING
+fanoutLayer1(ANN_Node11, ..., ANN_Node1N);
+...
+fanoutLayerM(ANN_NodeM1, ..., ANN_NodeMN);
+ANN_Series(fanoutLayer1, ..., fanoutLayerM);
+@end example
+
+@image{images/neural-implicit,,5cm}
+
+
+Implicit patching can automagically adjust the connections without
+requiring any code recompiliation.  For example, we can change
+the number of bands in a filter bank without changing any code.
+
+@image{images/implicit-filter-bank,,4cm}
+
+
+
+@node Patching example of Feature extraction
+@subsection Patching example of Feature extraction
+
+Suppose we wish to create a typical feature extraction program:
+
+@image{images/feature-extraction,,5cm}
+
+@example
+MarSystemManager mng; 
+MarSystem* Series1 = mng.create("Series", "Series1"); 
+MarSystem* Fanout1 = mng.create("Fanout", "Fanout1"); 
+MarSystem* Series2 = mng.create("Series", "Series2"); 
+MarSystem* Fanout2 = mng.create("Fanout", "Fanout2"); 
+MarSystem* Fanout3 = mng.create("Fanout", "Fanout3"); 
+Fanout3->addMarSystem(mng.create("Mean", "Mean")); 
+Fanout3->addMarSystem(mng.create("Variance", "Variance")); 
+Fanout2->addMarSystem(mng.create("Centroid", "Centroid")); 
+Fanout2->addMarSystem(mng.create("RollOff", "Rolloff")); 
+Fanout2->addMarSystem(mng.create("Flux", "Flux");
+Series2->addMarSystem(mng.create("Spectrum, "Spectrum"); 
+Series2->addMarSystem(Fanout2); 
+Fanout1->addMarSystem(mng.create("ZeroCrossings", "ZeroCrossings"); 
+Fanout1->addMarSystem(Series2); 
+Series1->addMarSystem(mng.create("SoundFileSource", "Source")); 
+Series1->addMarSystem(Fanout1); 
+Series1->addMarSystem(mng.create("Memory", "TextureMemory")); 
+Series1->addMarSystem(Fanout3); 
+Series1->addMarSystem(mng.create("classifier", "Classifier"));
+@end example
+
+
+
+@node MarSystem composites
+@section MarSystem composites
+
+@WANTED{ descriptions of composites, add the other composites }
+
+
+@menu
+* Series::                      
+* Parallel::                    
+* Fanout::                      
+* Accumulator::                 
+* Shredder::
+@end menu
+
+
+@node Series
+@subsection Series
+
+@image{images/composite-series}
+
+
+The Series composite is the most basic structure for connecting
+MarSystems into dataflow networks through implicit patching. It is
+similar to Unix pipes or the chuck operator in the Chuck programming
+language. The output of the first object in the Series connection
+becomes the input to the second object, the output of the second object
+becomes the input to the third object etc. A MarSystem can potentially
+have different size and characteristics for the input and output
+slices. In Series connections these characteristics are constrained to
+ensure that the output slice of each MarSystem is the same as the input
+slice of the MarSystem that is downstream from it. The figure shows how
+a Series composite can be used to express a complex spectrum computation
+from a windowed segment of audio. The Hanning MarSystem windows the
+incoming segment and the FFT MarSystem converts the audio to a complex
+spectrum. Notice how the dimensions of the slices can change at the
+different stages of processing. 
+ 
+
+
+
+
+@node Parallel
+@subsection Parallel
+
+A Parallel composite is used when you have an input with multiple
+observations (i.e. channels) and you want to run calculations in
+parallel on each of the observations.  This is shown in graphical form
+below:
+
+@image{images/composite-parallel}
+
+In the above diagram, the Parallel MarSystem is fed a realvec with 3
+observations (and a large number of samples).  The MarSystem F1
+receives the first observation, coloured in green.  The second
+MarSystem in the Parallel, F2, gets the second observation, coloured
+in blue, and the third MarSystem, F3, receives the third observation,
+coloured in yellow.
+
+To build this system you would write code that would look something
+like:
+
+@example
+MarSystem* parallel = mng.create("Parallel", "parallel");
+parallel->addMarSystem(mng.create("Gain", "F1"));
+parallel->addMarSystem(mng.create("Gain", "F2"));
+parallel->addMarSystem(mng.create("Gain", "F3"));
+@end example
+
+One real-life use of Parallels is if you have a stereo sound source
+and you want to run an analysis on the left and right channels
+seperately.  An example of generating a spectrum for the right and
+left channels of a sound source would look something like:
+
+@example
+	MarSystem* net = mng.create("Series", "net");
+	net->addMarSystem(mng.create("SoundFileSource", "src"));
+
+	MarSystem* stereobranches = mng.create("Parallel", "stereobranches");
+	MarSystem* left = mng.create("Series", "left");
+	MarSystem* right = mng.create("Series", "right");
+
+	left->addMarSystem(mng.create("Windowing", "hamleft"));
+	left->addMarSystem(mng.create("Spectrum", "spkleft"));
+	left->addMarSystem(mng.create("PowerSpectrum", "leftpspk"));
+
+	right->addMarSystem(mng.create("Windowing", "hamright"));
+	right->addMarSystem(mng.create("Spectrum", "spkright"));
+	right->addMarSystem(mng.create("PowerSpectrum", "rightpspk"));
+
+	stereobranches->addMarSystem(left);
+	stereobranches->addMarSystem(right);
+
+	net->addMarSystem(stereobranches);
+@end example
+
+
+
+
+
+@node Fanout
+@subsection Fanout
+
+A Fanout is another composite MarSytem that, like a Parallel, contains
+other MarSystem.  It differs from a Parallel in that it takes a single
+observation and sends a copy of this observation to all the MarSystems
+inside of it.  This is shown graphically below:
+
+@image{images/composite-fanout}
+
+In the above diagram, we send a realvec with a single observation (and
+many samples) into the Fanout.  The Fanout then makes a copy of this
+data for each of the MarSystems within in.  In the above diagram, it
+makes a copy of the input observation and sends it to F1 (shown in
+green), F2 (shown in blue) and F3 (shown in yellow).  
+
+Thus, the input of the Fanout shown above is one observation (and many
+samples) and the output of the Fanout is three observations (and the
+same number of samples as the input had).
+
+To build this system you would write code that would look something
+like:
+
+@example
+MarSystem* fanout = mng.create("Fanout", "fanout");
+fanout->addMarSystem(mng.create("Gain", "F1"));
+fanout->addMarSystem(mng.create("Gain", "F2"));
+fanout->addMarSystem(mng.create("Gain", "F3"));
+@end example
+
+One real-life example of using a Fanout is if you want to run many
+different kinds of algorithms on your data.  For example, you might to
+run a series of different filterbanks on your audio.  To do this you
+would write code that would look something like:
+
+@example
+MarSystem* net = mng.create("Series", "net");
+net->addMarSystem(mng.create("SoundFileSource", "src"));
+
+MarSystem* filterbank = mng.create("Fanout", "filterbank");
+filterbank->addMarSystem(mng.create("Filter", "cf8"));
+filterbank->addMarSystem(mng.create("Filter", "cf12"));
+filterbank->addMarSystem(mng.create("Filter", "cf18"));
+filterbank->addMarSystem(mng.create("Filter", "cf20"));
+
+net->addMarSystem(filterbank);
+@end example
+
+
+
+@node Accumulator
+@subsection Accumulator
+
+An Accumulator MarSystem accumulates result of multiple tick process
+calls to internal MarSystem.  It then generates output only once when
+all the results are accumulated.  It is used to change the rate of
+process requests.
+
+For example, if the nTimes control for the Accumulator is set to 6,
+then each time the Accumulator receives a tick(), it sends 6 tick()s
+to the MarSystems that are inside it.  This is shown graphically below:
+
+@image{images/composite-accumulator}
+
+One common use case for an Accumlator is if your algorithm needs to
+operate on a block of data, for example, it might need to analyze a
+number of frames of an FFT in order to detect a particular audio
+event.  
+
+An example of using an Accumulator could look like be:
+
+@example
+MarSystem* net = mng.create("Series", "net");
+
+MarSystem* acc = mng.create("Accumulator", "acc");
+MarSystem* accuInternal = mng.create("Series", "accuInternal");
+
+accuInternal->addMarSystem(mng.create("SoundFileSource", "src"));
+accuInternal->addMarSystem(mng.create("Windowing", "ham"));
+accuInternal->addMarSystem(mng.create("Spectrum", "spk"));
+acc->addMarSystem(accuInternal); 
+
+//IMPORTANT NOTE:
+//
+//note that you can only add one Marsystem to an Accumulator
+//any additional Systems added are simply ignored outputwise !!
+//e.g. if you want to use multiple Marsystems in a row and accumulate
+//their combined output, you need to put them in a series which you add 
+//to the accumulator
+
+net->addMarSystem(acc); 
+net->updctrl("mrs_natural/inSamples", 512);	
+
+net->updctrl("Accumulator/acc/mrs_natural/nTimes", 10);
+@end example
+
+In the above example, a SoundFileSource is followed by a hamming
+Window, a Spectrum and a PowerSpectrum.  All of these are added to an
+Accumulator, which is then added to a global Series.  The nTimes
+control of the Accumulator is then set to 10.  
+
+The output of this MarSystem would be a realvec with 512 observations,
+corresponding to each of the bins of the FFT generated by the
+Spectrum, and with 10 columns (or samples).  Your algorithm could then analyze this
+two-dimensional matrix to look for the audio feature you are
+investigating.
+
+@node Shredder
+@subsection Shredder
+
+A Shredder composite MarSystem does the inverse to what an Accumulator
+does.  While an Accumulator builds up a realvec containing the results
+from multiple ticks, a Shredder splits this realvec into multiple
+chunks, effectively increasing the rate at which data is output.
+
+A toy example of using both a Shredder and an Accumulator together
+would look something like:
+
+@example
+MarSystem* net = mng.create("Series", "net");
+MarSystem* acc = mng.create("Accumulator", "acc");
+MarSystem* shred = mng.create("Shredder", "shred");
+
+acc->addMarSystem(mng.create("SoundFileSource", "src"));
+net->addMarSystem(acc); 
+shred->addMarSystem(mng.create("AudioSink", "dest"));
+net->addMarSystem(shred);
+
+net->updctrl("Accumulator/acc/SoundFileSource/src/mrs_string/filename", sfName);
+net->updctrl("Shredder/shred/AudioSink/dest/mrs_bool/initAudio", true);
+
+net->updctrl("mrs_natural/inSamples", 256);
+
+net->updctrl("Accumulator/acc/mrs_natural/nTimes", 10);
+net->updctrl("Shredder/shred/mrs_natural/nTimes", 10);
+@end example
+
+In the above example, an Accumulator is added first to a global Series
+network, and then a Shredder is added to this Series.  A
+SoundFileSource is then added to the Accumulator, and an AudioSink is
+added to the Shredder.  The nTimes control of both the Shredder and
+Accumulator are then set to 10.
+
+This network would read in data from the SoundFileSource, and the
+Accumulator would build up a buffer of 10 chunks of this audio.  The
+Shredder would then take these 10 slices of audio data and would split
+them back into 10 chunks, which would then be output to the
+AudioSource.  
+
+This whole procedure would be akin to buffering a section of audio 10
+times the size of the number of samples that were input.  So, since we
+set the inSamples of the network to 256, the number of samples output
+by the Acccumulator would be 2560.
+
+@node Linking of controls
+@section Linking of controls 
+
+THIS SECTION WAS JUST A COPY-PASTE FROM A LONG EMAIL FROM THE DEVELOPERS MAILING LIST - STILL NEEDS A BIT OF REVISION, BUT ALREADY PROVIDES IMPORTANT INFORMATION ABOUT THE LINKING OF CONTROLS IN MARSYAS (lgmartins)
+
+This refactoring is the "part II" of the last refactoring to the linking mechanism, done some weeks ago.
+
+In the first part of the refactoring we changed the way linked controls store their values (i.e their data - a real number, an integer, a string, a realvec, etc). Before this refactoring, each control had it's own data allocation, and so everytime we changed a control's value, such change had to be propagated (i.e. copied) to all the linked controls (if any). Such a copy meant that the same data would be replicated in memory a number of times equal to the number of existing links. Furthermore, keeping all those copies in sync each time we change a control value implied a lot of copying. This was really ineficient, both computationally and memory-wise, and all the code for managing such a synchronization was a mess.
+
+So, the first step was to make all MarControls that are linked to each other share a same MarControlValue (i.e. the marsyas object that in fact stores in memory the data in MarControls). This automatically solves the synchronization problem, although it may create some others if we start thinking about multi-treaded code in Marsyas (but let's forget about multi-threads for now).
+
+When linking a control (let's say ctrl_A) to another control (ctrl_B), it's now just a matter of instructing control_A to start using the MarControlValue used by control_B. The old MarControlValue of ctrl_A can therefore be deleted from memory, in case no other MarControl is still pointing to it (i.e. refcounting).
+
+To do so, in marsyas pseuso-code, we would write:
+
+@example
+ctrl_A->linkTo(ctrl_B);
+@end example
+
+Or, in case we didn't have the direct pointer to the controls, using their pathnames and the MarSystem API:
+
+@example
+msys->linkControl("mrs_xxx/A", "mrs_xxx/B");
+@end example
+
+This brings us to the first important detail: during the linking of two controls, it's important the order of the linking operation. Doing ctrl_A->linkTo(ctrl_B) will discard the current value of ctrl_A, which will now use the value currently stored in ctrl_B. If we reverse it (ctrl_B->linkTo(ctrl_A);), ctrl_B value will be discarded (we can think as "overwriten") in favour of the value of ctrl_A. This is only relevant at the time of the linking operation, and users should, if nothing else, be aware of which value the want to keep when linking two controls. Of course, after the linking is done, changing the value of ctrl_B will also change the value of ctrl_A, and vice-versa, making this detail syntatically meaningless.
+
+However, this order of the linking operation is now stored internally by all MarControls in marsyas. And the reason for this has to do with the unlinking operation of controls. This was the work done in "part II" of the linking/unlinking refactoring, just completed today.
+
+In the first stage of the refactoring, we were not storing anywhere the order of the linking of two controls. So we just kept a table with references to all the MarControls linked together (i.e. sharing the same value/data), without any information to who linked to whom originally.
+
+This was quite elegant in fact, allowing to easily unlink any control from a set of linked controls by just cloning in memory its current value (i.e. creating a new but equal valued MarControlValue object), removing it from the reference table of the MarControlValue object holding its value, and re-pointing the control to, from that time on, start using the new cloned data object instead.
+
+The problem is that in Marsyas, the most interesting use of unlinking controls is a bit more demanding. The way just described of completely unlinking a control from all the other linked controls may not be desirable at all.
+
+Suppose the following scenario: we have a composite MarSystem (i.e. a MarSystem with other MarSystems inside, connected in series, for e.g.) where we have a control (say, ctrl_X) that we want to always link to, for example, the output control of the last child MarSystem (let's say ctrl_processedData control of the last child MarSystem). This is exactly the case of the composite FlowThru, so you can refer to its .cpp/.h code for an actual implementation. So we start by linking ctrl_X to the ctrl_processedData of the last child:
+
+@example
+ctrl_processedData = msys->getctrl("xxx/lastChildMsys1/mrs_realvec/processedData");
+ctrl_X->linkTo(ctrl_processedData);
+@end example
+
+Semanticaly, this is the order that makes more sense (but nothing prevents us to do it the other way around - the link will work as well!), since we are overwriting ctrl_X's value with the current value of ctrl_processedData, which is in fact an "output" control (controls in Marsyas do not have an explicit in/out attribute - "output" controls are considered controls to which makes no sense writing to because they will be ignored and overwriten by their owning MarSystem; "input" controls on the other hand will be used internally by their owning MarSystem as parameters, but they may also be read to know the current control value currently being used).
+
+Graphically, this link can be represented as:
+
+@example
+ctrl_processedData <--- ctrl_X
+@end example
+
+If we now need to link some other controls from other MarSystems to ctrl_X, we just need to explicitly do it:
+
+@example
+ctrl_Y->linkTo(ctrl_X);
+ctrl_W->linkTo(ctrl_X);
+ctrl_Z->linkTo(ctrl_W); //this control will be indirectly connected to ctrl_X, altough its link target is ctrl_W
+@end example
+
+Graphically:
+
+@example
+ctrl_processedData <--- ctrl_X <--- ctrl_Y
+                            ^
+                            |--- ctrl_W <--- ctrl_Z
+@end example
+
+So, after this we have ctrl_X, ctrl_Y, ctrl_W and ctrl_Z effectively all linked to and sharing the same value with ctrl_processedData, with minimal computational burden and a small memory footprint.
+
+Now imagine that we want to add a new child to the FlowThru composite. Since we want ctrl_X (and all the controls linked to it) sharing the value of the last child in the FlowThru composite, we must update the ctrl_X ---> ctrl_processedData link! In other words, we need to unlink ctrl_X from ctrl_processedData of the previous last child MarSystem, and re-link it to the ctrl_processedData of the new last child of the composite. For that we could think that the following way would cut it:
+
+@example
+ctrl_processedData = msys->getctrl("xxx/lastChildMsys2/mrs_realvec/processedData");
+ctrl_X->unlink();
+ctrl_X->linkTo(ctrl_processedData);
+@end example
+
+However, calling unlink in this way (i.e. the way implemented in "part I" of the refactoring) would unlink ctrl_X from all the other linked controls (i.e. ctrl_W, ctrl_Y, etc) and relinking it alone to the new ctrl_processedData (i.e. represented as (2) below) from the new last child. All the other previously linked controls would still be linked to the same ctrl_processedData of the previous last child in the composite. The only way around this would be to manually keep track of what links would have to be unlinked and relinked to the new control.
+
+Graphically:
+
+@example
+ctrl_processedData(1) <--- ctrl_Y
+                             ^
+                             |--- ctrl_W <--- ctrl_Z
+
+
+ctrl_processedData(2) <--- ctrl_X
+@end example
+
+
+As it is easy to imagine, any minimally complex network of multiple-nested MarSystems and linked controls would be totally insane to manage! Here's an example of what we would have to explicitly do to achieve what we really wanted:
+
+@example
+ctrl_processedData = msys->getctrl("xxx/lastChildMsys2/mrs_realvec/processedData");
+ctrl_X->unlink();
+ctrl_X->linkTo(ctrl_processedData_X);
+ctrl_Y->unlink();
+ctrl_Y->linkTo(ctrl_X);
+ctrl_W->unlink();
+ctrl_W->linkTo(ctrl_X);
+ctrl_Z->unlink();
+ctrl_Z->linkTo(ctrl_W); //we must remind that this one was originally connected to W and not directly to X! :-\
+@end example
+
+(OK, if you managed to follow me till here without getting suicidal tendencies or falling totally asleep, please go to http://marsyas.sness.net/community/getting_involved and welcome aboard ;-)).
+
+The best way to make Marsyas solve this automatically for us was to keep a simple record of the original link orders, as explained above. If we know who originally linked to whom, it's then easy to unlink a control from a set of controls, but keep all the controls that were originally connected (or indirectely connected) still attached to it. So after the "part II" of the refactoring, if we want to reconnect ctrl_X (and all the controls originally linked to it) to the new last child in the composite, we would only need to do:
+
+@example
+ctrl_X->unlinkFromTarget(); //this is in fact not needed! See below...
+ctrl_processedData = msys->getctrl("xxx/lastChildMsys2/mrs_realvec/processedData");
+ctrl_X->linkTo(ctrl_processedData);
+@end example
+
+As it's possible to see, the unlink() method is no longer used (it was deprecated) and we should now use unlinkFromTarget() for achieving the desired result. By "target" I mean the following: everytime we link a control *to* another control (and here we start to see the importance of the order of linking, other than the known issue of which control gets its value overwriten by the other as explained above), we are directly "targeting" or linking to that control. So for the case of ctrl_X, when we linked it to ctrl_processedData, we made the latter the "target" of ctrl_X. As we can see, each control, even if linked to any arbitrary number of controls, only has one "target" control, i.e. the one it was originaly linked to. So, when we call ctrl_X->unlinkFromTarget() above, we are just unlinking ctrl_X from its target (i.e. ctrl_processedData(1) and any other controls that have that control as their target) but keeping the links with all the other controls that have ctrl_X as their direct or indirect target. Graphically we get:
+
+@example
+ctrl_processedData(1)
+
+ctrl_processedData(2) <--- ctrl_X <--- ctrl_Y
+                                ^
+                                |--- ctrl_W <--- ctrl_Z
+@end example
+
+
+In truth, we do not even need to explicitly call unlinkFromTarget() before linking ctrl_X to the new target. Since each linked control can only have one target, re-linking it to other control will automatically unlink it from its previous target.
+
+All these linked controls can be seen as a directed graph problem (but please do not suggest me using Ncuts in it ;-)), where there is no possibility of existing loops (e.g. attemping to link ctrl_X with ctrl_Z, as depicted above, would do nothing, since it's very easy to detect that they are already linked - we just need to compare the pointers to the respective MarControlValue of each MarControl: if they point to the same object it means the controls are already linked, so very easy and efficient to avoid any loops!).
+
+In any case, if we need to completely unlink a control from all its linked controls (regardeless of targets etc - i.e. the way the now deprecated unlink() method worked), we can simply use:
+
+@example
+ctrl_X->unlinkFromAll();
+@end example
+
+Although not so usefull as the former version of unlinking, there are some situations in Marsyas where we need this (if you dare or if you are really curious about this, you can have a look ate MarSystem copy constructor and at the put() method ;-)).
+
+As a conclusion, if when constructing networks of linked controls in Marsyas we take into mind the importance of the linking order, it's really easy to construct semantically meaninful links that will allow easy reconfiguration of MarSystem networks. Actually, this is a mandatory feature if we want in the future to have MarSystem insertion/deletion at runtime, without messing up all the linked controls in the network.
+
+
+@node Scheduling
+@section Scheduling
+
+@menu
+* Scheduling in Marsyas::       
+* Components of the Marsyas Scheduler::  
+@end menu
+
+@node Scheduling in Marsyas
+@subsection Scheduling in Marsyas
+
+Scheduling is the art of delaying actions (events) until later periods in time.
+In Marsyas time and event are are more general than many other systems. This
+allows for a wide range of user specified control rates and actions.
+
+@subsubsection Time
+Time is simply a counter. What it counts is up to the writer of a new timer
+class. The two supplied timers, TmSampleCount and TmRealTime, count audio samples
+and system micro-seconds respectively.
+
+There are a number of issues surrounding control rates in Marsyas and most other
+time-aware processing systems. Marsyas' primary task is to process audio data.
+This data passes through the network in buffers of size N. Usually the network
+is prompted to process the buffer of N samples by an outer loop. During
+processing control of the network is lost as the buffer of data passes through
+each MarSystem object. The scheduler checks for and dispatches events when the
+network is ticked and before the buffer of data passes through the network.
+Events are therefore dispatched at the start of each buffer processed.
+
+Event dispatch is therefore governed by the audio sample rate. Ultimately every
+custom timer bears some relation to the audio sample rate. Since events are
+dispatched at the start of each tick, events are actually dispatched at a rate
+of every N samples. This implies that there is a granularity on event dispatch
+based on the sample rate and buffer size. If an event is to be dispatched at a
+point in time that falls inside a buffer, ie at 256 for a buffer size of 512
+samples, then that event will not be dispatched until the next buffer boundary
+at which point its dispatch time will be <= current counter time.
+
+We might wish to have sample accurate event timing. After all, there are other
+audio processing systems that can claim the accuracy we might desire. The major
+obstacle to achieving this accuracy is due to Marsyas' dataflow architecture.
+When a buffer of N samples passes through the network it is processed multiple
+times (normally once by each object in the network). This means that each sample
+recurs a number of times equal to the number of Marsystems that process it.
+More specifically, if the time is T when the network is ticked, then after the
+first MarSystem processes the buffer of N samples time will be at T+N. The next
+MarSystem will start processing the buffer at time T. In this way, time bounces
+between T and T+N as the buffer passes through the network. This situation makes
+it exceedingly difficult to make the network consistent for events that occur
+between T and T+N. If a control value C is to be changed at time T+K where 0<K<N
+then for C to remain consistent for all MarSystem objects that might be
+interested then it must be changed to the previous state at the start of buffer
+processing then to the new value at the event time - each time the buffer is
+processed. This would be somewhat difficult and computationally expensive to
+accomplish within the dataflow model. For this reason the scheduler only
+dispatches events on buffer boundaries - when the network is ticked - as this is
+the only point when all MarSystems are at the same point in time.
+
+In many systems multiple control rates are desireable. Consider two timers based
+on separate sample rates such as 44.1kHz and 12.34kHz. Since both of these rates
+are regular, that is they repeat at a constant rate, then a simple conversion
+function can be used to convert between the two rates. By converting one of the
+rates to the other a single timer can be used in the scheduler. However for
+other timers an errorless conversion function may not be possible. Consider a
+control rate based on detecting someone tapping a drum stick. The rate of
+tapping could be described as irregular because it is not known exactly when the
+next tap will happen. Combining this timer with the audio sample rate creates
+the problem that no perfect conversion function is possible that can compute
+what the sample time will be for N taps in the future. In Marsyas this problem
+is bypassed through the support of multiple timers. Events are therefore posted
+on the timers they are specified on and no timer conversion takes place.
+
+@subsubsection Event
+An event is simply something that happens at some point in time. In Marsyas
+an event is a class that contains a user-defined function. What this function
+contains is up to the writer and can act on the Marsyas network or outside of
+it. Marsyas is not threaded and neither is the scheduler so the scheduler will
+wait for the event to complete its action before resuming. Be careful not to
+do excessive processing during the dispatch of an event.
+
+@node Components of the Marsyas Scheduler
+@subsection Components of the Marsyas Scheduler
+
+The scheduler is made up of a collection of files from those used by
+the scheduler to those that support it. The classes directly related to
+the scheduler along with their relationships is shown in
+@xref{fig:asch1}.
+
+@c @float Figure,fig:asch1
+@c @image{images/scheduler-class-diagram}
+@c @caption{Scheduler class diagram.}
+@c @end float
+
+@c @imgfigure{fig:asch1,Scheduler class diagram.,images/scheduler-class}
+@float Figure, fig:asch1
+@image{images/scheduler-class}
+@caption{Scheduler class diagram.}
+@end float
+
+@subsubsection MarSystem
+Each MarSystem object has its own scheduler. This makes it possbile to
+post events on the MarSystem object directly. However, once a MarSystem
+is contained within another (within a Composite) it no longer responds
+to tick messages. This means that the schedulers in any of the contained
+objects will remain dormant. Therefore the only operational scheduler in
+a network is the one in the MarSystem being ticked.
+
+Posting events on the scheduler is done through a number of
+@code{updctrl} methods. Each one takes a @code{TmTime} class as its
+first parameter.
+
+@example
+void @b{updctrl}(EvEvent* me);
+void @b{updctrl}(TmTime t, EvEvent* ev);
+void @b{updctrl}(TmTime t, Repeat rep, EvEvent* ev);
+void @b{updctrl}(TmTime t, std::string cname, MarControlPtr control);
+void @b{updctrl}(TmTime t, Repeat rep, std::string cname, MarControlPtr control);
+@end example
+
+Additional methods for adding and removing timers and discovering the
+current time on a timer are available. The @code{updtimer} method is
+provided to modify timer parameters at run-time.
+
+@example
+mrs_natural @b{getTime}(std::string timer_name);
+void @b{updtimer}(std::string cname, TmControlValue value);
+void @b{addTimer}(std::string class_name, std::string identifier);
+void @b{addTimer}(TmTimer* t);
+void @b{removeTimer}(std::string name);
+@end example
+
+@subsubsection Scheduler
+It is the schedulers job to see that events are passed to the correct
+timer when they are posted. On each network tick the scheduler prompts
+each of the timers it manages to dispatch their pending events.
+
+@subsubsection Timers
+Timers define a control rate on which events may be scheduled. It is
+also the job of the timer to manage a queue of events and dispatch them
+at their scheduled dispatch time.
+
+Creating a custom timer is simply a matter of defining its control rate,
+its units (ie seconds), and implementing a function to count the elapsed
+time between ticks. See the @file{TmSampleCount} timer as an example of
+a custom timer.
+
+@subsubsection Events
+Events are the actions that happen at specified points in time. In
+Marsyas events inherit from the @file{EvEvent}. Custom events are
+constructed by inheriting from @file{EvEvent} and overriding the
+@code{dispatch} and @code{clone} methods.
+
+The overridden @code{EvEvent::dispatch} method is where the custom
+event action is defined. Since Marsyas is not threaded the network will
+block during dispatch. This could result in breaks in audio for
+real-time audio if the action takes too much time.
+
+The @code{clone} method is intended to be used by the @file{TmTimer} to
+copy the event when it's posted. This would force the user to take care
+of its deletion and avoid confusion about who must do this. At this time
+clone is not used for this task so that once an @file{EvEvent} is posted
+it is under the control of the @file{TmTimer} it was posted on. It
+should not be reposted or deleted by the user. The search is on for a
+better solution.
+
+@file{EvEvent} supports repetition without having to create new
+events. The @code{setRepeat(Repeat r)} method takes a @file{Repeat}
+object that defines how to repeat the event. The default behaviour is
+no repetition. A true value from the @code{repeat()} method tells the
+scheduler to repeat the event. This method queries the supplied
+@file{Repeat} object. The @code{getRepeatInterval()} returns the repeat
+rate. The @code{repeat_interval(string interval)} may be used to convert
+the supplied interval to a count. It is used in the
+@code{EvEvent::doRepeat()} method.
+
+@subsubsection Repeat
+Repetition of events is defined using the @file{Repeat} class. This
+class is simply a tuple of the repetition time interval and repetition
+count. There are three ways to define repetition. @code{Repeat()}
+defines no repetition. @code{Repeat(string interval)} defines an
+infinite repetition at a rate specified by the supplied interval.
+@code{Repeat(string interval, mrs_natural count)} defines a finite
+repetition of count repeats to occur every interval.
+
+Time is specified as a single string without a timer name. It is assumed
+that the specified interval time will be meaningful on the timer that
+the event is posted in.
+
+@subsubsection TmTime
+Time is specified using the @file{TmTime} class as
+@code{TmTime(string timer, string time)}. The first parameter is the
+name of the timer on which the second parameter has meaning. As an
+example, @code{TmTime("TmSampleCount/Virtual","5s")} specifies 5 seconds
+from the point of time it is used on the TmSampleCount timer called
+Virtual.
+
+@subsubsection TmTimerManager
+Rather than instantiating timers and adding them to the scheduler using
+the @code{MarSystem::addtimer(TmTimer* tmr)} method, timers may be
+specified and added by name using the
+@code{MarSystem::addtimer(string name, string ident)} method where name
+is the timer name, ie TmSampleCount, and ident is the unique identifier,
+ie Virtual. Of course, if the timer name is not known then this method
+will fail. New timers can be added to the factory using the method
+laid out in @file{TmTimerManager.cpp}. @xref{archtmrfac,,Timer Factory}.
+@c @ref{Writing a new Timer,Timer Factory}.
+
+

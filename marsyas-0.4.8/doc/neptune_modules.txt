@@ -1,0 +1,946 @@
+Last updated: December 13 2010
+Marsyas svn revision: 4347
+
+List of available modules in Marsyas for use in CANARIE/NEPTUNE workflow system: 
+(* denotes documented modules). These modules are all based on command-line tools 
+included in the Marsyas repository. Only a meaningful (for the particular domain) 
+subset of the available parameters are documented in this text.  
+
+
+NOTE: Currently the prediction modules can select which classifier 
+is used for training and the prediction happens after training. 
+The ability to store a trained classifier is available but not 
+yet documented. 
+
+Visualization Modules: *Spectrogram, *Waveform, SelfSimilarityMatrix
+Audio Modules: *LowPass, *BandPass, *HighPass, *Normalize, Resample, NoiseRemove
+Feature Extraction Modules: *SpectralCentroid, *SpectralRolloff, *SpectralFlux, 
+*MelFrequencyCepstralCoefficients, *ZeroCrossings 
+Feature Transformation Modules: PCA 
+Train   Classification Modules:  *Gaussian, *SVM, *ZeroR 
+Predict Classification Modules: *TimeLine, *ClassificationStatistics,*Frames
+
+
+Name of module: Spectrogram 
+Type of module: Visualization 
+Description: Calculate the spectrogram of an audio file using the
+magnitude of the Short Time Fourier Transform (STFT) 
+Code: marsyas/src/apps/sound2png 
+Documentation: 
+http://marsyas.info/docs/manual/marsyas-user/sound2png.html#sound2png
+Default commandline: sound2png -m spectrogram 
+Examples: 
+> sound2png --help 
+> sound2png -m spectrogram -ws 512 -hs 512 -s 5 -l 10 input.wav output.png 
+> sound2png input.wav  output.png --verbose --lowfreq 1000 --highfreq 2000 --height 100 --width 500
+
+
+Input : Audio file in non-compressed .wav or .mp3 compressed format 
+Output: Image file in .png format 
+Parameters: 
+-Name: verbose 
+    -Units: no units 
+    -Possible values: true or false 
+    -Default value: false 
+    -Description: Turn on/off verbose ouput at stdout 
+-Name: windowsize 
+   -Units: samples 
+   -Possible values: 128, 256, 8192 (powers of two) 
+   -Default value 256 
+   -Description: The window size for the calculation of the spectrogram 
+-Name: hopsize 
+    -Units: samples 
+    -Possible values: any positive number 
+    -Default value: 256
+    -Description: The hop size for the calculation of the spectrogram 
+-Name: gain
+    -Units: no units 
+    -Possible values: any possitive real number 
+    -Default value: 1.5 
+    -Description: The gain to multiply the spectrogram for plotting 
+-Name: maxfreq 
+    -Units: Hertz 
+    -Possible values: 100-22050 (for 44100 sampling rate) or any frequency less than half the sampling frequency 
+    -Default value: 22050 
+    -Description: the highest frequency to plot on the spectrogram 
+-Name: minfreq 
+    -Units: Hertz 
+    -Possible values: 100-22050 (for 44100 sampling rate) or any frequency less than half the sampling frequency 
+    -Default value: 0 
+    -Description: the lowest frequency to plot on the spectrogram 
+-Name: start 
+    -Units: seconds 
+    -Possible values: 0 - end of the input audio file in seconds 
+    -Default value: 0.0 
+-Name: length 
+    -Units: seconds 
+    -Possible values: 0-end of the input audio file in seconds 
+    -Default value: the entire length of the audio file in seconds
+-Name: width 
+    -Units: pixels 
+    -Possible values: any positive integer 
+    -Default value: the number of spectra computed 
+-Name: height 
+    -Units: pixels 
+    -Possible values: any positive integer 
+    -Default value: the number of FFT bins (half the window size) 
+
+
+
+
+
+
+
+Name of module: Waveform 
+Type of module: Visualization 
+Description: Compute the time-domain envelope waveform for the input
+audio signal 
+Code: marsyas/src/apps/sound2png 
+Documentation: 
+http://marsyas.info/docs/manual/marsyas-user/sound2png.html#sound2png
+Default commandline: sound2png -m waveform 
+Examples: 
+> sound2png --help 
+> sound2png -m waveform -ws 512 -s 5 -l 10 input.wav output.png 
+> sound2png input.wav output.png --verbose --height 100 --width 500
+
+
+Input : Audio file in non-compressed .wav or .mp3 compressed format 
+Output: Image file in .png format 
+Parameters: 
+-Name: verbose 
+    -Units: no units 
+    -Possible values: true or false 
+    -Default value: false 
+    -Description: Turn on/off verbose ouput at stdout 
+-Name: windowsize 
+   -Units: samples 
+   -Possible values: 128, 256, 8192 (powers of two) 
+   -Default value 256 
+   -Description: The window size for the calculation of the spectrogram 
+-Name: hopsize 
+    -Units: samples 
+    -Possible values: any positive number 
+    -Default value: 256
+    -Description: The hop size for the calculation of the spectrogram 
+-Name: start 
+    -Units: seconds 
+    -Possible values: 0 - end of the input audio file in seconds 
+    -Default value: 0.0 
+-Name: length 
+    -Units: seconds 
+    -Possible values: 0-end of the input audio file in seconds 
+    -Default value: the entire length of the audio file in seconds
+-Name: width 
+    -Units: pixels 
+    -Possible values: any positive integer 
+    -Default value: the number of spectra computed 
+-Name: height 
+    -Units: pixels 
+    -Possible values: any positive integer 
+    -Default value: the number of FFT bins (half the window size) 
+
+
+
+
+
+Name of module: LowPass 
+Type of module: Audio 
+Description: Low pass filter with two poles and two zeroes (BiQuad)
+Code: marsyas/src/apps/sound2sound 
+Documentation: 
+http://marsyas.info/docs/manual/marsyas-user/sound2sound.html#sound2sound
+Default commandline: sound2sound -m lowpass 
+Examples: 
+> sound2png --help 
+> sound2sound input.wav -m lowpass -f 500 -q 10 -s 15 -l 30 -g 0.8 output.wav
+> sound2sound input.wav --method lowpass --frequency 500 --qfactor 10 --start 15 --length 30 --gain 0.8 output.wav 
+
+Input : Audio file in non-compressed .wav or .mp3 compressed format 
+Output: Audio file in non-compressed .wav format 
+Parameters: 
+-Name: verbose 
+    -Units: no units 
+    -Possible values: true or false 
+    -Default value: false 
+    -Description: Turn on/off verbose ouput at stdout 
+-Name: start 
+    -Units: seconds 
+    -Possible values: 0 - end of the input audio file in seconds 
+    -Default value: 0.0 
+-Name: length 
+    -Units: seconds 
+    -Possible values: 0-end of the input audio file in seconds 
+    -Default value: the entire length of the audio file in seconds
+-Name: gain 
+    -Units: no units 
+    -Possible values: any positive float 
+    -Default value: 1.0 
+    -Description: Apply gain to audio signal (>1.0 amplifies) 
+-Name: frequency 
+    -Units: Hertz 
+    -Possible values: 0..half the sampling rate 
+    -Default value: 500 
+    -Description: The cut-off frequency 
+-Name: qfactor 
+    -Units: no units 
+    -Possible values: any positive float 
+    -Default value: 1.0 
+    -Description: the q-factor of the filter 
+
+ 
+Name of module: BandPass 
+Type of module: Audio 
+Code: marsyas/src/apps/sound2sound 
+Description: BandPass filter with two poles and two zeroes (Biquad) 
+Documentation: 
+http://marsyas.info/docs/manual/marsyas-user/sound2sound.html#sound2sound
+Default commandline: sound2sound -m lowpass 
+Examples: 
+> sound2png --help 
+> sound2sound input.wav -m bandpass -f 500 -q 10 -s 15 -l 30 -g 0.8 output.wav
+> sound2sound input.wav --method bandpass --frequency 500 --qfactor 10 --start 15 --length 30 --gain 0.8 output.wav 
+
+Input : Audio file in non-compressed .wav or .mp3 compressed format 
+Output: Audio file in non-compressed .wav format 
+Parameters: 
+-Name: verbose 
+    -Units: no units 
+    -Possible values: true or false 
+    -Default value: false 
+    -Description: Turn on/off verbose ouput at stdout 
+-Name: start 
+    -Units: seconds 
+    -Possible values: 0 - end of the input audio file in seconds 
+    -Default value: 0.0 
+-Name: length 
+    -Units: seconds 
+    -Possible values: 0-end of the input audio file in seconds 
+    -Default value: the entire length of the audio file in seconds
+-Name: gain 
+    -Units: no units 
+    -Possible values: any positive float 
+    -Default value: 1.0 
+    -Description: Apply gain to audio signal (>1.0 amplifies) 
+-Name: frequency 
+    -Units: Hertz 
+    -Possible values: 0..half the sampling rate 
+    -Default value: 500 
+    -Description: The center frequency 
+-Name: qfactor
+    -Units: no units 
+    -Possible values: any positive float 
+    -Default value: 1.0 
+    -Description: The q-factor of the filter
+
+
+Name of module: HighPass 
+Type of module: Audio 
+Description: HighPass filter with two poles and two zeroes (Biquad) 
+Code: marsyas/src/apps/sound2sound 
+Documentation: 
+http://marsyas.info/docs/manual/marsyas-user/sound2sound.html#sound2sound
+Default commandline: sound2sound -m highpass 
+Examples: 
+> sound2png --help 
+> sound2sound input.wav -m highpass -f 500 -q 10 -s 15 -l 30 -g 0.8 output.wav
+> sound2sound input.wav --method highpass --frequency 500 --qfactor 10 --start 15 --length 30 --gain 0.8 output.wav 
+
+Input : Audio file in non-compressed .wav or .mp3 compressed format 
+Output: Audio file in non-compressed .wav format 
+Parameters: 
+-Name: verbose 
+    -Units: no units 
+    -Possible values: true or false 
+    -Default value: false 
+    -Description: Turn on/off verbose ouput at stdout 
+-Name: start 
+    -Units: seconds 
+    -Possible values: 0 - end of the input audio file in seconds 
+    -Default value: 0.0 
+-Name: length 
+    -Units: seconds 
+    -Possible values: 0-end of the input audio file in seconds 
+    -Default value: the entire length of the audio file in seconds
+-Name: gain 
+    -Units: no units 
+    -Possible values: any positive float 
+    -Default value: 1.0 
+    -Description: Apply gain to audio signal (>1.0 amplifies) 
+-Name: frequency 
+    -Units: Hertz 
+    -Possible values: 0..half the sampling rate 
+    -Default value: 500 
+    -Description: The cut-off frequency 
+-Name: qfactor 
+    -Units: no units 
+    -Possible values: any positive float 
+    -Default value: 1.0 
+    -Description: The q-factor of the filter
+
+
+
+Name of module: Normalize
+Type of module: Audio 
+Description: Normalize the audio so that the dynamic range is
+reasonable 
+Code: marsyas/src/apps/sound2sound 
+Documentation: 
+http://marsyas.info/docs/manual/marsyas-user/sound2sound.html#sound2sound
+Default commandline: sound2sound -m highpass 
+Examples: 
+> sound2png --help 
+> sound2sound input.wav -m normalize -s 15 -l 30 output.wav
+> sound2sound input.wav --method normalize --target_rms 0.3 --start 15 --length 30 output.wav 
+
+Input : Audio file in non-compressed .wav or .mp3 compressed format 
+Output: Audio file in non-compressed .wav format 
+Parameters: 
+-Name: verbose 
+    -Units: no units 
+    -Possible values: true or false 
+    -Default value: false 
+    -Description: Turn on/off verbose ouput at stdout 
+-Name: start 
+    -Units: seconds 
+    -Possible values: 0 - end of the input audio file in seconds 
+    -Default value: 0.0 
+-Name: length 
+    -Units: seconds 
+    -Possible values: 0-end of the input audio file in seconds 
+    -Default value: the entire length of the audio file in seconds
+-Name: target_rms
+    -Units: no units 
+    -Possible values: a positive number between 0.0 and 1.0 
+    -Default value: 0.5 
+    -Description: Apply gain to audio signal so that the maximum
+	window rms is 0.5 
+
+
+
+
+
+
+
+
+
+
+
+
+Name of module: SpectralCentroid
+Type of module: Feature Extraction  
+Description: Extract the running mean and standard deviation of the spectral centroid
+over a texture window 
+Code: marsyas/src/apps/bextract 
+Documentation: 
+http://marsyas.info/docs/manual/marsyas-user/bextract.html#bextract
+Default commandline: bextract -t -fe --SpectralCentroid  
+Examples: 
+> bextract --help 
+> bextract -t -fe -ctd input.txt -w output.arff 
+> bextract -t -fe --SpectralCentroid input.txt -m 0 --weka output.arff  
+
+Input : A .txt file where each line has the following format  
+full_path_to_audio_file.wav \t full_path_label_file.txt 
+
+The label file is optional can be created using audacity and has the format 
+start \t end \t label. If no label file is provided the features 
+will be extracted but no annotation for supervised learning will be performed.  
+
+Both start and end are in seconds 
+
+
+Output: A .arff file (a format for storing feature vectors used by the Weka machine learning software as 
+well as Marsyas  
+Parameters: 
+-Name: verbose 
+    -Units: no units 
+    -Possible values: true or false 
+    -Default value: false 
+    -Description: Turn on/off verbose ouput at stdout 
+-Name: memory  
+    -Units: analysis windows  
+    -Possible values: 0 - any positive integer  
+    -Default value: 40 
+    -Description: The size of the texture window over which dynamic statistics of the features are computed 
+    Setting to 0 disables the texture window. 
+-Name: windowsize 
+   -Units: samples 
+   -Possible values: 128, 256, 8192 (powers of two) 
+   -Default value 512 
+   -Description: The analysis window size in samples  
+-Name: hopsize 
+    -Units: samples 
+    -Possible values: any positive number 
+    -Default value: 512
+    -Description: The hop size in samples  
+-Name: timeline 
+    -Units: no units 
+    -Possible values: true or false 
+    -Default value: false 
+    -Description: If timeline is false then only the features are extracted. If it is 
+    true the feature vectors are annotated with the labels provided in the corresponding 
+    timeline for supervised learning.  
+-Name: downsample 
+    -Units: feature vectors 
+    -Possible values: 1 or any positive integer 
+    -Default: 1 
+    -Description: Output 1 out of every D feature vector where D is the argument of the downsample parameter
+
+
+
+
+
+Name of module: SpectralRolloff
+Type of module: Feature Extraction  
+Description: Extract the running mean and standard deviation of the spectral rolloff 
+over a texture window 
+Code: marsyas/src/apps/bextract 
+Documentation: 
+http://marsyas.info/docs/manual/marsyas-user/bextract.html#bextract
+Default commandline: bextract -t -fe  --SpectralRolloff  
+Examples: 
+> bextract --help 
+> bextract -t -fe -rlf input.txt -w output.arff 
+> bextract -t -fe --SpectralRolloff input.txt -m 0 --weka output.arff  
+
+Input : A .txt file where each line has the following format  
+full_path_to_audio_file.wav \t full_path_label_file.txt 
+
+The label file is optional can be created using audacity and has the format 
+start \t end \t label. If no label file is provided the features 
+will be extracted but no annotation for supervised learning will be performed.  
+
+Both start and end are in seconds 
+
+
+Output: A .arff file (a format for storing feature vectors used by the Weka machine learning software as 
+well as Marsyas  
+Parameters: 
+-Name: verbose 
+    -Units: no units 
+    -Possible values: true or false 
+    -Default value: false 
+    -Description: Turn on/off verbose ouput at stdout 
+-Name: memory  
+    -Units: analysis windows  
+    -Possible values: 0 - any positive integer  
+    -Default value: 40 
+    -Description: The size of the texture window over which dynamic statistics of the features are computed 
+    Setting to 0 disables the texture window. 
+-Name: windowsize 
+   -Units: samples 
+   -Possible values: 128, 256, 8192 (powers of two) 
+   -Default value 512 
+   -Description: The analysis window size in samples  
+-Name: hopsize 
+    -Units: samples 
+    -Possible values: any positive number 
+    -Default value: 512
+    -Description: The hop size in samples  
+-Name: timeline 
+    -Units: no units 
+    -Possible values: true or false 
+    -Default value: false 
+    -Description: If timeline is false then only the features are extracted. If it is 
+    true the feature vectors are annotated with the labels provided in the corresponding 
+    timeline for supervised learning.  
+-Name: downsample 
+    -Units: feature vectors 
+    -Possible values: 1 or any positive integer 
+    -Default: 1 
+    -Description: Output 1 out of every D feature vector where D is the argument of the downsample parameter
+
+
+
+
+
+Name of module: SpectralFlux
+Type of module: Feature Extraction  
+Description: Extract the running mean and standard deviation of the spectral flux 
+over a texture window 
+Code: marsyas/src/apps/bextract 
+Documentation: 
+http://marsyas.info/docs/manual/marsyas-user/bextract.html#bextract
+Default commandline: bextract -t -fe --SpectralFlux  
+Examples: 
+> bextract --help 
+> bextract -t -fe -flx input.txt -w output.arff 
+> bextract -t -fe --SpectralFlux input.txt -m 0 --weka output.arff  
+
+Input : A .txt file where each line has the following format  
+full_path_to_audio_file.wav \t full_path_label_file.txt 
+
+The label file is optional can be created using audacity and has the format 
+start \t end \t label. If no label file is provided the features 
+will be extracted but no annotation for supervised learning will be performed.  
+
+Both start and end are in seconds 
+
+
+Output: A .arff file (a format for storing feature vectors used by the Weka machine learning software as 
+well as Marsyas  
+Parameters: 
+-Name: verbose 
+    -Units: no units 
+    -Possible values: true or false 
+    -Default value: false 
+    -Description: Turn on/off verbose ouput at stdout 
+-Name: memory  
+    -Units: analysis windows  
+    -Possible values: 0 - any positive integer  
+    -Default value: 40 
+    -Description: The size of the texture window over which dynamic statistics of the features are computed 
+    Setting to 0 disables the texture window. 
+-Name: windowsize 
+   -Units: samples 
+   -Possible values: 128, 256, 8192 (powers of two) 
+   -Default value 512 
+   -Description: The analysis window size in samples  
+-Name: hopsize 
+    -Units: samples 
+    -Possible values: any positive number 
+    -Default value: 512
+    -Description: The hop size in samples  
+-Name: timeline 
+    -Units: no units 
+    -Possible values: true or false 
+    -Default value: false 
+    -Description: If timeline is false then only the features are extracted. If it is 
+    true the feature vectors are annotated with the labels provided in the corresponding 
+    timeline for supervised learning.  
+-Name: downsample 
+    -Units: feature vectors 
+    -Possible values: 1 or any positive integer 
+    -Default: 1 
+    -Description: Output 1 out of every D feature vector where D is the argument of the downsample parameter
+
+
+Name of module: MelFrequencyCepstralCoefficients
+Type of module: Feature Extraction  
+Description: Extract the running mean and standard deviation of the MelFrequencyCepstralCoefficients
+over a texture window
+Code: marsyas/src/apps/bextract 
+Documentation: 
+http://marsyas.info/docs/manual/marsyas-user/bextract.html#bextract
+Default commandline: bextract -t -fe --MelFrequencyCepstralCoefficients  
+Examples: 
+> bextract --help 
+> bextract -t -fe -mfcc input.txt -w output.arff 
+> bextract -t -fe --MelFrequencyCepstralCoefficients input.txt -m 0 --weka output.arff  
+
+Input : A .txt file where each line has the following format  
+full_path_to_audio_file.wav \t full_path_label_file.txt 
+
+The label file is optional can be created using audacity and has the format 
+start \t end \t label. If no label file is provided the features 
+will be extracted but no annotation for supervised learning will be performed.  
+
+Both start and end are in seconds 
+
+
+Output: A .arff file (a format for storing feature vectors used by the Weka machine learning software as 
+well as Marsyas  
+Parameters: 
+-Name: verbose 
+    -Units: no units 
+    -Possible values: true or false 
+    -Default value: false 
+    -Description: Turn on/off verbose ouput at stdout 
+-Name: memory  
+    -Units: analysis windows  
+    -Possible values: 0 - any positive integer  
+    -Default value: 40 
+    -Description: The size of the texture window over which dynamic statistics of the features are computed 
+    Setting to 0 disables the texture window. 
+-Name: windowsize 
+   -Units: samples 
+   -Possible values: 128, 256, 8192 (powers of two) 
+   -Default value 512 
+   -Description: The analysis window size in samples  
+-Name: hopsize 
+    -Units: samples 
+    -Possible values: any positive number 
+    -Default value: 512
+    -Description: The hop size in samples  
+-Name: timeline 
+    -Units: no units 
+    -Possible values: true or false 
+    -Default value: false 
+    -Description: If timeline is false then only the features are extracted. If it is 
+    true the feature vectors are annotated with the labels provided in the corresponding 
+    timeline for supervised learning.  
+-Name: downsample 
+    -Units: feature vectors 
+    -Possible values: 1 or any positive integer 
+    -Default: 1 
+    -Description: Output 1 out of every D feature vector where D is the argument of the downsample parameter
+
+
+
+Name of module: ZeroCrossings
+Type of module: Feature Extraction  
+Description: Extract the running mean and standard deviation of the time domain zerocrossings
+over a texture window 
+Code: marsyas/src/apps/bextract 
+Documentation: 
+http://marsyas.info/docs/manual/marsyas-user/bextract.html#bextract
+Default commandline: bextract -t  -fe --ZeroCrossings  
+Examples: 
+> bextract --help 
+> bextract -t -fe -zcrs input.txt -w output.arff 
+> bextract -t -fe --ZeroCrossings input.txt -m 0 --weka output.arff  
+
+Input : A .txt file where each line has the following format  
+full_path_to_audio_file.wav \t full_path_label_file.txt 
+
+The label file is optional can be created using audacity and has the format 
+start \t end \t label. If no label file is provided the features 
+will be extracted but no annotation for supervised learning will be performed.  
+
+Both start and end are in seconds 
+
+
+Output: A .arff file (a format for storing feature vectors used by the Weka machine learning software as 
+well as Marsyas  
+Parameters: 
+-Name: verbose 
+    -Units: no units 
+    -Possible values: true or false 
+    -Default value: false 
+    -Description: Turn on/off verbose ouput at stdout 
+-Name: memory  
+    -Units: analysis windows  
+    -Possible values: 0 - any positive integer  
+    -Default value: 40 
+    -Description: The size of the texture window over which dynamic statistics of the features are computed 
+    Setting to 0 disables the texture window. 
+-Name: windowsize 
+   -Units: samples 
+   -Possible values: 128, 256, 8192 (powers of two) 
+   -Default value 512 
+   -Description: The analysis window size in samples  
+-Name: hopsize 
+    -Units: samples 
+    -Possible values: any positive number 
+    -Default value: 512
+    -Description: The hop size in samples  
+-Name: timeline 
+    -Units: no units 
+    -Possible values: true or false 
+    -Default value: false 
+    -Description: If timeline is false then only the features are extracted. If it is 
+    true the feature vectors are annotated with the labels provided in the corresponding 
+    timeline for supervised learning.  
+-Name: downsample 
+    -Units: feature vectors 
+    -Possible values: 1 or any positive integer 
+    -Default: 1 
+    -Description: Output 1 out of every D feature vector where D is the argument of the downsample parameter
+
+
+
+Name of module: Gaussian 
+Type of module: Classifier 
+Description: Trains a classifier uisng the provided .arff file 
+Code: marsyas/src/apps/kea 
+Documentation: 
+http://marsyas.info/docs/manual/marsyas-user/kea.html#kea
+Default commandline: kea -m train  -cl GS 
+Examples: 
+> kea --help 
+> kea -m train_classifier -w train.arff -cl GS -trcl trained.mpl 
+> kea --mode train_classifier --wekafname train.arff -cl GS --trainedclassifier trained.mpl
+
+Input: An input .arff file for training the classifier 
+Output: A trained classifier in the Marsyas plugin format (.mpl) 
+
+Parameters: 
+-Name: verbose 
+    -Units: no units 
+    -Possible values: true or false 
+    -Default value: false 
+    -Description: Turn on/off verbose ouput at stdout 
+-Name: wekafname   
+    -Units: no units
+    -Possible values: string
+    -Default value: ""
+    -Description: The name of the .arff filename containing the
+labeled feature vectors used for training the classifier 
+-Name: trainedclassifier 
+  -Units: no units 
+  -Possible values: string 
+  -Default value: ""
+  -Description: The name of the file for storing the trained
+  classifier in Marsyas plugin format (.mpl) 
+
+
+
+
+Name of module: SupportVectorMachine
+Type of module: Classifier 
+Description: Trains a classifier uisng the provided .arff file 
+Code: marsyas/src/apps/kea 
+Documentation: 
+http://marsyas.info/docs/manual/marsyas-user/kea.html#kea
+Default commandline: kea -m train  -cl SVM
+Examples: 
+> kea --help 
+> kea -m train_classifier -w train.arff -cl SVM -trcl trained.mpl 
+> kea --mode train_classifier --wekafname train.arff -cl SVM --trainedclassifier trained.mpl
+
+Input: An input .arff file for training the classifier 
+Output: A trained classifier in the Marsyas plugin format (.mpl) 
+
+Parameters: 
+-Name: verbose 
+    -Units: no units 
+    -Possible values: true or false 
+    -Default value: false 
+    -Description: Turn on/off verbose ouput at stdout 
+-Name: wekafname   
+    -Units: no units
+    -Possible values: string
+    -Default value: ""
+    -Description: The name of the .arff filename containing the
+labeled feature vectors used for training the classifier 
+-Name: trainedclassifier 
+  -Units: no units 
+  -Possible values: string 
+  -Default value: ""
+  -Description: The name of the file for storing the trained
+  classifier in Marsyas plugin format (.mpl) 
+
+
+Name of module: ZeroR
+Type of module: Classifier 
+Description: Trains a classifier uisng the provided .arff file 
+Code: marsyas/src/apps/kea 
+Documentation: 
+http://marsyas.info/docs/manual/marsyas-user/kea.html#kea
+Default commandline: kea -m train  -cl ZEROR
+Examples: 
+> kea --help 
+> kea -m train_classifier -w train.arff -cl ZEROR -trcl trained.mpl 
+> kea --mode train_classifier --wekafname train.arff -cl ZEROR --trainedclassifier trained.mpl
+
+Input: An input .arff file for training the classifier 
+Output: A trained classifier in the Marsyas plugin format (.mpl) 
+
+Parameters: 
+-Name: verbose 
+    -Units: no units 
+    -Possible values: true or false 
+    -Default value: false 
+    -Description: Turn on/off verbose ouput at stdout 
+-Name: wekafname   
+    -Units: no units
+    -Possible values: string
+    -Default value: ""
+    -Description: The name of the .arff filename containing the
+labeled feature vectors used for training the classifier 
+-Name: trainedclassifier 
+  -Units: no units 
+  -Possible values: string 
+  -Default value: ""
+  -Description: The name of the file for storing the trained
+  classifier in Marsyas plugin format (.mpl) 
+
+
+
+
+
+
+Name of module: TimeLine
+Type of module: Predict Classification   
+Description: Uses a trained classifier (in .mpl format) to create a
+predicted time-line for a test .arff file. 
+Code: marsyas/src/apps/kea 
+Documentation: 
+http://marsyas.info/docs/manual/marsyas-user/kea.html#kea
+Default commandline: kea -m predict_timeline  
+Examples: 
+> kea --help 
+> kea -m predict_timeline -trcl trained.mpl -tw test.arff -prtl test_timeline.txt 
+> kea --mode predict_timeline --trainedclassifier trained.mpl --testwekafname test.arff --predicttimeline test_timeline.txt 
+
+Input : An input .arff file for training a classifier and a test .arff file 
+for predicting a timeline in audacity format.  
+
+Output: A timeline file in audacity format (i.e each line has the form: 
+start \t end \t label arff file 
+
+Both start and end are in seconds. 
+
+
+Parameters: 
+-Name: verbose 
+    -Units: no units 
+    -Possible values: true or false 
+    -Default value: false 
+    -Description: Turn on/off verbose ouput at stdout 
+
+-Name: testwekafname
+   -Units: no units 
+   -Possible values: string
+   -Default value: ""
+   -Description: The name of the .arff filename containing the 
+feature vectors that need to be classified in order to predict the
+output timeline
+
+
+-Name: predicttimeline 
+    -Units: no units 
+    -Possible values: string 
+    -Default value: ""
+    -Description: The output timeline file
+
+-Name: trainedclassifier 
+  -Units: no units 
+  -Possible values: string 
+  -Default value: ""
+  -Description: The name of the file for storing the trained
+  classifier in Marsyas plugin format (.mpl) 
+
+
+-Name: label 
+    -Units: no units
+    -Possible values: any of the labels of the time-line 
+    -Default: the second label of the timeline  
+    -Description: Select for which label to output the predicted
+timeline 
+
+-Name: minspan 
+    -Units: seconds 
+	-Possible values: any positive real 
+    -Default value: 1 second 
+	-Description: the minimum duration that a region in the predicted
+timeline can span 
+
+
+
+
+
+Name of module: Frames
+Type of module: Predict Classification   
+Description: Uses a trained classifier (in .mpl format) to predict
+individual frames of audio 
+Code: marsyas/src/apps/kea 
+Documentation: 
+http://marsyas.info/docs/manual/marsyas-user/kea.html#kea
+Default commandline: kea -m predict
+Examples:
+> kea --help 
+> kea -m predict -trcl trained.mpl -tw test.arff 
+> kea --mode predict --trainedclassifier trained.mpl --testwekafname test.arff  
+
+Input : An input .arff file for training a classifier and a test .arff file 
+for predicting a timeline in audacity format.  
+
+Output: Individual classification decisions per frame 
+
+
+
+Parameters: 
+-Name: verbose 
+    -Units: no units 
+    -Possible values: true or false 
+    -Default value: false 
+    -Description: Turn on/off verbose ouput at stdout 
+
+-Name: testwekafname
+   -Units: no units 
+   -Possible values: string
+   -Default value: ""
+   -Description: The name of the .arff filename containing the 
+feature vectors that need to be classified in order to predict the
+output timeline
+
+
+-Name: predicttimeline 
+    -Units: no units 
+    -Possible values: string 
+    -Default value: ""
+    -Description: The output timeline file
+
+-Name: trainedclassifier 
+  -Units: no units 
+  -Possible values: string 
+  -Default value: ""
+  -Description: The name of the file for storing the trained
+  classifier in Marsyas plugin format (.mpl) 
+
+
+-Name: label 
+    -Units: no units
+    -Possible values: any of the labels of the time-line 
+    -Default: the second label of the timeline  
+    -Description: Select for which label to output the predicted
+timeline 
+
+-Name: minspan 
+    -Units: seconds 
+	-Possible values: any positive real 
+    -Default value: 1 second 
+	-Description: the minimum duration that a region in the predicted
+timeline can span 
+
+
+
+
+Name of module: ClassificationStatistics
+Type of module: Predict Classification 
+Description: Trains a classifier using a provided .arff training file and 
+shows classification statistics using 10-fold cross-validation
+Code: marsyas/src/apps/kea 
+Documentation: 
+http://marsyas.info/docs/manual/marsyas-user/kea.html#kea
+Default commandline: kea -m train_predict_timeline
+Examples: 
+> kea --help 
+> kea -m train -w train.arff -tw test.arff  -cl SVM 
+> kea --mode train --wekafname train.arff  
+
+Input : An input .arff file for training a classifier 
+Output: Classification statistics at stdout
+
+
+Parameters: 
+-Name: verbose 
+    -Units: no units 
+    -Possible values: true or false 
+    -Default value: false 
+    -Description: Turn on/off verbose ouput at stdout 
+
+-Name: wekafname   
+    -Units: no units
+    -Possible values: string
+    -Default value: ""
+    -Description: The name of the .arff filename containing the
+labeled feature vectors used for training the classifier 
+
+-Name: testwekafname
+   -Units: no units 
+   -Possible values: string
+   -Default value: ""
+   -Description: The name of the .arff filename containing the 
+feature vectors that are classified to calculate the statistics 
+when used in UseTestSet validation mode. 
+
+
+-Name: classifier 
+    -Units: no units
+    -Possible values: SVM or GS or ZEROR
+    -Default value: SVM
+    -Description: The type of classifier to use. SVM is a linear SVM
+trained using sequential minimal optimization and GS is a simple Naive
+Bayes Classifier where each class is represented as a single
+Gaussian with a diagonal covariance matrix. ZEROR is a trivial 
+classifier that classify everything based on the label with the most 
+training instances. 
+
+
+
+
+
+

@@ -1,0 +1,35 @@
+GENERAL
+- Figure out CPACK for distribution packaging (maybe we really need
+to start distributing binaries)
+
+- Add all the apps and Qt4Apps after weeding out dead code
+
+
+CMAKE BROKENNESS
+
+
+- Add the CMakeLists.txt files for the Ruby and possibly
+Java, Lua bindings  (maybe post-0.3)
+
+- fix the linking for the vamp plugins.  (sness is doing this)
+
+
+DOCS / USABILITY
+
+- begin docs on interactive python use.
+
+
+OTHER
+
+- Test Qt4 with MSVC, mingw, cygwin
+
+- Test on as many different systems with as many different compile
+configurations as we can to make sure everything works
+
+-- ask Gustavo about speakerSeg
+
+
+RENAMINGS  (between 0.2.17 and 0.3)
+- notEmpty -> hasData
+- done -> make sure it really is just "done" stuff.
+

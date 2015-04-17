@@ -1,0 +1,318 @@
+@node System details
+@chapter System details
+
+
+@menu
+* Library reference::           
+* Predefined types::            
+* Realvec::                     
+* Systems limitations::         
+@end menu
+
+
+@node Library reference
+@section Library reference
+
+@subsection Source documentation
+
+MarSystems are documented in the
+@ifhtml
+@uref{../../sourceDoc/index.html,
+source documentation}.
+@end ifhtml
+@ifnothtml
+source documentation available at
+@code{@uref{http://marsyas.sness.net/docs/index.html}}.
+@end ifnothtml
+Most MarSystems are organized into groups.
+
+@subsection MarSystem groups
+
+The groups are fairly self-explanatory, but we should clarify a few
+groupings:
+
+@itemize
+@item @strong{Processing}: audio block => audio block.  Examples are
+@code{Gain} and @code{Filter}
+
+@item @strong{Analysis}: audio block => other block.  Examples are
+@code{Spectrum} and @code{Rms}.
+
+@item @strong{Synthesis}: other block => audio block.  Examples are
+@code{SineSource} and @code{NoiseSource}.
+
+@end itemize
+
+There is one special group: @code{Basic} Processing.  This is a subset
+of the @code{Processing} group.
+
+To see all MarSystems, look at @emph{Data Structures} instead of
+@emph{Main Page}.
+
+@subsection Limited documentation
+
+The @qq{main} MarSystems are fairly well documented, but many MarSystems
+lack even basic documentation.  In this case, the only option is to read
+the source code.
+
+@WANTED{ Once you have learned how to use an undocumented MarSystem,
+please help document it.  The source documentation only requires adding
+a special comment in the source file, so it is very easy! Please see
+@develref{Contributing source documentation}.}
+
+
+@node Predefined types
+@section Predefined types
+
+@subsection Variables types
+
+Marsyas contains some predefined, portable data types:
+
+@cindex mrs_bool
+@cindex mrs_natural
+@cindex mrs_real
+@cindex mrs_complex
+
+@example
+mrs_bool
+mrs_natural   (integers)
+mrs_real
+mrs_complex
+@end example
+
+The use of these variable types instead of normal C++ like @code{int}
+and @code{double} is @strong{strongly} recommended.
+
+@warning{a number like @samp{100} is interpreted as a
+@emph{mrs_natural}.  If you want to pass this value to a
+@emph{mrs_real}, you must specify @samp{100.0}.}
+
+
+@subsection Constants
+
+A number of useful constants, such as @code{PI} and @code{TWOPI} (at
+double precision instead of float) are defined in
+@file{marsyas/common.h}.
+
+
+@node Realvec
+@section Realvec
+@cindex realvec
+
+The basic unit of data in Marsyas is the @code{realvec}, which is
+essentially a one- or two-dimensional array of real numbers.  All data
+flows from MarSystem to MarSystem in the form of @code{realvec}s; the
+actual function which does the main work of every MarSystem is
+
+@example
+void
+@emph{MarSystem_name}::myProcess(realvec& in, realvec& out)
+@{
+	...
+@}
+@end example
+
+In other words, each MarSystem takes a @code{realvec} as input, and
+writes a @code{realvec} as output.
+
+@menu
+* Reading and writing to a realvec::  
+* Resizing a realvec::          
+* Realvec arithmetic::          
+* Applying a function to a realvec::  
+* Realvec input and output to a file::  
+* Statistical analysis::        
+* Other realvec functions::     
+@end menu
+
+
+@node Reading and writing to a realvec
+@subsection Reading and writing to a realvec
+
+Realvecs may be accessed using @code{var_name(index) = value}.
+
+@subsubheading Non-pointer way (allocation in stack)
+
+@example
+mrs_natural i,j;
+
+realvec foo;
+foo.create(10);
+for (i=0; i<10; i++) @{
+	foo(i) = i;
+@}
+for (i=0; i<10; i++) @{
+	cout<<foo(i)<<endl;
+@}
+
+realvec bar;
+bar.create(5,10);
+for (i=0; i<5; i++) @{
+	for (j=0; j<10; j++) @{
+		bar(i,j) = i+j;
+	@}
+@}
+@end example
+
+@subsubheading Pointer way (allocation on heap)
+
+@example
+// pointer for this example
+realvec *baz;
+
+// automatically calls calls create
+baz = new realvec(10,20);
+
+// we could do it this way if we wanted (instead of the above line)
+//baz = new realvec;
+//baz->create(10,20);
+
+for (i=0; i<10; i++) @{
+	for (j=0; j<20; j++) @{
+		(*baz)(i,j) = i+j;
+	@}
+@}
+delete baz;  // don't forget to free the allocated memory
+@end example
+
+
+@node Resizing a realvec
+@subsection Resizing a realvec
+
+The size of a realvec may be changed dynamically; you may also get the
+current size.
+
+@example
+stretch();
+
+getSize();
+// for two-dimensional realvecs
+getCols();
+getRows();
+@end example
+
+If you do not know how big your realvec should be, use
+@code{stretchWrite(...)}.  This function checks to make sure that the
+realvec is big enough; if not, it resizes the realvec (by doubling the
+size) so that it can store the value.  This function is much slower than
+normal writing.
+
+
+@node Realvec arithmetic
+@subsection Realvec arithmetic
+
+Realvecs may be set (=), added, subracted, and the like.
+
+@example
+// realvec foo created, filled with data, etc.
+...
+
+realvec bar;
+bar = foo;
+// bar is now the same size and contains the same data
+
+// arithmetic
+baz = foo + bar;
+baz = foo + 3;
+@end example
+
+
+@node Applying a function to a realvec
+@subsection Applying a function to a realvec
+
+Use apply().
+
+@example
+void
+TranscriberExtract::toMidi(realvec* pitchList)
+@{
+    pitchList->apply( hertz2pitch );
+@}
+@end example
+
+
+@node Realvec input and output to a file
+@subsection  Realvec input and output to a file
+
+@example
+/* you can do
+realvec foo;
+...
+cout<<foo;
+file<<foo;
+*/
+friend std::ostream& operator<<(std::ostream&, const realvec&);
+friend std::istream& operator>>(std::istream&, realvec&);
+
+
+// does the "file<<foo" method
+void write(std::string filename) const;
+void read(std::string filename);
+
+
+// input/output functions for line-separated text files
+void readText(std::string filename);
+void writeText(std::string filename);
+@end example
+
+
+@node Statistical analysis
+@subsection Statistical analysis
+
+This is an incomplete list:
+
+@example
+maxval();
+minval();
+mean();
+median();
+sum();
+std();
+var();
+meanObs();
+stdObs();
+varObs();
+normObs();
+sort();
+abs();
+sqr();
+sqroot();
+covariance();
+covariance2();
+correlation();
+det();
+divergenceShape();
+bhattacharyyaShape();
+@end example
+
+
+@node Other realvec functions
+@subsection Other realvec functions
+
+For a complete (and up-to-date) list of all realvec functions, please
+see the file @file{marsyas/realvec.h}
+
+
+
+@node Systems limitations
+@section System limitations
+
+There are many bugs in Marsyas (far too many to list here!), but there
+@emph{are} a few issues which are more fundamental.  We list these
+issues here, along with workarounds.
+
+
+@subsection Stereo vs. mono in a spectrum
+
+Due to the way that observations behave in Marsyas, in some cases it is
+impossible to differentiate between a stereo signal and a mono signal
+which is twice as long.  In particular, there is currently no direct way
+to tell apart a stereo pair of spectrums from a mono spectrum with twice
+the number of bins. 
+
+In these cases, we recommend that you use a Parallel Composite: split
+the stereo signal into separate mono dataflows (using Parallel), then
+treat each mono signal individually.
+
+
+

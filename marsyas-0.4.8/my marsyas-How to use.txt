@@ -1,0 +1,28 @@
+Firstly, Download Marsyas from 
+http://marsyas.info/
+
+Or just use my folder named marsyas-0.4.8
+
+and install it using instructions on
+http://marsyas.info/assets/docs/manual/marsyas-user/Source-installation.html
+
+If you downloaded the marsyas sustem from website.
+Replace the following file
+marsyas-0.4.8/src/apps/helloWorld/helloWorld.cpp
+with the same-one in my folder.
+
+This helloWorld.cpp will be compiled automatically with the
+sudo make
+instruction. after you replace the file do compile it once more by
+cd marsyas-0.4.8/build/
+sudo make
+
+Once you are done with this you will have an executable file:
+marsyas-0.4.8/build/bin/helloWorld
+
+as you are in build directory. use command
+sudo ./bin/helloWorld InputFile.wav
+
+and you will be able to see output features as well as real time playing audio.
+
+Further for internal details about marsyas systema and my helloWorld.cpp see marsyas-internal_details.txt

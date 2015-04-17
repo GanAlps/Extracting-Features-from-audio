@@ -1,0 +1,1 @@
+/usr/bin/c++   -Wall -Wextra -fPIC -O3 -DNDEBUG    CMakeFiles/sound2sound.dir/sound2sound.cpp.o  -o ../../bin/sound2sound -rdynamic ../../lib/libmarsyas.so -lasound -lpthread -Wl,-rpath,/home/oshogupta/Desktop/HLTCPro/marsyas-0.4.8/build/lib: 

@@ -1,0 +1,43 @@
+#ifndef _config_h
+#define _config_h
+#cmakedefine MARSYAS_LINUX
+#cmakedefine MARSYAS_MACOSX
+#cmakedefine MARSYAS_WIN32
+#cmakedefine MARSYAS_CYGWIN
+#cmakedefine MARSYAS_MINGW
+
+#cmakedefine MARSYAS_BIGENDIAN
+
+
+#cmakedefine MARSYAS_AUDIOIO
+#cmakedefine MARSYAS_MIDIIO
+
+#cmakedefine MARSYAS_ASSERTS
+#cmakedefine MARSYAS_PROFILING
+#cmakedefine MARSYAS_TRACECONTROLS
+#cmakedefine MARSYAS_FLOWCHECK 
+#cmakedefine MARSYAS_BOUNDCHECK
+#cmakedefine MARSYAS_STATIC
+
+
+#cmakedefine MARSYAS_LOG_WARNINGS
+#cmakedefine MARSYAS_LOG_DEBUGS
+#cmakedefine MARSYAS_LOG_DIAGNOSTICS
+#cmakedefine MARSYAS_LOG_MESSAGES
+#cmakedefine MARSYAS_LOG_ERRORS
+#cmakedefine MARSYAS_LOG2FILE
+#cmakedefine MARSYAS_LOG2STDOUT
+#cmakedefine MARSYAS_LOG2STDERR
+#cmakedefine MARSYAS_LOG2GUI
+
+#cmakedefine MARSYAS_LAME
+#cmakedefine MARSYAS_MAD
+#cmakedefine MARSYAS_MATLAB
+#cmakedefine MARSYAS_VORBIS
+#cmakedefine MARSYAS_GSTREAMER
+#cmakedefine MARSYAS_PNG
+
+#cmakedefine MARSYAS_ANN
+
+#cmakedefine DISTRIBUTED
+#endif

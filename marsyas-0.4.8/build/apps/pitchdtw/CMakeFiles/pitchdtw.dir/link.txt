@@ -1,0 +1,1 @@
+/usr/bin/c++   -Wall -Wextra -fPIC -O3 -DNDEBUG    CMakeFiles/pitchdtw.dir/pitchdtw.cpp.o  -o ../../bin/pitchdtw -rdynamic ../../lib/libmarsyas.so -lasound -lpthread -Wl,-rpath,/home/oshogupta/Desktop/HLTCPro/marsyas-0.4.8/build/lib: 

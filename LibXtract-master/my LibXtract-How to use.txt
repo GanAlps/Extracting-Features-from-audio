@@ -1,0 +1,30 @@
+Download LibXtract from
+http://libxtract.sourceforge.net/
+
+Install it using instructions in "readme.md"
+
+Now, I integrated library libsndfile with it to read sudio files.
+Install libsndfile by command
+sudo apt-get install libsndfile1
+
+Then add
+LIBS = -lsndfile
+to following MakeFile:
+LibXtract-master/examples/simpletest/MakeFile
+
+Replace simpletest.c by simpletest.c created by me.
+
+now open terminal change directory to LibXtract-master and type
+sudo make
+sudo make install
+
+now you will have an executable file in examples/simpletest/
+you can run this with an audio file as input and get feature vectors.
+
+Basic concept of LibXtract is the output of one feature can be given as input to other to save time. Thus is first have features that takes samples as input then features that take spectrum as input and then some features take harmonics as input and there are some other that take previous features as input thus the order of feature extraction can not be varied independently.
+
+In My simpletest.c I have a main function that just uses libsndfile and reads the input wav file and give us samples in variable named waveTable.
+Now, I send this samples chunk by chunk to function extractall() which returns me the feature vector.
+
+For further help about libxtracts file by file working I refered:
+http://libxtract.sourceforge.net/modules.html

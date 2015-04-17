@@ -1,0 +1,39 @@
+For understanding marsyas Follow the documentation online on
+http://marsyas.info/assets/docs/manual/marsyas-user/index.html
+
+Marsyas have something called MarSystem that will be used to do whole processing in Marsyas. To better understand MarSystem after reading section 7,9.1 and 9.2 in above mentioned online documentation have a look at chapter 4 - Architecture of
+marsyas.info/assets/docs/manual/marsyas-user.pdf
+
+Once you have looked at it you know about Series and Fanout thing of MarSystem.
+My Marsyas model that I used in my helloWorld.cpp is shown in "my marsyas model.png".
+I used the fact that most of features either use direct samples or use sprectrum as input so I divided two categoreies named Fanout1 and Fanout2. Rest is all clear I hope.
+
+For file by file details about marsyas features I refered:
+http://marsyas.info/assets/docs/sourceDoc/html/group__Analysis.html
+
+######helloWorld.cpp######
+
+pnet is the main series of our model as seen from "my marsyas model.png".
+All features require to be accompanied with a gain in series to make them work. That gain will be by default 1.
+
+Each and every portion of code (even comments) are working code.
+(MaxMin is distorting sound and F0Analysis is not being recognized as a feature,  other all are working.)
+Some features are commented because it can process a certain number of features only at once making them more was stopping the function to work. To use those features which are in comment you can remove or comment one feature from the ones that are being used and uncomment the one you want to use.
+
+every feature is completely decribed in 4 parts.
+1. initialization of feature "series" as: 
+	MarSystem* SerXXXX = mng.create("Series","SerXXXX");
+
+2. initialization of feature in series followed by gain:
+	SerXXXX->addMarSystem(mng.create("XXXX", "xxxx"));
+	SerXXXX->addMarSystem(mng.create("Gain", "gXX"));
+
+3. adding this series to Fanout (1 for audio feature 2 for spectral feature):
+	FanoutX->addMarSystem(SerXXXX);
+
+4. getting output from each feature in while loop and put that in FVec (This is in functio MyTick() ):
+	const realvec& xxxx = pnet->getctrl("Fanout/Fanout1/Spec/Fanout/Fanout2/SerXXXX/XXXX/xxxx/mrs_realvec/processedData")->to<mrs_realvec>();
+	FVec[i++] = xxxx(0,0);
+
+
+

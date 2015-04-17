@@ -1,0 +1,69 @@
+#My Version of Marsyas
+This is to extract maximum possible features from an audio.
+
+Firstly, Download Marsyas from 
+http://marsyas.info/
+
+Or just use my folder named marsyas-0.4.8
+
+and install it using instructions on
+http://marsyas.info/assets/docs/manual/marsyas-user/Source-installation.html
+
+If you downloaded the marsyas sustem from website.
+Replace the following file
+marsyas-0.4.8/src/apps/helloWorld/helloWorld.cpp
+with the same-one in my folder.
+
+This helloWorld.cpp will be compiled automatically with the
+sudo make
+instruction. after you replace the file do compile it once more by
+cd marsyas-0.4.8/build/
+sudo make
+
+Once you are done with this you will have an executable file:
+marsyas-0.4.8/build/bin/helloWorld
+
+as you are in build directory. use command
+sudo ./bin/helloWorld InputFile.wav
+
+and you will be able to see output features as well as real time playing audio.
+
+Further for internal details about marsyas systema and my helloWorld.cpp see marsyas-internal_details.txt
+
+
+#Origianl Marsyas Readme starts here
+
+Welcome to marsyas.
+ 
+MARSYAS is a software framework that was created as part of my
+research in Princeton University as a Phd graduate student. It is a
+collection of classes written in C++ and JAVA for various sound
+analysis and synthesis tasks. It started my first year in graduate school
+(1998) when I rewrote various tools that I had been using in order to
+make my life easier and also to code them the way I wanted them to be.
+
+This library is made by me for my own research purposes. Anyone who
+finds anything useful is welcome to use it, but I have no
+responsibility whatsoever. I will be happy to answer any questions and
+I will try to keep developing the library/toolkit. Until now
+development is guided by what my research needs and whenever I find
+some free time other stuff.
+
+The basic goal for MARSYAS has been to design a flexible and easily
+extensible system that allows rapid prototyping of audio
+applications. MARSYAS is released as free software under the GNU
+public licence hoping that people will actively contribute to its
+development. Please send bugs, comments, additions, problems and
+anything else to gtzan@@cs.cmu.edu. This version 0.2 is the third 
+major rewrite of Marsyas and is still in experimental stage. Feedback 
+is more than welcome. 
+
+
+MARSYAS is free software. Please see the file COPYING for details.
+For documentation, we recommend reading the online verison,
+
+	http://marsyas.sness.net
+
+
+
+

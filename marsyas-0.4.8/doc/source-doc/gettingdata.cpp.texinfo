@@ -1,0 +1,64 @@
+@c Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
+@example
+@b{#include} @t{"MarSystemManager.h"}
+@b{using} @b{namespace} std;
+@b{using} @b{namespace} Marsyas;
+
+void @b{recognize}(string sfName)
+@{
+       MarSystemManager mng;
+       MarSystem* pnet = mng.@b{create}(@t{"Series"}, @t{"pnet"});
+       @i{// standard network}
+       pnet->@b{addMarSystem}(mng.@b{create}(@t{"SoundFileSource"}, @t{"src"}));
+       pnet->@b{updctrl}(@t{"SoundFileSource/src/mrs_string/filename"}, sfName);
+       pnet->@b{addMarSystem}(mng.@b{create}(@t{"Spectrum"},@t{"spk"}));
+       pnet->@b{addMarSystem}(mng.@b{create}(@t{"Gain"}, @t{"g2"}));
+
+       @b{while} ( pnet->@b{getctrl}(@t{"SoundFileSource/src/mrs_bool/notEmpty"})->to<mrs_bool>() )
+       @{
+              pnet->@b{tick}();
+              @i{// gets data from the Spectrum for read only!}
+              @b{const} realvec& processedData =
+                  pnet->@b{getctrl}(@t{"Spectrum/spk/mrs_realvec/processedData"})->to<mrs_realvec>();
+              cout << @t{"Original Spectrum = "} << processedData << endl;
+
+              @i{// if we need to get the Spectrum and modify it, here is the way}
+              @i{// to do it.  Notice that we must open a new scope using curly}
+              @i{// brackets so that MarControlAccessor is automatically destroyed}
+              @i{// when we are finished modifing the realvec control.}
+              @{
+                     MarControlAccessor
+                     @b{acc}(pnet->@b{getctrl}(@t{"Spectrum/spk/mrs_realvec/processedData"}));
+                     realvec&
+                     processedData2 = acc.to<mrs_realvec>();
+
+                     @i{// we can now write to processedData without worries of}
+                     @i{// breaking encapsulation}
+                     processedData2 *= 2.0;
+                     cout << @t{"Modified Spectrum = "} << processedData2 << endl;
+              @}
+       @}
+       @b{delete} pnet;
+@}
+
+int @b{main}(int argc, @b{const} char **argv)
+@{
+       string fileName;
+       @b{if} (argc<2)
+       @{
+              cout<<@t{"Please enter filename."}<<endl;
+              @b{exit}(1);
+       @}
+       @b{else}
+       @{
+              fileName = argv[1];
+       @}
+       cout << @t{"Processing file "} << fileName << endl;
+
+       @b{recognize}(fileName);
+       @b{exit}(0);
+@}
+
+
+
+@end example

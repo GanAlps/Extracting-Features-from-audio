@@ -1,0 +1,1 @@
+/usr/bin/c++   -Wall -Wextra -fPIC -O3 -DNDEBUG    CMakeFiles/mirex_train_and_predict.dir/mirex_train_and_predict.cpp.o  -o ../../bin/mirex_train_and_predict -rdynamic ../../lib/libmarsyas.so -lasound -lpthread -Wl,-rpath,/home/oshogupta/Desktop/HLTCPro/marsyas-0.4.8/build/lib: 

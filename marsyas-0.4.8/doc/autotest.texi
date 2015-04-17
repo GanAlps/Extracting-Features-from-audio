@@ -1,0 +1,421 @@
+@node Automatic testing
+@chapter Automatic testing
+
+In an attempt to reduce the number of times we break working code,
+we have added some testing mechanisms to Marsyas.
+
+@menu
+* Unit tests::                  
+* Black-box tests::            
+* Daily Auto-tester::           
+@end menu
+
+
+@node Unit tests
+@section Unit tests
+
+These tests are highly focused on specific portions of code.
+
+@menu
+* What are unit tests?::
+* What testing framework does Marsyas use?::
+* How do I add a new test?::
+* How do I run the tests?::
+@end menu
+
+
+@node What are unit tests?
+@subsection What are unit tests?
+
+Unit tests are simple, short tests that test the functionality of
+individual modules in your source code.  A module can be a method of a
+class, or can be smaller or larger parts of your code.  Unit tests are
+usually developed at the same time code is written, independently
+testing each small component of your algorithm is on it's own.
+
+The main goal of unit testing is to isolate each part of your code and
+ensure that each part is correct.  This allows you to refactor your
+code at a later time with the confidence that your refactoring gives
+the same behaviour as the original code.  This allows you to quickly
+write code that works, and then later come and refactor your code to
+make it run faster.
+
+Unit testing also allows you to check whether a particular piece of
+code still works properly.  This is useful in a large software project
+such as Marsyas which has currently over 180,000 lines of code and
+many developers on different continents.
+
+Unit tests can also provide a sort of living documentation for the
+system.  Well written unit tests have example code in them that can
+help new developers understand how to use different MarSystems.
+Written documentation added to the unit tests also helps in this
+regard, and often the best place for verbose documentation is in the
+unit tests rather than in the main functions themselves, where they
+can occasionally hide the beautiful logic therein.
+
+Test-Driven Development (TDD) is a technique where you first write
+your tests, and then write the actual that will make the tests pass.
+In TDD you have short iterative development cycles on pre-written test
+cases that define desired improvements or new functionality.  On each
+iteration of the cycle, you write just the code that you need to make
+the tests pass.  With TDD you write just the code that you need, not
+the code you think you might need at some point in the future.
+
+Cxxtest unit testing framework that is built into Marsyas lets you
+write your tests either before, as in standard unit testing, or after,
+as in TDD.
+
+
+@node What testing framework does Marsyas use?
+@subsection What testing framework does Marsyas use?
+
+Marsyas uses the GPLed Cxxtest (http://cxxtest.sourceforge.net/)
+testing framework.  Cxxtest is a JUnit/CppUnit/xUnit-like framework
+for C++.  We chose Cxxtest because it is lightweight, easy-to-use,
+is very portable and is distributed under the GPL licence.  It is
+easier to use than other C++ testing frameworks and features a very
+rich set of assertions.
+
+An example can be found in
+marsyas/src/tests/unit_tests/TestSelector.h 
+
+@example
+#include "Selector.h"
+using namespace Marsyas;
+
+class Selector_runner : public CxxTest::TestSuite
+@{
+public:
+  void
+  setUp()
+  @{
+	// ... setup the "in" realvec ...
+  @}
+
+  void test_all_input_copied_to_output_by_default(void) 
+  @{
+ 	selector->myProcess(in,out);
+  	TS_ASSERT_EQUALS(out(0,0), 0.1);
+  @}
+@}
+@end example
+
+In this example, we setup the input realvec ``in'' in the function
+``setup()''.  We then add a test by creating a new method that begins
+with the word ``test_''.
+
+
+@node How do I add a new test?
+@subsection How do I add a new test?
+
+
+The easiest way to add a new test is to copy the file
+marsyas/src/tests/unit_tests/TestSample.h to a new file of your
+choice, for example, to ``TestAutoCorrelation.h''.  ``TestSample.h''
+has sample code in it that will help you get started, and contains
+copious documentation.
+
+Add new tests for all the parts of your class that you want to test.
+Remember to start all the new function names with the string ``test_''
+so that CxxTest knows that this function is one that you wish to test.
+
+You then need to add a line to
+``marsyas/src/tests/unit_tests/CMakeLists.txt'' to tell CMake to
+compile this new file:
+
+@example
+marsyas_unit_test(AubioYin AubioYin_runner.cpp)
+@end example
+
+In order to generate the AubioYin_runner.cpp file from the
+TestAubioYin.h file, you then need to run the command:
+
+./scripts/generate-unit-test-cpp-files.py
+
+
+@node How do I run the tests?
+@subsection How do I run the tests?
+
+To run the tests, you first need to enable testing in your build
+directory.  To do this, do something like:
+
+@example
+cd marsyas
+mkdir build-with-tests
+cd build-with-tests
+ccmake ../src
+@end example
+
+Then type ``t'' to see the advanced options and turn on the
+``BUILD_TESTS'' option.
+
+The tests will then be automatically built if you then compile Marsyas:
+
+@example
+make -j3
+@end example
+
+
+
+@node Black-box tests
+@section Black-box tests
+
+These tests are deliberately simple and easy to understand.
+
+@menu
+* What does black-box mean?::  
+* How do I write a black-box test?::      
+* How do the tests work?::      
+* When a test fails...::        
+* Why should I care?::          
+@end menu
+
+@node What does black-box mean?
+@subsection What does "black-box" mean?
+
+@unnumberedsubsubsec Definition
+
+The term @qq{black-box testing} seems to mean something different
+to each project, website, and software engineering academic.  So I
+shall define what we mean by @qq{black-box testing} in the
+context of Marsyas @qq{black-box testing}:
+
+@quotation
+Does it work the way it used to?
+@end quotation
+
+This is checked as follows:
+
+@enumerate
+@item
+Pick a program to test.  Find some input for the program (generally a
+sound file).  Save the input.
+
+@item
+Run the program on the saved input.  Save the output (either another
+sound file, or some text).
+
+@item
+Wait / change stuff / let other people change stuff.
+
+@item
+Run the program with the initial input.  Compare the current output to
+the initially stored output.  If they are different, the test fails.
+
+@item
+Goto step 3.
+
+@end enumerate
+
+In other words, these tests do not check for @emph{correctness};
+they simply check for @emph{consistency}.  Fixing a bug could
+result in a test @qq{failing}.  However, this is not a problem:
+see @ref{When a test fails...}
+
+
+@node How do I write a black-box test?
+@subsection How do I write a black-box test?
+
+Writing a black-box test is very easy.  
+
+1) Run your program with the normal command line flags on an input
+audio file.  I would suggest to use one of the files in the
+marsyas/src/tests/black-box/input directory if possible.  To test
+the waveform generation functionality of sound2png I ran it with the
+following flags:
+
+@example
+sound2png -m waveform marsyas/src/tests/black-box/input/right.wav waveform.png
+@end example
+
+2) Copy the output file to the marsyas/src/tests/black-box/output
+directory
+
+@example
+cp waveform.png marsyas/src/tests/black-box/output
+@end example
+
+3) Add a section to marsyas/src/tests/black-box/CMakeLists.txt for
+your new test:
+
+@example
+set( ARGUMENTS
+	-m waveform
+)
+black-box_explicit(sound2png_waveform right.wav waveform.png sound2png "$@{ARGUMENTS@}")
+@end example
+
+The first section ``ARGUMENTS'' are where you should put all the
+command line arguments for your program.  ``black-box_explicit'' is a
+test MACRO that we've written to help make it easy to write tests like
+this, and it takes 5 arguments:
+
+
+@example
+macro(black-box_audio REG_NAME REG_INPUT REG_OUTPUT REG_COMMAND REG_ARGS)
+@end example
+
+REG_NAME is the name of your test.  Each test must be named
+differently, if not, the duplicate tests won't be run.
+
+REG_INPUT is the input file for your test.  In our case this was
+``right.wav''
+
+REG_OUTPUT is the output file for your test.  In our case this was
+``waveform.png''
+
+REG_COMMAND is the command to run, ``sound2png'' in this example.
+
+REG_ARGS are the command line arguments to REG_COMMAND.
+
+
+@node How do the tests work?
+@subsection How do the tests work?
+
+@unnumberedsubsubsec List of tests
+
+Tests are defined in @file{src/tests/black-box/CMakeLists.txt}.
+Each test is split into two steps: creating an audio file, and
+comparing that audio file to the previous (working) audio file.
+
+
+@unnumberedsubsubsec Approximate matching (no rounding errors)
+
+When an audio file is specified as an @qq{answer} file,
+
+@example
+audioCompare phasevoder.au ../output/right-phasevocoder.au
+@end example
+
+@noindent
+we attempt to match the files approximately, to avoid rounding
+mismatches on different operating systems.  Each sample must be
+very close to the corresponding sample in the answer file, but
+they need not be exact.
+
+
+@node When a test fails...
+@subsection When a test fails...
+
+@unnumberedsubsubsec Don't panic!
+
+If a test fails as a result of your work, remember that these are
+@emph{consistency} tests, not @emph{correctness} tests.  Do you expect
+your work to produce any different output for that particular test?
+
+For example, if you discover (and fix) a bug in the inverse FFT, the
+phasevocoder test will probably @qq{fail}.  This is to be expected: the
+previously-recorded output of the phasevocoder faithfully archived the
+buggy output, so the bug-free output is detected as different.
+
+On the other hand, suppose you are adding a new classifier for machine
+learning, and the Windowing test breaks.  This is not expected; a new
+feature should not impact basic functions like taking a Hanning window!
+In this case, you should investigate before committing your changes to
+svn.
+
+@unnumberedsubsubsec Updating the test
+
+If you are certain that your patch (and new output file) are good, then
+you should update the answer file.  This is simply a matter of copying
+your new output file over the old answer file.
+
+The new output file is found in
+@file{BUILD_DIR/tests/black-box/}.  You may also create the file
+manually yourself; the exact command-line arguments used for each
+test can be seen with:
+
+@example
+make test ARGS="-V"
+@end example
+
+Please commit the changed
+@file{src/tests/black-box/output/@emph{<FILE.au>}} in a separate
+svn commit, and make sure the log message explains that your new
+output is superior to the old one.
+
+@unnumberedsubsubsec Temporarily disabling a test
+
+If you are planning on doing a lot of work on part of Marsyas
+(which would result in tests failing, but having no working output
+yet), tests may be commented out in the
+@file{src/tests/black-box/CMakeLists.txt} file.  Again, please
+commit this change in a separate svn commit with a log message
+that explains this.
+
+
+@node Why should I care?
+@subsection Why should I care?
+
+@unnumberedsubsubsec Developers
+
+Think of these tests as a mutual assistance pact: you should care
+about not breaking other people's code, because other people will
+care about not breaking @emph{your} code.
+
+Of course, this requires that you create black-box tests for your
+own code.  Due to practicality, we can't check every single case
+of every single program.  So instead, create one or two tests
+which investigate as many things as possible.  For example,
+instead of simply testing if sfplay can output a sound file, we
+test changing the gain, starting at a specific time, and only
+playing for a specific length.
+
+We recommend discussing potential black-box tests on the
+developer mailist.
+
+@unnumberedsubsubsec New users
+
+These tests are also very useful if you start investigating a new
+aspect of Marsyas.  Currently there are many unmaintained
+MarSystems, applications, and projects in Marsyas.  New users can
+easily waste hours trying to use part of the codebase which has
+been broken for months.
+
+Having a testing mechanism means that users know that the code is
+working -- at least, working for the exact command and input that
+the test uses.  If (when?) a user has problems getting something
+to work in Marsyas, he can turn to the regtests: if a regtest
+passes but his own code doesn't work, he can compare his code
+against the regtest code.
+
+Trust me, by now I've probably spent 20 hours trying to make
+broken code to work -- sometimes when the developers already knew
+it was broken!  Quite apart from the waste of time, it's
+incredibly demoralizing.  It was this problem that inspired me to
+create these tests.
+
+
+
+@node Daily Auto-tester
+@section Daily Auto-tester
+
+We run the script
+
+@example
+scripts/dailytest.sh
+@end example
+
+@noindent
+every day.  This script performs a few tasks:
+
+@enumerate
+@item
+Exports a clean copy of the source tree from svn.
+
+@item
+Builds Marsyas.
+
+@item
+Runs the tests.
+
+@item
+Builds the documentation.
+
+@end enumerate
+
+An email is sent to some developers with the results of these
+tests.  If you would like to receive these daily emails, please
+enquire on the developer mailist.
+
+

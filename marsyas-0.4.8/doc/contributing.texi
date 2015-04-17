@@ -1,0 +1,453 @@
+@node Contributing to Marsyas
+@chapter Contributing to Marsyas
+
+This chapter explains how to integrate your code in Marsyas so that
+others may use it.
+
+@menu
+* Contributing documentation::  
+* Contributing source documentation::  
+* Code style::                  
+* Playing in the mudbox::       
+* Contributing applications::   
+* Contributing system code::    
+* Sending a patch::             
+* Building documentation::      
+* Build system details::        
+* Command-line arguments::
+@end menu
+
+
+@node Contributing documentation
+@section Contributing documentation
+
+The documentation for Marsyas is still a work in progress; we can use
+all the help we can get.  Don't
+say @qq{oh, I don't know enough} or @qq{I'm not good at writing
+English.}  The question is not @qq{could anybody create something better
+than my suggestion?}  -- the question is @qq{is this better than
+nothing?}  Remember the most important thing about documentation:
+
+@quotation
+Documentation is like sex: when it is good, it is very, very good; and
+when it is bad, it is better than nothing.   (Dick Brandon)
+@end quotation
+
+
+@subsection Manual
+
+If you can add something to the docs, please send an email to
+@code{<marsyas-developers@@lists.sourceforge.net>}.  A formal patch for
+the texidoc is not required; we can take care of the technical
+details.  Here is an example of a perfect documentation suggestion:
+
+@verbatim
+To: marsyas-users@lists.sourceforge.net
+From: helpful-user@example.net
+Subject: doc addition
+
+In 4.2.1 Implicit patching vs. explicit patching, please add
+----
+It could be helpful to think of this like blah blah blah.
+----
+to the second paragraph.
+@end verbatim
+
+
+@subsection Examples
+
+Small, easy-to-understand examples are also great.  If you have some
+source code that illustrates something, we can add it to
+@file{examples/}.  We use these examples to generate the
+@userref{Example programs}.  You don't have to write any English at all!
+
+
+@node Contributing source documentation
+@section Contributing source documentation
+
+In your @code{.h} file, just after the @code{namespace Marsyas \n @{}
+line, please include a short documentation snippet:
+
+@example
+namespace Marsyas
+@{
+/**
+    \ingroup Processing
+    \brief Multiply input realvec with gain
+
+	Simple MarSystem example.  Just multiply the values of the input
+realvec with gain and put them in the output vector.  This object can be
+used as a prototype template for building more complicated MarSystems. 
+
+    Controls:
+    - \b mrs_real/gain [w] : adjust the gain multiplier.
+*/
+
+class Gain: public MarSystem
+@{
+@end example
+
+@strong{Warning: } the old convention included a @code{\class Gain};
+this was a mistake in our understanding of Doxygen.  Please @strong{do
+not} include an explicit class name; just make sure that the doc snippet
+occurs above the class.
+
+The @code{[w]} indicates that the control should be written and not
+(usefully) read.  Valid options are @code{[r]}, @code{[w]}, and
+@code{[rw]}.
+
+The @code{\ingroup GROUP} will generally be @code{Processing},
+@code{Analysis}, or @code{Synthesis}.  For details about these
+categories, see @userref{MarSystem reference}.  For a complete list
+of all available groups, see the file @file{marsyas/groups.doxy}.
+
+There is one special group: @code{Basic} Processing.  This is a subset
+of the @code{Processing} group.  No MarSystem should only be in the
+@code{Basic} group; it should be placed in both groups, with
+
+@example
+\ingroup Processing Basic
+@end example
+
+Code which is not a MarSystem should be placed in the @code{Notmar}
+group.
+
+A complete list of groups can be found in the @file{marsyas/groups.doxy}
+file.  The main groups are @code{Composites}, @code{Basic}, @code{IO},
+@code{Processing}, @code{Analysis}, and @code{Synthesis}.
+
+
+@node Code style
+@section Code style
+
+@itemize
+
+@item
+We use the Allman  code style (also known as ANSI or BSD code style) with tabs as indentation.
+Code style is of course somewhat personal 
+and we can almost guarantee that everybody will hate @emph{some} aspect of the style,
+but having a uniform style makes it much easier to understand other people's code and fix bugs. 
+
+If possible, configure your editor/IDE to use this code style. 
+Otherwise, you can use the @code{astyle} tool (@uref{http://astyle.sourceforge.net/,Artistic Style}) 
+(with the @code{ansi} style) for automated clean up of code style issues (braces, indentation, whitespace). 
+For ease of use, we have a file @file{misc/astylerc} with predefined options. To use it, call
+
+@example
+astyle --options=@emph{/path/to/marsyas_topdir}/misc/astylerc filename.cpp
+@end example
+
+@samp{filename.cpp} can include wildcards, like @samp{*.h} and @samp{*.cpp}.
+
+You do not need to format your source code according to this style, 
+but don't complain if someone else modifies/cleans up your file accordingly.
+
+Unfortunately, due to historical reasons the code style is not
+consistant within the Marsyas source code itself.
+
+@item
+Files should use unix line endings.
+
+
+@item
+We strongly encourage the use of underscores@code{_} after member
+variables (@qq{member variables} are variables which can be used
+throughout the class).  In other words, in your @file{.h} files use:
+
+@example
+class MyMar: public MarSystem
+@{
+private:
+	mrs_real varname_;  // don't use a plain "varname"
+	...
+@}
+@end example
+
+@item
+By convention, a program (not a MarSystem) should return
+@code{exit(0)} upon successful completion.  If any problems arise, the
+program should return a number greater than 0.
+
+
+
+
+@end itemize
+
+
+
+@node Playing in the mudbox
+@section Playing in the mudbox
+
+The easiest way to add code to Marsyas is to add a test to
+@file{apps/mudbox/mudbox.cpp}.  This file is a huge mess of short
+examples, many out of date and no longer working, but it seems popular.
+
+To add your own test, follow the general pattern of other tests.  You
+will need to modify
+
+@itemize
+@item @code{void printHelp(string progName)} : display the argument
+which calls your test.
+@item @code{int main(int argc, const char **argv)} : call your
+test function.  Yes, that's a 100-line collection of @code{else if}
+statements.  (see @qq{huge mess}, above)
+@item @code{void test_myTestName()} : your actual code.
+@end itemize
+
+
+@node Contributing applications
+@section Contributing applications
+
+The source code for applications is in the @file{apps/} directory.
+The easiest way to get started is probably to copy everything from
+an existing directory, then modify the files accordingly.
+
+You should update all these files:
+
+@itemize
+@item @file{src/apps/MYDIR/CMakeLists.txt}
+@item @file{src/apps/CMakeLists.txt}
+@end itemize
+
+By convention, your program should return @code{exit(0)} upon
+successful completion.  If any problems arise, the program should
+return a number greater than 0.
+
+
+@node Contributing system code
+@section Contributing system code
+
+
+@menu
+* Adding/removing to/from the build system::  
+* Contributing non-MarSystem system code::  
+* Contributing MarSystems::     
+@end menu
+
+
+
+@node Adding/removing to/from the build system
+@subsection Adding/removing to/from the build system
+
+To add files to the Marsyas build system, use
+
+@example
+addMarsystem MyMarSystemName
+addClass MyClassName
+@end example
+
+@warning{Remember to do @code{svn add}!  Adding files to the build
+system does not add them to svn.}
+
+For text files (including source code @code{.h} and @code{.cpp}),
+please set
+
+@example
+svn propset svn:eol-style native FILE
+    for example
+svn propset svn:eol-style native *.h *.cpp
+@end example
+
+It would be nice if svn did this automatically, but unfortunately
+it does not.  :(
+
+To remove files from the build system, use
+
+@example
+removeMarsystem MyMarSystemName
+removeClass MyClassName
+@end example
+
+@warning{Remember to do @code{svn rm}!  Removing files from the
+build system does not remove them from svn.}
+
+
+@node Contributing non-MarSystem system code
+@subsection Contributing non-MarSystem system code
+
+If you have created a useful library or set of functions which you
+want to share with others, you may add it to the Marsyas source
+code.  The new files should be placed in the @file{src/marsyas/}
+directory, and added to the build process.
+
+@subheading Automatically
+
+There is a Python script which automates this process; please see
+@ref{Adding/removing to/from the build system}.  If you are a
+masochist and wish to do this manually, see below.
+
+@subheading Manually
+
+The easiest way is to look for any appearances of @code{realvec}
+in the below files, and duplicate these entries using your
+@file{myfile}.
+
+@itemize
+@item @file{src/marsyas/CMakeLists.txt}
+@end itemize
+
+
+@node Contributing MarSystems
+@subsection Contributing MarSystems
+
+If you have created a useful MarSystem which you want to share
+with others, you may add it to the Marsyas source code.
+@strong{THIS IS NOT REQUIRED FOR BUILDING YOUR OWN APPLICATONS!!!}
+See @userref{Compiling and using a new MarSystem}.
+
+@subheading Automatically
+
+There is a Python script which automates this process; please see
+@ref{Adding/removing to/from the build system}.  If you are a
+masochist and wish to do this manually, see below.
+
+@subheading Manually
+
+The new MarSystem should be placed in the @file{src/marsyas/}
+directory, and must be added to @file{MarSystemManager.cpp} and
+the build process.  The easiest way is to look for @code{Gain} and
+do the same thing with your new MarSystem.
+
+@itemize
+@item @file{src/marsyas/CMakeLists.txt}
+@end itemize
+
+
+@node Sending a patch
+@section Sending a patch
+
+@subheading Checklist
+
+@itemize
+@item Does Marsyas still compile?
+@item Does Marsyas still pass @code{make test}?
+@item Did you follow @ref{Contributing source documentation} (if applicable)?
+@item Did you add your file(s) to the build process?
+@end itemize
+
+If the answer to all these questions is @emph{yes}, then proceed.
+
+
+@subheading Producing the patch
+
+To produce a patch with svn, simply type
+
+@example
+svn diff > mypatch.diff
+@end example
+
+@noindent
+and then send the resulting file to
+@code{<marsyas-developers@@lists.sourceforge.net>}.
+
+If you have SVN write access, you may simply type
+
+@example
+svn ci
+@end example
+
+
+@node Building documentation
+@section Building documentation
+
+This manual is built with texinfo, and the source code documentation is
+created with doxygen.  These software packages may be installed from
+
+@itemize
+@item @uref{http://www.gnu.org/software/texinfo/, texinfo}
+@item @uref{http://www.doxygen.org/, doxygen}
+@item @uref{http://www.graphviz.org/, graphviz}
+@end itemize
+
+The latest version of the manual is in the SVN tree; create a new
+directory @code{doc-build}, run cmake, and make.
+
+Source-highlighted examples are stored in the @file{doc/source-doc/}
+directory.  These may be built with this additional program and the
+following command:
+
+@itemize
+@item @uref{http://www.gnu.org/software/src-highlite/, GNU/source-highlight}
+@end itemize
+
+@example
+scripts/generate-source-docs.sh
+@end example
+
+
+@node Build system details
+@section Build system details
+
+The main file is src/CMakeLists.txt.  Additional modules are in
+cmake-modules/.
+
+
+@node Command-line arguments
+@section Command-line arguments
+
+We're trying to avoid have the same command-line arguments meaning
+different things in different programs.  All arguments should have
+a short form (1-2 characters) and a long form.  Here is a list of
+commands with specific meanings; if you want to do something
+different, then find a different pair of letters for the short
+form.
+
+@example
+(null)             : same as -u
+-u --usage
+-h --help
+-v --verbose
+-s --silent
+-q --quiet
+
+-o --output    : output to a file
+
+-g --gain
+
+-ws --windowsize
+-hs --hopsize
+-ms --memorysize
+
+-sa --start
+-ln --length
+-pl --plugin
+
+-sr --samplerate
+-ch --channels
+
+-co --collection
+
+@end example
+
+We're still in the process of renaming arguments, so there may be
+inconsistencies between actual program behaviour and this list.
+
+
+@node Making a release
+@subsection Making a release
+
+Checklist:
+
+@enumerate
+
+@item
+In the build dir, build in RELEASE mode and run:
+
+@example
+make test
+@end example
+
+@item
+In the top source dir, create tarball (adjust number as
+necessary):
+
+@example
+svn export . /tmp/marsyas-0.4.8/
+@end example
+
+
+@end enumerate
+
+
+
+

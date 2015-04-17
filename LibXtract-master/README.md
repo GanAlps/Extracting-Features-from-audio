@@ -1,6 +1,5 @@
 #My version of LibXtract
-#This is to extract maximum possible features from an audio in psedu real-time.
-#Reads audio file in chunks and process it fast enough
+Reads audio file in chunks and process it fast enough
 
 Download LibXtract from
 http://libxtract.sourceforge.net/

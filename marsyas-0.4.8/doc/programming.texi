@@ -1,0 +1,267 @@
+@node Programming MarSystems
+@chapter Programming MarSystems
+
+The main method that each MarSystem must support is @b{process} which
+takes two arguments both arrays of floating point numbers used to
+represent slices (matrices where one dimension is samples in time and
+the other is observations which are interpreted as happening at the
+same time). When the @b{process} method is called it reads data from
+the input slice, performs some computation/transformation and writes
+the results to the output slice. Both slices have to be preallocated
+when process is called.  One of the main advantages of Marsyas is that
+a lot of the necessary buffer allocation/reallocation and memory
+management happens behind the scene without the programmer having to
+do anything explicitly.
+
+@menu
+* Compiling and using a new MarSystem::  
+* Anatomy of a MarSystem::      
+@end menu
+
+
+@node Compiling and using a new MarSystem
+@section Compiling and using a new MarSystem
+
+Writing a new MarSystem is relatively straightforward if you begin with
+a working example and modify it for your needs.  Fortunately, there is a
+python script which does precisely this.
+
+@menu
+* Writing your own MarSystems::  
+* Using your MarSystem::        
+@end menu
+
+
+@node Writing your own MarSystems
+@subsection Writing your own MarSystems
+
+To create a @qq{blank} MarSystem to begin programming, use
+
+@example
+@emph{path/to/marsyas}/scripts/createMarSystem.py MyMar
+@end example
+
+@noindent
+where @code{MyMar} is the name of your new MarSystem.  This script will
+create @file{MyMar.h} and @file{foo.cpp} in your @strong{current}
+directory.
+
+If you want to create these new MarSystems in the @file{src/marsyas/}
+directory, go to that directory and call the script.  Relative paths are
+fine, for example @code{../../scripts/createMarSystem.py MyMar}
+(on *nix).
+
+
+@node Using your MarSystem
+@subsection Using your MarSystem
+
+Suppose that you have created a MarSystem called @code{MyMar}, which
+implements a filter.  To use this MarSystem in a network (see
+@ref{Writing applications}), simply register the MarSystem with the
+manager:
+
+@example
+MarSystemManager mng;
+// add MyMar to MarSystemManager
+MarSystem* myMar = new MyMar("hello");
+mng.registerPrototype("MyMar", myMar);
+
+// create a network normally
+playbacknet = mng.create("Series", "playbacknet");
+playbacknet->addMarSystem(mng.create("SoundFileSource", "src"));
+playbacknet->addMarSystem(mng.create("MyMar", "mymar"));
+playbacknet->addMarSystem(mng.create("Gain", "gain"));
+playbacknet->addMarSystem(mng.create("AudioSink", "dest"));
+playbacknet->updctrl("AudioSink/dest/mrs_bool/initAudio", true);
+@end example
+
+
+@node Anatomy of a MarSystem
+@section Anatomy of a MarSystem
+
+@menu
+* Methods of the object::       
+* Constructors / destructor::   
+* Handling controls::           
+* myProcess()::                 
+* myUpdate() vs. myProcess()::  
+* More details about MarSystems::  
+@end menu
+
+
+@node Methods of the object
+@subsection Methods of the object
+
+A MarSystem is an object which contains these methods.  In this example,
+we use a fake MarSystem called @code{MyName}.
+
+@itemize
+@item Constructors / Destructor:
+@example
+MyName::MyName(string name):MarSystem("MyName", name)
+MyName::MyName(const MyName& a) : MarSystem(a)
+MyName::~MyName()
+MarSystem* MyName::clone() const
+@end example
+
+@item Handling controls:
+@example
+void MyName::addControls()
+void MyName::myUpdate(MarControlPtr sender)
+@end example
+
+@item Actual processing method:
+@example
+void MyName::myProcess(realvec& in, realvec& out)
+@end example
+
+@end itemize
+
+Most of the changes that you make to the basic template will be to the
+@samp{Handling controls} methods and the @code{myProcess} method.  For
+more information, see @ref{Handling controls} and @ref{myProcess()}.
+
+
+@node Constructors / destructor
+@subsection Constructors / destructor
+
+The first function is the standard C++ constructor; the second function
+is the copy constructor.  The destructor is straightforward.
+
+@example
+MyName::MyName(string name):MarSystem("MyName", name)
+MyName::MyName(const MyName& a) : MarSystem(a)
+MyName::~MyName()
+
+MarSystem* MyName::clone() const
+@end example
+
+@code{clone()} is used to create a new MarSystem; Marsyas stores an
+instance of every MarSystem at run-time, and future MarSystems are
+simply @code{clone()}'d from the initial instance.
+
+@unnumberedsubsubsec Copy constructor
+
+All member pointers to controls @strong{must} be explicitly reassigned
+in the copy constructor.  Otherwise these member points would be
+invalid, which results in trying to de-allocate them twice!  The
+function should look like this:
+
+@example
+MyMar::MyMar(const MyMar& a) : MarSystem(a)
+@{
+    ctrl_gain_ = getctrl("mrs_real/gain");
+    ctrl_other_ = getctrl("mrs_natural/other");
+    ctrl_dothis_ = getctrl("mrs_bool/dothis");
+    ...
+@}
+@end example
+
+
+
+@node Handling controls
+@subsection Handling controls
+
+@code{addControls()} defines which controls a MarSystem uses:
+
+@example
+addctrl("mrs_real/frequency", 1000);
+//setctrlState("mrs_real/frequency", true);
+@end example
+
+The @code{addctrl()} sets up a control for the MarSystem; this control
+may be changed by other C++ code by doing
+
+@example
+@emph{MarNetwork}->updctrl("@emph{MyName}/@emph{myInstanceName}/mrs_real/frequency",
+500 );
+@end example
+
+This will change the value of the control and call @code{MyName::myUpdate()}.
+
+If we called @code{setctrl} instead of @code{updctrl},
+
+@example
+@emph{MarNetwork}->setctrl("@emph{MyName}/@emph{myInstanceName}/mrs_real/frequency",
+500 );
+@end example
+
+Then @code{myUpdate()} will not be called.  If we had set
+@code{setctrlState} to @emph{true} (ie uncommented the line in the
+initial example), then setting this control would automatically call
+@code{MyName::myUpdate()}.
+
+
+@node myProcess()
+@subsection @code{myProcess()}
+
+@code{myProcess()} is called every time the MarSystem receives a
+@code{tick()} (ie all the time the program is running).
+
+Resource-intensive operations (such as changing the buffer size,
+computing trigonomic functions, etc) that only depend on the controls
+(not the actual dataflow input) should be performed inside
+@code{myUpdate()}.  For more information, see @ref{myUpdate() vs.
+myProcess()}
+
+Most @code{myProcess()} functions will look like this:
+
+@example
+void
+MyMar::myProcess(realvec& in, realvec& out)
+@{   
+	// pre-loop initialization
+	...
+
+	// loop over buffer
+	for (o=0; o < inObservations_; o++)
+		for (t = 0; t < inSamples_; t++)
+		// calculate next value
+		...
+		out(o,t) = ...;
+
+	// post-loop actions
+	...
+@}
+@end example
+
+
+@node myUpdate() vs. myProcess()
+@subsection @code{myUpdate()} vs. @code{myProcess()}
+
+Taking a real-world example, consider a simple one-pole high/low-pass
+filter where we wish to perform the following operations:
+
+@example
+mrs_real fc = ctrl_fc ->to<mrs_real>()();
+mrs_real tanf = tan( PI * fc / 44100.0);
+mrs_real c = (tanf - 1.0) / (tanf + 1.0);
+
+// main loop
+for (t=1; t < inSampes_; t++) @{
+    az = c*in(0,t) + in(0,t-1) - c*out(0,t-1);
+    out(0,t) = (1-az)/2;
+@}
+@end example
+
+@noindent
+Since @code{tanf} and @code{c} only depend on @code{fc}, they may be
+computed inside @code{myUpdate()} instead of @code{myProcess()}.  If
+@code{fc} has not changed, we can use the old value @code{c} to perform
+the loop over our sound buffer; if the value of @code{fc} has changed,
+then @code{c} will be recomputed inside @code{myUpdate()}.
+
+
+@node More details about MarSystems
+@subsection More details about MarSystems
+
+These files have useful comments:
+
+@example
+marsyas/MarSystemTemplateBasic .h .cpp
+marsyas/MarSystemTemplateMedium .h .cpp
+marsyas/MarSystemTemplateAdvanced .h .cpp
+marsyas/Gain .h .cpp
+@end example
+
+
