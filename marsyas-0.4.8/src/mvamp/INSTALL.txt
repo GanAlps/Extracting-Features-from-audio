@@ -1,0 +1,84 @@
+In order to compile the MVAMP plugins, the VAMP plugin sdk is required. You can either download and install from the distribution (http://www.vamp-plugins.org/develop.html) or check out the latest version from the svn:
+
+$ svn co https://vamp.svn.sourceforge.net/svnroot/vamp/vamp-plugin-sdk/trunk vamp-plugin-sdk
+
+Build and install the plugin sdk using the supplied instructions.
+
+To test your plugins it's recommended to use vamp-plugin-tester. This command line application will give you a very detailed report about the compliance of the plugin.
+
+Download the distribution or compile from source. The latest code can be found here:
+$ svn co https://vamp.svn.sourceforge.net/svnroot/vamp/vamp-plugin-tester/trunk vamp-plugin-tester
+
+============================================================================================
+
+Linux OS:
+(Tested in Linux Ubuntu 9.04-32bits with gcc 4.3 -> may work on others)
+
+1. Building Marsyas Vamp Plugin:
+
+   - $ ccmake WITH_VAMP ON:
+		* VAMP_LIBRARY -> static version of libvamp-sdk, from the install path - /usr/local/lib/libvamp-sdk.a
+		* VAMP_INCLUDE_DIR -> vamp sdk src main path: /xxx/vamp-plugin-sdk-2.x/
+   - $ make (vamp plugin compiled as shared dynamic library: /build/lib/libmvamp.so)
+
+(Alternatively simply download pre-compiled plugin for Linux i686 at http://marsyas.info/download/vamp_plugins)
+
+2. Marsyas Vamp Plugin Integration in SonicVisualiser Transforms:
+
+   - copy libmvamp.so (or pre-compiled mvamp.so) to one of the following paths:
+	* /home/(user)/vamp
+	* /home/(user)/.vamp
+	* /usr/local/lib/vamp
+	* /usr/lib/vamp
+
+(mvamp-plugins.cat, in pre-compiled version or /src/mvamp/, is a txt file for organizing the plugin functions within SonicVisualiser Transforms - for such you may also copy it to the chosen path above, yet it seems to be unnecessary)
+
+============================================================================================
+OSX:
+
+Tested in 10.6 with gcc 4.2 for i386 and x86_64, linking to both the static and dynamic build of Marsyas. Note that x86_64 is not supported by Sonic Visualiser yet, but fat binaries with both architectures work fine.
+
+1. Building the Marsyas Bextract Vamp Plugins:
+	
+	- Enable WITH_VAMP in ccmake
+	
+	If the VAMP plugin sdk is compiled and installed using the default procedure the libraries and the include files will be located in /usr/local/lib and /usr/local/include. When in ccmake WITH_VAMP is toggled to ON, VAMP_LIBRARY and VAMP_INCLUDE_DIR are set to these default paths. Change them in order to reflect your own system paths if necessary
+	
+	- Build using gmake. If you generate an XCode project, the mvamp target won't be included so you'll need to build using plain "make".
+	- The resulting library should be located at your_build_dir/lib/libmvamp.dylib
+
+2. (optional) Testing your plugin with vamp-plugin-tester. Assuming that vamp-plugin-tester is located somewhere in your $PATH.
+	From the cmake build directory execute the plugin tester with it's plugin search path pointing to the mvamp library directory:
+	$ VAMP_PATH=./lib vamp-plugin-tester -a 
+
+3. Add plugin to Sonic Visualiser
+
+	To use your plugin in Sonic Visualiser copy libmvamp.dylib to 
+	~/Library/Audio/Plug-Ins/Vamp 
+	or 
+	/Library/Audio/Plug-Ins/Vamp for system wide use.
+
+============================================================================================
+
+Windows OS:
+(Tested in Windows Vista-32bits with VS2010 -> may work on others)
+
+1. Building Marsyas Vamp Plugin - FOR DYNAMIC MARSYAS LIBRARY (marsyas.dll):
+
+	- run Cmake-GUI WITH_VAMP ON (check that MARSYAS_STATIC is OFF):
+		* VAMP_LIBRARY -> static version of pre-compiled libvamp-sdk - xxx\vamp-plugin-sdk-2.x-staticlibs-win32-msvc\release\VampPluginSDK.lib
+		* VAMP_INCLUDE_DIR -> vamp sdk src main path - xxx\vamp-plugin-sdk-2.x\
+	- load Marsyas.sln in Visual Studio
+	- build marsyas + mvamp in Release mode.
+
+2. Marsyas Vamp Plugin Integration in SonicVisualiser Transforms:
+
+	- copy mvamp.dll from marsyas_path\build\bin\Release\ to C:\Program Files\Vamp Plugins\ (default VAMP_PATH)
+	- run-time linking to marsyas.dll (one of the two options below):
+		(With Static marsyas library (marsyas.lib) [MARSYAS_STATIC OFF] it shouldn't need to have run-time linking to marsyas.lib, yet static marsyas is not working properly on Windows)
+		* set marsyas_path\build\bin\Release\ to environment variable PATH
+		* copy marsyas.dll from marsyas_path\build\bin\Release\ to SonicVisualiser directory.
+		
+	(mvamp-plugins.cat uneccessary)
+
+NOTE: Only plugins built as x86 architecture are supported by SonicVisualiser.
