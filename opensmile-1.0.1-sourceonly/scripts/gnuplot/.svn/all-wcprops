@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svnroot/opensmile/!svn/ver/305/trunk/scripts/gnuplot
+END
+gpconvert.pl
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svnroot/opensmile/!svn/ver/305/trunk/scripts/gnuplot/gpconvert.pl
+END
+plotchroma.sh
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svnroot/opensmile/!svn/ver/305/trunk/scripts/gnuplot/plotchroma.sh
+END
+plotcontour.sh
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svnroot/opensmile/!svn/ver/305/trunk/scripts/gnuplot/plotcontour.sh
+END
+plotmatrix_chroma.gp
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svnroot/opensmile/!svn/ver/305/trunk/scripts/gnuplot/plotmatrix_chroma.gp
+END
+plotframe.sh
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svnroot/opensmile/!svn/ver/305/trunk/scripts/gnuplot/plotframe.sh
+END
+plotmatrix_spec.gp
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svnroot/opensmile/!svn/ver/305/trunk/scripts/gnuplot/plotmatrix_spec.gp
+END
+plotmatrix.gp
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svnroot/opensmile/!svn/ver/305/trunk/scripts/gnuplot/plotmatrix.gp
+END
+transpose.pl
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svnroot/opensmile/!svn/ver/305/trunk/scripts/gnuplot/transpose.pl
+END
+transpose_lin.pl
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svnroot/opensmile/!svn/ver/305/trunk/scripts/gnuplot/transpose_lin.pl
+END
+gpframeconvert.pl
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svnroot/opensmile/!svn/ver/305/trunk/scripts/gnuplot/gpframeconvert.pl
+END
+plotaudspec.sh
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svnroot/opensmile/!svn/ver/305/trunk/scripts/gnuplot/plotaudspec.sh
+END
+plotmatrix.sh
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svnroot/opensmile/!svn/ver/305/trunk/scripts/gnuplot/plotmatrix.sh
+END
+plotcontour.gp
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svnroot/opensmile/!svn/ver/305/trunk/scripts/gnuplot/plotcontour.gp
+END
+plotframe.gp
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svnroot/opensmile/!svn/ver/305/trunk/scripts/gnuplot/plotframe.gp
+END

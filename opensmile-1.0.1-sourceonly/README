@@ -1,0 +1,123 @@
+#My version of opensmile to extract maximum possible features from an audio in real-time
+
+Download OpenSmile from
+http://opensmile.sourceforge.net/
+
+Or use myedited library.
+
+Follow the documentation and install it with portaudio.
+Once you have working opensmile.
+
+If you downloaded it, in 'src/' replace following files by my code.
+exampleSink.cpp
+exampleSink.hpp
+componenManaget.cpp
+componenManaget.hpp
+smileExtract.cpp
+smileComponent.hpp
+
+Now before proceeding you must know that how opensmile works. for that read the doc/OpenSmile_book.pdf this will explain that opensmile uses a configuration file to get, process, and output data.
+
+You can find the configuration file that I wrote in 'MyExperiment/Exp_live.conf'
+
+For audio source I used Portaudio which records audio in real-time and opensmile extract features from it.
+For data sink I used 'exampleSink' that I edited.
+
+In this way Opensmile extract features from real-time recorded audio data.
+
+'smileExtract.cpp' is our main file, which calls runSingleThreaded() in a do-while loop. runSingleThreaded() returns the feature vector, its defined in componentManager.cpp. runSingleThreaded() calls function tick(), which further calls tick() and myTick() functions for all components. myTick() of exampleSink has the final feature vector, from where we get it returned untill main().
+
+in 'MyExperiment/Exp_live.conf' I named 'exampleSink' components as 'csvSink'. Thus in function tick() in componenManager.cpp, I compare if component[i]->getInstanceName() is csvSink, I call my created tick2() instead of conventional tick().
+
+
+#ISSUES with my version:
+exampleSink.cpp is the file that gives output.
+SMILExtract.cpp is te main file.
+
+I wanted to get back a pointer to all features in SMILExtract.cpp
+
+OpenSmile uses multithreading and its Mutex lock concept. Its a complicated library to understand relationship between its source files.
+'exampleSink.cpp' have a function named "mytick()". It gets a "reader" type object from which it extracts the feature vector "vec". I am unable to find where it finds "reader" and how "reader" is upadted and from where the "mytick()" is called? Thus I am unable to use that in my main file SMILExtract.cpp
+
+
+
+#Original Opensmile Readme:
+
+  openSMILE
+   - open Speech and Music Interpretation by Large-space Extraction -
+  Copyright (C) 2008-2010  Florian Eyben, Martin Woellmer, Bjoern Schuller
+  
+  Institute for Human-Machine Communication
+  Technische Universitaet Muenchen (TUM)
+  D-80333 Munich, Germany
+
+ ********************************************************************** 
+ If you use openSMILE or any code from openSMILE in your research work,
+ you are kindly asked to acknowledge the use of openSMILE in your publications.
+ See the file CITING.txt for details.
+ **********************************************************************
+
+  This copy of openSMILE is distributed under the terms of the GPL:
+ 
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details (file: COPYING).
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+ ++ For commercial licensing options, please contact the authors ++
+ 
+About openSMILE:
+================
+
+openSMILE is a complete and open-source toolkit for audio analysis, processing and classification especially targeted at speech and music applications, e.g. ASR, emotion recognition, or beat tracking and chord detection.
+The toolkit is developed at the Institute for Human-Machine Communication at the Technische Universitaet Muenchen in Munich, Germany.
+It was started withtin the SEMAINE EU FP7 project.
+
+
+Third-party dependencies:
+=========================
+
+openSMILE uses LibSVM (by Chih-Chung Chang and Chih-Jen Lin) for classification tasks. It is distributed with openSMILE and is included in the svm/ directory.
+
+PortAudio is required for live recording from sound card and for the SEMAINE component.
+You can get it from: http://www.portaudio.com
+A working snapshot is included in thirdparty/portaudio.tgz
+
+Optionally, openSMILE can be linked against the SEMAINE API and the Julius LVCSR engine, enabling an interface to the SEMAINE system and a keyword spotter component. See http://www.semaine-project.eu/ for details on running the SEMAINE system.
+
+Moreover, there is an experimental dependency on the Speex Codec package for an echo cancellation component. By default openSMILE is compiled without this component, thus you do not require Speex. If you want to experiment with the echo cancellation feature, please read the unix build files and the speex echo canceller source files. 
+
+
+Documentation/Installing/Using:
+===============================
+
+openSMILE is well documented in the openSMILE book, which can be found in doc/openSMILE_book.pdf.
+
+For quick-start information on how to compile openSMILE, see the file INSTALL.
+
+
+Developers:
+===========
+
+Developer's documentation can be found in "doc/developer" and in the openSMILE book.
+
+Information on how to write and compile run-time linkable plug-ins for openSMILE, see the openSMILE book or take a look at the files in the "plugindev" directory, especially the README file.
+
+
+Getting more help:
+==================
+
+If you encounter problems with openSMILE, and solve them yourself, please do inform Florian Eyben via e-mail (lastname at tum.de), so the documentation can be updated!
+
+If you cannot solve the problems yourself, please do also contact Florian Eyben so we can solve the problem together and update the documentation.
+
+

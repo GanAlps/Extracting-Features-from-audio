@@ -1,0 +1,53 @@
+8
+
+dir
+324
+https://opensmile.svn.sourceforge.net/svnroot/opensmile/trunk/scripts/util
+https://opensmile.svn.sourceforge.net/svnroot/opensmile
+
+
+
+2009-11-20T12:10:08.621618Z
+203
+feyben
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+085650a7-939c-42df-9e66-e8259269880e
+
+compile.sh
+file
+
+
+
+
+2010-05-23T22:51:26.000000Z
+f065b640d3fe679f37fe408fc2d31568
+2009-11-20T12:10:08.621618Z
+203
+feyben
+has-props
+
+htk-standardize.c
+file
+
+
+
+
+2010-05-23T22:51:26.000000Z
+e21e807ad33d95098300cdafd85f2807
+2009-11-20T12:10:08.621618Z
+203
+feyben
+

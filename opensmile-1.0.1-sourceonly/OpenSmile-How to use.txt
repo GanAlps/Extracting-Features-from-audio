@@ -1,0 +1,39 @@
+Download OpenSmile from
+http://opensmile.sourceforge.net/
+
+Or use myedited library it will save lot of time.
+
+Follow the documentation and install it with portaudio.
+Once you have working opensmile.
+
+If you downloaaded it, in src/ replace following files by my code.
+exampleSink.cpp
+exampleSink.hpp
+componenManaget.cpp
+componenManaget.hpp
+smileExtract.cpp
+smileComponent.hpp
+
+Now before proceeding you must know that how opensmile works. for that read the doc/OpenSmile_book.pdf this will explain that opensmile uses a configuration file to get, process, and output data.
+
+You can find the configuration file that I wrote in MyExperiment/Exp_live.conf
+
+For audio source I used Portaudio which records audio in real-time and opensmile extract features from it.
+For data sink I used exampleSink that I edited.
+
+In this way Opensmile extract features from real-time recorded audio data.
+
+smileExtract.cpp is our main file, which calls runSingleThreaded() in a do-while loop. runSingleThreaded() returns the feature vector, its defined in componentManager.cpp. runSingleThreaded() calls function tick(), which further calls tick() and myTick() functions for all components. myTick() of exampleSink has the final feature vector, from where we get it returned untill main().
+
+in MyExperiment/Exp_live.conf I named exampleSink components as "csvSink". Thus in function tick() in componenManager.cpp, I compare if component[i]->getInstanceName() is csvSink, I call my created tick2() instead of conventional tick().
+
+
+ISSUES:
+exampleSink.cpp is the file that gives output.
+SMILExtract.cpp is te main file.
+
+
+
+
+OpenSmile uses multithreading and its Mutex lock concept. Its a complicated library to understand relationship between its source files.
+exampleSink.cpp have a function named "mytick()". It gets a "reader" type object from which it extracts the feature vector "vec". I am unable to find where it finds "reader" and how "reader" is upadted and from where the "mytick()" is called? Thus I am unable to use that in my main file SMILExtract.cpp

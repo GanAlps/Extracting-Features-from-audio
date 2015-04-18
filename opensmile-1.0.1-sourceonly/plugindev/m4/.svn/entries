@@ -1,0 +1,52 @@
+8
+
+dir
+324
+https://opensmile.svn.sourceforge.net/svnroot/opensmile/trunk/plugindev/m4
+https://opensmile.svn.sourceforge.net/svnroot/opensmile
+
+
+
+2009-06-05T16:12:51.514144Z
+6
+feyben
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+085650a7-939c-42df-9e66-e8259269880e
+
+find_pthread.m4
+file
+
+
+
+
+2010-05-23T22:51:27.000000Z
+b91ec8263e6cafcf2c52db463e73f807
+2009-06-05T16:12:51.514144Z
+6
+feyben
+
+opensmile.m4
+file
+
+
+
+
+2010-05-23T22:51:27.000000Z
+ac03ff0d945ae323f60438faceb8e300
+2009-06-05T16:12:51.514144Z
+6
+feyben
+

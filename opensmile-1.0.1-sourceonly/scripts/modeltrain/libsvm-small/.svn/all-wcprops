@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svnroot/opensmile/!svn/ver/245/trunk/scripts/modeltrain/libsvm-small
+END
+svm-train.c
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svnroot/opensmile/!svn/ver/245/trunk/scripts/modeltrain/libsvm-small/svm-train.c
+END
+svm.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svnroot/opensmile/!svn/ver/245/trunk/scripts/modeltrain/libsvm-small/svm.cpp
+END
+COPYRIGHT
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/opensmile/!svn/ver/245/trunk/scripts/modeltrain/libsvm-small/COPYRIGHT
+END
+Makefile.win
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svnroot/opensmile/!svn/ver/245/trunk/scripts/modeltrain/libsvm-small/Makefile.win
+END
+svm-scale.c
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svnroot/opensmile/!svn/ver/245/trunk/scripts/modeltrain/libsvm-small/svm-scale.c
+END
+svm.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svnroot/opensmile/!svn/ver/245/trunk/scripts/modeltrain/libsvm-small/svm.h
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/opensmile/!svn/ver/245/trunk/scripts/modeltrain/libsvm-small/Makefile
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svnroot/opensmile/!svn/ver/245/trunk/scripts/modeltrain/libsvm-small/README
+END
+svm-predict.c
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svnroot/opensmile/!svn/ver/245/trunk/scripts/modeltrain/libsvm-small/svm-predict.c
+END

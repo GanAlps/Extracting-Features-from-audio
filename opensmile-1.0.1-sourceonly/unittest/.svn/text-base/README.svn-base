@@ -1,0 +1,18 @@
+
+This directory contains two sets of unittests for openSMILE:
+  A) Various configurations are tested against various real audio files.
+  B) Various components are tested against series of test values (component-tests)
+
+(B) is not yet implemented but will follow soon. All stable components should be nonetheless covered by the tests in the set (A).
+
+To run the tests you must have compiled openSMILE and have a running binary in ../SMILExtract
+
+You can then run: 
+  sh init_tests.sh
+to unpack the samples and references
+
+and then 
+  perl do_tests.sh
+
+to perform the tests and evaluate the result. This script will create a file called 'test.log' which contains the detailed evaluation result.
+

@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svnroot/opensmile/!svn/ver/322/trunk/unittest
+END
+references.zip
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/321/trunk/unittest/references.zip
+END
+gen_references.pl
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svnroot/opensmile/!svn/ver/291/trunk/unittest/gen_references.pl
+END
+samples.zip
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svnroot/opensmile/!svn/ver/291/trunk/unittest/samples.zip
+END
+diffline.pl
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svnroot/opensmile/!svn/ver/316/trunk/unittest/diffline.pl
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svnroot/opensmile/!svn/ver/322/trunk/unittest/README
+END
+do_tests.pl
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svnroot/opensmile/!svn/ver/291/trunk/unittest/do_tests.pl
+END
+init_tests.sh
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svnroot/opensmile/!svn/ver/291/trunk/unittest/init_tests.sh
+END

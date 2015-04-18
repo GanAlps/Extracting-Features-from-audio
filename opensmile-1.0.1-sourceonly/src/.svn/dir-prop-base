@@ -1,0 +1,9 @@
+K 10
+svn:ignore
+V 68
+._nnlPlugin.cpp
+._nnlPlugin.hpp
+._smileCommon.cpp
+._smileCommon.hpp
+
+END

@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svnroot/opensmile/!svn/ver/245/trunk/scripts/util
+END
+compile.sh
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/245/trunk/scripts/util/compile.sh
+END
+htk-standardize.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svnroot/opensmile/!svn/ver/245/trunk/scripts/util/htk-standardize.c
+END

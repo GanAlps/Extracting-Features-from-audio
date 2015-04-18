@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svnroot/opensmile/!svn/ver/245/trunk/plugindev/m4
+END
+find_pthread.m4
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svnroot/opensmile/!svn/ver/245/trunk/plugindev/m4/find_pthread.m4
+END
+opensmile.m4
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svnroot/opensmile/!svn/ver/245/trunk/plugindev/m4/opensmile.m4
+END

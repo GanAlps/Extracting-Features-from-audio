@@ -1,0 +1,528 @@
+///////////////////////////////////////////////////////////////////////////////////////
+///////// > openSMILE configuration file to extract MFCC features <  //////////////////
+/////////   HTK target kind: MFCC_E_D_A_Z, numCeps=12                //////////////////
+/////////                                                            //////////////////
+/////////  * written 2009 by Florian Eyben *                         //////////////////
+/////////                                                            //////////////////
+///////// (c) 2009 by Florian Eyben, Martin Wöllmer, Björn Schuller  //////////////////
+/////////     see the file COPYING for details                       //////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+;
+; This section is always required in openSMILE configuration files
+;   it configures the componentManager and gives a list of all components which are to be loaded
+; The order in which the components are listed should match 
+;   the order of the data flow for most efficient processing
+;
+///////////////////////////////////////////////////////////////////////////////////////
+[componentInstances:cComponentManager]
+instance[dataMemory].type=cDataMemory
+instance[waveIn].type=cWaveSource
+instance[frame].type=cFramer
+instance[pe].type=cVectorPreemphasis
+instance[win].type=cWindower
+instance[fft].type=cTransformFFT
+instance[fftmag].type=cFFTmagphase
+instance[melspec].type=cMelspec
+instance[mfcc].type=cMfcc
+instance[energy].type=cEnergy
+instance[cmsM].type=cFullinputMean
+instance[delta1m].type=cDeltaRegression
+instance[delta2m].type=cDeltaRegression
+instance[delta1e].type=cDeltaRegression
+instance[delta2e].type=cDeltaRegression
+instance[plp].type=cPlp
+instance[cmsP].type=cFullinputMean
+instance[delta1p].type=cDeltaRegression
+instance[delta2p].type=cDeltaRegression
+instance[csvSink].type=cExampleSink
+ ; pitch
+instance[intP].type=cIntensity
+instance[winP].type=cWindower
+instance[fftP].type=cTransformFFT
+instance[fftmpP].type=cFFTmagphase
+instance[acf].type=cAcf
+instance[cep].type=cAcf
+instance[pitchACF].type=cPitchACF
+instance[pitchCEP].type=cPitchACF
+instance[smoACF].type=cContourSmoother
+instance[smoCEP].type=cContourSmoother
+instance[smoINT].type=cContourSmoother
+instance[scale].type=cSpecScale
+instance[shs].type=cPitchShs
+instance[smooth].type=cPitchSmoother
+instance[smoA].type=cContourSmoother
+ ; Chroma
+instance[winC].type = cWindower
+instance[fftC].type = cTransformFFT
+instance[fftmagphaseC].type = cFFTmagphase
+instance[tonespec].type = cTonespec
+instance[chroma].type = cChroma
+instance[tonefilt].type = cTonefilt
+instance[chromaFilt].type = cChroma
+
+; run single threaded (nThreads=1)
+; NOTE: a single thread is more efficient for processing small files, since multi-threaded processing involves more 
+;       overhead during startup, which will make the system slower in the end
+nThreads=1
+; do not show any internal dataMemory level settings 
+; (if you want to see them set the value to 1, 2, 3, or 4, depending on the amount of detail you wish)
+printLevelStats=0
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////   component configuration  ////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+; the following sections configure the components listed above
+; a help on configuration parameters can be obtained with 
+;  SMILExtract -H
+; or
+;  SMILExtract -H configTypeName (= componentTypeName)
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+[waveIn:cWaveSource]
+ ; this sets the level this component writes to
+ ; the level will be created by this component
+ ; no other components may write to a level having the same name
+writer.dmLevel=wave
+ ; this defines a new commandline option "-I" or "-inputfile", which can be used to specify 
+ ; the filename on the commandline instead of having it "hard-coded" in the config file
+filename=\cm[inputfile(I){test.wav}:name of input file]
+ ; mix stereo files down to mono for analysis
+monoMixdown=1
+
+[frame:cFramer]
+reader.dmLevel=wave
+writer.dmLevel=frames
+noPostEOIprocessing = 1
+copyInputName = 1
+frameSize = 0.0250
+frameStep = 0.010
+frameMode = fixed
+frameCenterSpecial = left
+
+[pe:cVectorPreemphasis]
+reader.dmLevel=frames
+writer.dmLevel=framespe
+k=0.97
+de = 0
+
+[win:cWindower]
+reader.dmLevel=framespe
+writer.dmLevel=winframes
+copyInputName = 1
+processArrayFields = 1
+ ; hamming window
+winFunc = ham
+ ; no gain
+gain = 1.0
+offset = 0
+
+[fft:cTransformFFT]
+reader.dmLevel=winframes
+writer.dmLevel=fft
+copyInputName = 1
+processArrayFields = 1
+inverse = 0
+
+[fftmag:cFFTmagphase]
+reader.dmLevel=fft
+writer.dmLevel=fftmag
+copyInputName = 1
+processArrayFields = 1
+inverse = 0
+magnitude = 1
+phase = 0
+
+[melspec:cMelspec]
+reader.dmLevel=fftmag
+writer.dmLevel=melspec
+nameAppend=Mel
+copyInputName = 0
+processArrayFields = 1
+; htk compatible sample value scaling
+htkcompatible = 1
+nBands = 26
+; use power spectrum instead of magnitude spectrum
+usePower = 1
+lofreq = 0
+hifreq = 8000
+specScale = mel
+inverse = 0
+
+[mfcc:cMfcc]
+reader.dmLevel=melspec
+writer.dmLevel=mfcc
+writer.levelconf.growDyn=1
+writer.levelconf.isRb=0
+buffersize=1000
+copyInputName = 1
+processArrayFields = 1
+firstMfcc = 1
+lastMfcc  = 12
+cepLifter = 22.0
+htkcompatible = 1
+
+[delta1m:cDeltaRegression]
+reader.dmLevel=mfcc
+writer.dmLevel=mfccD
+writer.levelconf.growDyn=1
+writer.levelconf.isRb=0
+buffersize=1000
+nameAppend = MfD
+copyInputName = 0
+noPostEOIprocessing = 0
+deltawin=2
+blocksize=1
+
+[delta2m:cDeltaRegression]
+reader.dmLevel=mfccD
+writer.dmLevel=mfccA
+writer.levelconf.growDyn=1
+writer.levelconf.isRb=0
+buffersize=1000
+nameAppend = MfA
+copyInputName = 0
+noPostEOIprocessing = 0
+deltawin=2
+blocksize=1
+
+[cmsM:cFullinputMean]
+reader.dmLevel=mfcc
+writer.dmLevel=mfccM
+nameAppend = MfM
+copyInputName = 0
+
+
+
+[energy:cEnergy]
+reader.dmLevel=frames
+writer.dmLevel=energy
+writer.levelconf.growDyn=1
+writer.levelconf.isRb=0
+buffersize=1000
+nameAppend=En
+copyInputName = 0
+processArrayFields = 0
+htkcompatible=1
+rms = 0
+log = 1
+
+[delta1e:cDeltaRegression]
+reader.dmLevel=energy
+writer.dmLevel=energyD
+nameAppend = EnD
+copyInputName = 0
+noPostEOIprocessing = 0
+deltawin=2
+blocksize=1
+
+[delta2e:cDeltaRegression]
+reader.dmLevel=energyD
+writer.dmLevel=energyA
+nameAppend = EnA
+copyInputName = 0
+noPostEOIprocessing = 0
+deltawin=2
+blocksize=1
+
+[plp:cPlp]
+reader.dmLevel=melspec
+writer.dmLevel=plp
+writer.levelconf.growDyn=1
+writer.levelconf.isRb=0
+nameAppend = Plp
+copyInputName = 0
+buffersize=1000
+firstCC = 1
+lpOrder = 5
+cepLifter = 22
+compression = 0.33
+htkcompatible = 1 
+doIDFT = 1
+doLpToCeps = 1
+doLP = 1
+doInvLog = 0
+doAud = 1
+doLog = 0
+
+[cmsP:cFullinputMean]
+reader.dmLevel=plp
+writer.dmLevel=plpM
+
+
+[delta1p:cDeltaRegression]
+reader.dmLevel=plp
+writer.dmLevel=plpD
+writer.levelconf.growDyn=1
+writer.levelconf.isRb=0
+buffersize=1000
+nameAppend = PlpD
+copyInputName = 0
+noPostEOIprocessing = 0
+deltawin=2
+blocksize=1
+
+[delta2p:cDeltaRegression]
+reader.dmLevel=plpD
+writer.dmLevel=plpA
+writer.levelconf.growDyn=1
+writer.levelconf.isRb=0
+buffersize=1000
+nameAppend = PlpA
+copyInputName = 0
+noPostEOIprocessing = 0
+deltawin=2
+blocksize=1
+
+///////////////////////PITCH///////////////////////////
+
+
+[intP:cIntensity]
+reader.dmLevel = frames
+writer.dmLevel = intensP
+nameAppend = Int
+copyInputName = 0
+processArrayFields = 1
+intensity = 0
+loudness = 1
+
+[winP:cWindower]
+reader.dmLevel=frames
+writer.dmLevel=winP
+winFunc=gauss
+gain=1.0
+sigma=0.4
+
+[fftP:cTransformFFT]
+reader.dmLevel=winP
+writer.dmLevel=fftP
+
+[fftmpP:cFFTmagphase]
+reader.dmLevel=fftP
+writer.dmLevel=fftmagP
+
+[acf:cAcf]
+reader.dmLevel=fftmagP
+writer.dmLevel=acf
+
+[cep:cAcf]
+reader.dmLevel=fftmagP
+writer.dmLevel=cepstrum
+cepstrum=1
+
+[pitchACF:cPitchACF]
+reader.dmLevel = acf
+writer.dmLevel = pitchAcf
+nameAppend = acf
+copyInputName = 0
+processArrayFields = 0
+maxPitch = 500
+voiceProb = 1
+voiceQual = 0
+HNR = 0
+F0 = 1
+F0raw = 0
+F0env = 0
+voicingCutoff = 0.550000
+
+[pitchCEP:cPitchACF]
+reader.dmLevel = cepstrum
+writer.dmLevel = pitchCep
+nameAppend = cep
+copyInputName = 0
+processArrayFields = 0
+maxPitch = 500
+voiceProb = 1
+voiceQual = 0
+HNR = 0
+F0 = 1
+F0raw = 0
+F0env = 0
+voicingCutoff = 0.550000
+
+[smoACF:cContourSmoother]
+reader.dmLevel = pitchAcf
+writer.dmLevel = smoAcf
+nameAppend = smoA
+copyInputName = 1
+noPostEOIprocessing = 0
+smaWin = 3
+
+[smoCEP:cContourSmoother]
+reader.dmLevel = pitchCep
+writer.dmLevel = smoCep
+nameAppend = smoC
+copyInputName = 1
+noPostEOIprocessing = 0
+smaWin = 3
+
+[smoINT:cContourSmoother]
+reader.dmLevel = intensP
+writer.dmLevel = smoInt
+nameAppend = smoI
+copyInputName = 1
+noPostEOIprocessing = 0
+smaWin = 3
+
+[scale:cSpecScale]
+reader.dmLevel=fftmagP
+writer.dmLevel=hps
+// nameAppend =
+copyInputName = 1
+processArrayFields = 0
+scale=octave
+sourceScale = lin
+// logScaleBase = 2
+// logSourceScaleBase = 2
+// firstNote = 55
+interpMethod = spline
+minF = 25
+maxF = -1
+nPointsTarget = 0
+specSmooth = 1
+specEnhance = 1
+auditoryWeighting = 1 
+
+[shs:cPitchShs]
+reader.dmLevel=hps
+writer.dmLevel=pitchShs
+nameAppend = pitchS
+copyInputName = 0
+processArrayFields = 0
+maxPitch = 620
+minPitch = 52
+nCandidates = 4
+scores = 1
+voicing = 1
+F0C1 = 0
+voicingC1 = 0
+F0raw = 1
+voicingClip = 1
+voicingCutoff = 0.700000
+inputFieldSearch = Mag_logScale
+octaveCorrection = 0
+nHarmonics = 15
+compressionFactor = 0.850000
+
+[smooth:cPitchSmoother]
+reader.dmLevel=pitchShs
+writer.dmLevel=pitch
+nameAppend = pitch
+copyInputName = 0
+processArrayFields = 0
+medianFilter0 = 0
+postSmoothing = 0
+postSmoothingMethod = simple
+ ; note: octave correction is too agressive, thus we disable it..
+octaveCorrection = 0
+F0final = 1
+F0finalEnv = 0
+no0f0 = 0
+voicingFinalClipped = 0
+voicingFinalUnclipped = 1
+F0raw = 0
+voicingC1 = 0
+voicingClip = 0
+
+[smoA:cContourSmoother]
+reader.dmLevel = pitch
+writer.dmLevel = smoShs
+nameAppend = smoS
+copyInputName = 0
+noPostEOIprocessing = 0
+smaWin = 3
+
+
+////////////////////////////////CHROMA////////////////////////////////////
+
+[winC:cWindower]
+reader.dmLevel = frames
+writer.dmLevel = winframesC
+// nameAppend = 
+copyInputName = 1
+processArrayFields = 1
+gain = 1
+offset = 0
+winFunc = Gau
+sigma = 0.400000
+ 
+[fftC:cTransformFFT]
+reader.dmLevel = winframesC
+writer.dmLevel = fftC
+// nameAppend = 
+copyInputName = 1
+processArrayFields = 1
+inverse = 0
+ 
+[fftmagphaseC:cFFTmagphase]
+reader.dmLevel = fftC
+writer.dmLevel = fftmagC
+// nameAppend = 
+copyInputName = 1
+processArrayFields = 1
+inverse = 0
+magnitude = 1
+phase = 0
+ 
+[tonespec:cTonespec]
+reader.dmLevel = fftmagC
+writer.dmLevel = tonespec
+nameAppend = note
+copyInputName = 1
+processArrayFields = 0
+nOctaves = 6
+firstNote = 55
+filterType = gau
+usePower = 1
+dbA = 1
+ 
+[chroma:cChroma]
+reader.dmLevel = tonespec
+writer.dmLevel = chroma
+nameAppend = chroma
+copyInputName = 0
+processArrayFields = 0
+octaveSize = 12
+ 
+[tonefilt:cTonefilt]
+reader.dmLevel = wave
+writer.dmLevel = tonefilt
+nameAppend = tonefilt
+copyInputName = 1
+nNotes = 72
+firstNote = 55
+decayF0 = 0.999900
+decayFN = 0.999000
+outputPeriod = 0.0100
+ 
+[chromaFilt:cChroma]
+reader.dmLevel = tonefilt
+writer.dmLevel = chromafilt
+nameAppend = chromaFilt
+copyInputName = 0
+processArrayFields = 1
+octaveSize = 12
+
+
+
+
+    //////////////////////////////////////////////////////////////////////
+  ///////////////////////OUTPUT SINK////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
+; csv sink for output of data to be visualised with gnuplot
+[csvSink:cExampleSink]
+reader.dmLevel = mfcc;mfccM;plp;plpM;energy;mfccD;plpD;energyD;mfccA;plpA;energyA;intensP;pitchAcf;pitchCep;smoAcf;smoCep;smoInt;pitch;smoShs//;tonespec;chroma;tonefilt;chromafilt
+filename = \cm[outputcsv{MyExperiment/Exp1.txt}:name of output CSV file for auditory spectrum, no deltas]
+//delimChar = ;
+//append = 0
+//timestamp = 0
+
+//mfccM;plpM
+// frameno=0; mfcc1:12 ; plp 13:17 ; energy 18 ; mfccD 19:30 ; plpD 31:35 ; energyD 36 ; mfccA 37:48 ; plpA 49:53 ; energyA 54 ; intens 55 ; pitchACF 56:57 ; pitchCep 58:59 ; smoAcf 60:61 ; smoCep 62:63 ; smoInt 64 ; pitch 65:66 ; smoShs 67:68 ; tonespec 69:140 ; chroma 141:152 ; tonefilt 153:224 ; chromafilt 225:236
+
+

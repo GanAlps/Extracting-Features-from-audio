@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svnroot/opensmile/!svn/ver/245/trunk/m4
+END
+rtnnllib.m4
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svnroot/opensmile/!svn/ver/245/trunk/m4/rtnnllib.m4
+END
+atklib.m4
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svnroot/opensmile/!svn/ver/245/trunk/m4/atklib.m4
+END
+portaudio.m4
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svnroot/opensmile/!svn/ver/245/trunk/m4/portaudio.m4
+END
+find_pthread.m4
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svnroot/opensmile/!svn/ver/245/trunk/m4/find_pthread.m4
+END
+targets.m4
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svnroot/opensmile/!svn/ver/245/trunk/m4/targets.m4
+END
+qtlib.m4
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svnroot/opensmile/!svn/ver/245/trunk/m4/qtlib.m4
+END
+semaineapi.m4
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svnroot/opensmile/!svn/ver/245/trunk/m4/semaineapi.m4
+END

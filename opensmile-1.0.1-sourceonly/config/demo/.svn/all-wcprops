@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svnroot/opensmile/!svn/ver/314/trunk/config/demo
+END
+audioplayer.conf
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svnroot/opensmile/!svn/ver/308/trunk/config/demo/audioplayer.conf
+END
+demo1_energy.conf
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svnroot/opensmile/!svn/ver/298/trunk/config/demo/demo1_energy.conf
+END
+signalGenerator.conf
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svnroot/opensmile/!svn/ver/314/trunk/config/demo/signalGenerator.conf
+END
+audiorecorder.conf
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svnroot/opensmile/!svn/ver/308/trunk/config/demo/audiorecorder.conf
+END

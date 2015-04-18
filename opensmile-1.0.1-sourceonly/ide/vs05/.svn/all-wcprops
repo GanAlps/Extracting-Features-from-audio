@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svnroot/opensmile/!svn/ver/321/trunk/ide/vs05
+END
+portaudio.def
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svnroot/opensmile/!svn/ver/245/trunk/ide/vs05/portaudio.def
+END
+openSmileLib.vcproj
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svnroot/opensmile/!svn/ver/321/trunk/ide/vs05/openSmileLib.vcproj
+END
+openSmileLibPA.vcproj
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svnroot/opensmile/!svn/ver/321/trunk/ide/vs05/openSmileLibPA.vcproj
+END
+openSmilePlugin.sln
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svnroot/opensmile/!svn/ver/245/trunk/ide/vs05/openSmilePlugin.sln
+END
+openSmile.sln
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svnroot/opensmile/!svn/ver/245/trunk/ide/vs05/openSmile.sln
+END
+openSmileLibAll.sln
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svnroot/opensmile/!svn/ver/245/trunk/ide/vs05/openSmileLibAll.sln
+END
+openSmilePA.sln
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svnroot/opensmile/!svn/ver/245/trunk/ide/vs05/openSmilePA.sln
+END
+portaudio.vcproj
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svnroot/opensmile/!svn/ver/245/trunk/ide/vs05/portaudio.vcproj
+END
+openSmilePlugin.vcproj
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svnroot/opensmile/!svn/ver/245/trunk/ide/vs05/openSmilePlugin.vcproj
+END
+openSmile.vcproj
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svnroot/opensmile/!svn/ver/245/trunk/ide/vs05/openSmile.vcproj
+END
+openSmileLibAll.vcproj
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svnroot/opensmile/!svn/ver/245/trunk/ide/vs05/openSmileLibAll.vcproj
+END
+openSmilePA.vcproj
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svnroot/opensmile/!svn/ver/245/trunk/ide/vs05/openSmilePA.vcproj
+END

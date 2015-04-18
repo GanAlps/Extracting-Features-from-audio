@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svnroot/opensmile/!svn/ver/245/trunk/plugindev
+END
+configure.ac
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svnroot/opensmile/!svn/ver/245/trunk/plugindev/configure.ac
+END
+pluginMain.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svnroot/opensmile/!svn/ver/245/trunk/plugindev/pluginMain.cpp
+END
+AUTHORS
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svnroot/opensmile/!svn/ver/245/trunk/plugindev/AUTHORS
+END
+INSTALL
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svnroot/opensmile/!svn/ver/245/trunk/plugindev/INSTALL
+END
+ChangeLog
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svnroot/opensmile/!svn/ver/245/trunk/plugindev/ChangeLog
+END
+COPYING
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svnroot/opensmile/!svn/ver/245/trunk/plugindev/COPYING
+END
+plug_exampleSink.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svnroot/opensmile/!svn/ver/245/trunk/plugindev/plug_exampleSink.cpp
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svnroot/opensmile/!svn/ver/245/trunk/plugindev/Makefile.am
+END
+autogen.sh
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svnroot/opensmile/!svn/ver/245/trunk/plugindev/autogen.sh
+END
+NEWS
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svnroot/opensmile/!svn/ver/245/trunk/plugindev/NEWS
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svnroot/opensmile/!svn/ver/245/trunk/plugindev/README
+END
+plug_exampleSink.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svnroot/opensmile/!svn/ver/245/trunk/plugindev/plug_exampleSink.hpp
+END

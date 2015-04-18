@@ -1,0 +1,1733 @@
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svnroot/opensmile/!svn/ver/324/trunk/src
+END
+windower.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svnroot/opensmile/!svn/ver/292/trunk/src/windower.cpp
+END
+speexPreprocess.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/304/trunk/src/speexPreprocess.hpp
+END
+smileComponent.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svnroot/opensmile/!svn/ver/245/trunk/src/smileComponent.hpp
+END
+vectorProcessor.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/292/trunk/src/vectorProcessor.cpp
+END
+functionalRegression.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svnroot/opensmile/!svn/ver/315/trunk/src/functionalRegression.hpp
+END
+functionalSegments.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svnroot/opensmile/!svn/ver/300/trunk/src/functionalSegments.cpp
+END
+exampleSource.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svnroot/opensmile/!svn/ver/301/trunk/src/exampleSource.cpp
+END
+volanalyse.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svnroot/opensmile/!svn/ver/245/trunk/src/volanalyse.cpp
+END
+voiceQuality.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svnroot/opensmile/!svn/ver/261/trunk/src/voiceQuality.cpp
+END
+functionalExtremes.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svnroot/opensmile/!svn/ver/300/trunk/src/functionalExtremes.cpp
+END
+valbasedSelector.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svnroot/opensmile/!svn/ver/292/trunk/src/valbasedSelector.cpp
+END
+dataSource.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svnroot/opensmile/!svn/ver/292/trunk/src/dataSource.hpp
+END
+libsvmliveSink.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svnroot/opensmile/!svn/ver/304/trunk/src/libsvmliveSink.cpp
+END
+functionalMoments.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svnroot/opensmile/!svn/ver/315/trunk/src/functionalMoments.cpp
+END
+SEMAINExtract.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svnroot/opensmile/!svn/ver/245/trunk/src/SEMAINExtract.cpp
+END
+arffSink.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svnroot/opensmile/!svn/ver/245/trunk/src/arffSink.hpp
+END
+transformFft.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svnroot/opensmile/!svn/ver/317/trunk/src/transformFft.cpp
+END
+functionalOnset.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/300/trunk/src/functionalOnset.cpp
+END
+windowProcessor.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/257/trunk/src/windowProcessor.hpp
+END
+chroma.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svnroot/opensmile/!svn/ver/315/trunk/src/chroma.hpp
+END
+preemphasis.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svnroot/opensmile/!svn/ver/292/trunk/src/preemphasis.cpp
+END
+mzcr.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svnroot/opensmile/!svn/ver/304/trunk/src/mzcr.hpp
+END
+turnDetector.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svnroot/opensmile/!svn/ver/292/trunk/src/turnDetector.cpp
+END
+exampleVectorProcessor.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svnroot/opensmile/!svn/ver/292/trunk/src/exampleVectorProcessor.hpp
+END
+acf.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svnroot/opensmile/!svn/ver/304/trunk/src/acf.cpp
+END
+plp.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svnroot/opensmile/!svn/ver/315/trunk/src/plp.cpp
+END
+functionalPeaks.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/304/trunk/src/functionalPeaks.hpp
+END
+waveSink.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svnroot/opensmile/!svn/ver/292/trunk/src/waveSink.hpp
+END
+SMILExtractTest.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/245/trunk/src/SMILExtractTest.cpp
+END
+dataMemory.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svnroot/opensmile/!svn/ver/317/trunk/src/dataMemory.cpp
+END
+functionalPercentiles.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svnroot/opensmile/!svn/ver/300/trunk/src/functionalPercentiles.hpp
+END
+mfcc.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svnroot/opensmile/!svn/ver/292/trunk/src/mfcc.cpp
+END
+chromaFeatures.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svnroot/opensmile/!svn/ver/249/trunk/src/chromaFeatures.cpp
+END
+windowframer.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svnroot/opensmile/!svn/ver/245/trunk/src/windowframer.hpp
+END
+htkSource.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svnroot/opensmile/!svn/ver/292/trunk/src/htkSource.hpp
+END
+pitchDirection.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svnroot/opensmile/!svn/ver/292/trunk/src/pitchDirection.hpp
+END
+buffer.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svnroot/opensmile/!svn/ver/292/trunk/src/buffer.hpp
+END
+vectorMVN.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svnroot/opensmile/!svn/ver/292/trunk/src/vectorMVN.cpp
+END
+tonespec.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svnroot/opensmile/!svn/ver/292/trunk/src/tonespec.hpp
+END
+csvSink.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svnroot/opensmile/!svn/ver/292/trunk/src/csvSink.hpp
+END
+gsl_zsolve.c
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svnroot/opensmile/!svn/ver/257/trunk/src/gsl_zsolve.c
+END
+functionalsVecToVec.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svnroot/opensmile/!svn/ver/304/trunk/src/functionalsVecToVec.hpp
+END
+energy.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svnroot/opensmile/!svn/ver/301/trunk/src/energy.cpp
+END
+intensity.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svnroot/opensmile/!svn/ver/304/trunk/src/intensity.hpp
+END
+exampleProcessor.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svnroot/opensmile/!svn/ver/301/trunk/src/exampleProcessor.cpp
+END
+gsl_zsolve.h
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svnroot/opensmile/!svn/ver/257/trunk/src/gsl_zsolve.h
+END
+stretchToTime.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svnroot/opensmile/!svn/ver/304/trunk/src/stretchToTime.cpp
+END
+portaudioSink.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svnroot/opensmile/!svn/ver/304/trunk/src/portaudioSink.hpp
+END
+portaudioDuplexD.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svnroot/opensmile/!svn/ver/304/trunk/src/portaudioDuplexD.hpp
+END
+activeMqSink.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svnroot/opensmile/!svn/ver/245/trunk/src/activeMqSink.hpp
+END
+vecGlMean.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svnroot/opensmile/!svn/ver/292/trunk/src/vecGlMean.hpp
+END
+dataProcessor.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svnroot/opensmile/!svn/ver/301/trunk/src/dataProcessor.cpp
+END
+semaineComponentForSmile.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svnroot/opensmile/!svn/ver/245/trunk/src/semaineComponentForSmile.hpp
+END
+dataSelector.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svnroot/opensmile/!svn/ver/301/trunk/src/dataSelector.cpp
+END
+dataWriter.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svnroot/opensmile/!svn/ver/296/trunk/src/dataWriter.hpp
+END
+amdf.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svnroot/opensmile/!svn/ver/292/trunk/src/amdf.hpp
+END
+speexResample.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svnroot/opensmile/!svn/ver/245/trunk/src/speexResample.cpp
+END
+portaudioSinkS.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svnroot/opensmile/!svn/ver/245/trunk/src/portaudioSinkS.cpp
+END
+contourSmoother.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/292/trunk/src/contourSmoother.hpp
+END
+vectorMVStd.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svnroot/opensmile/!svn/ver/304/trunk/src/vectorMVStd.cpp
+END
+libsvmSink.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svnroot/opensmile/!svn/ver/292/trunk/src/libsvmSink.cpp
+END
+spectral.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svnroot/opensmile/!svn/ver/317/trunk/src/spectral.hpp
+END
+smileCommon.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svnroot/opensmile/!svn/ver/299/trunk/src/smileCommon.cpp
+END
+semaineEmmaSender.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svnroot/opensmile/!svn/ver/288/trunk/src/semaineEmmaSender.cpp
+END
+lpc.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svnroot/opensmile/!svn/ver/292/trunk/src/lpc.hpp
+END
+exampleSink.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svnroot/opensmile/!svn/ver/304/trunk/src/exampleSink.hpp
+END
+pitchShs.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svnroot/opensmile/!svn/ver/292/trunk/src/pitchShs.hpp
+END
+bowProducer.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svnroot/opensmile/!svn/ver/287/trunk/src/bowProducer.cpp
+END
+dbA.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svnroot/opensmile/!svn/ver/292/trunk/src/dbA.hpp
+END
+kwsjKresult.h
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svnroot/opensmile/!svn/ver/245/trunk/src/kwsjKresult.h
+END
+functionalDCT.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svnroot/opensmile/!svn/ver/300/trunk/src/functionalDCT.cpp
+END
+modelmake.c
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svnroot/opensmile/!svn/ver/245/trunk/src/modelmake.c
+END
+dataSink.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svnroot/opensmile/!svn/ver/301/trunk/src/dataSink.cpp
+END
+arffSource.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svnroot/opensmile/!svn/ver/304/trunk/src/arffSource.cpp
+END
+componentTemplate.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svnroot/opensmile/!svn/ver/245/trunk/src/componentTemplate.hpp
+END
+vectorPreemphasis.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svnroot/opensmile/!svn/ver/292/trunk/src/vectorPreemphasis.cpp
+END
+waveSinkCut.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svnroot/opensmile/!svn/ver/298/trunk/src/waveSinkCut.cpp
+END
+winToVecProcessor.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svnroot/opensmile/!svn/ver/304/trunk/src/winToVecProcessor.hpp
+END
+smileComponentExample.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svnroot/opensmile/!svn/ver/245/trunk/src/smileComponentExample.cpp
+END
+commandlineParser.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svnroot/opensmile/!svn/ver/245/trunk/src/commandlineParser.hpp
+END
+smileLogger.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svnroot/opensmile/!svn/ver/304/trunk/src/smileLogger.cpp
+END
+pitchAmdfAcf.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svnroot/opensmile/!svn/ver/250/trunk/src/pitchAmdfAcf.cpp
+END
+channelMixer.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svnroot/opensmile/!svn/ver/304/trunk/src/channelMixer.cpp
+END
+tumkwsaSink.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svnroot/opensmile/!svn/ver/304/trunk/src/tumkwsaSink.cpp
+END
+TumFeatureExtractor.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svnroot/opensmile/!svn/ver/245/trunk/src/TumFeatureExtractor.h
+END
+vadV1.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svnroot/opensmile/!svn/ver/245/trunk/src/vadV1.hpp
+END
+multipleWaveSources.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svnroot/opensmile/!svn/ver/304/trunk/src/multipleWaveSources.hpp
+END
+functionalSamples.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svnroot/opensmile/!svn/ver/299/trunk/src/functionalSamples.cpp
+END
+specResample.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svnroot/opensmile/!svn/ver/292/trunk/src/specResample.hpp
+END
+tonefilt.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svnroot/opensmile/!svn/ver/304/trunk/src/tonefilt.hpp
+END
+libSamplerate.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svnroot/opensmile/!svn/ver/245/trunk/src/libSamplerate.hpp
+END
+fftmagphase.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svnroot/opensmile/!svn/ver/292/trunk/src/fftmagphase.hpp
+END
+dataReader.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svnroot/opensmile/!svn/ver/292/trunk/src/dataReader.hpp
+END
+smileResample.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svnroot/opensmile/!svn/ver/292/trunk/src/smileResample.cpp
+END
+pitchBase.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svnroot/opensmile/!svn/ver/292/trunk/src/pitchBase.cpp
+END
+componentManager.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svnroot/opensmile/!svn/ver/312/trunk/src/componentManager.hpp
+END
+functionalCrossings.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svnroot/opensmile/!svn/ver/304/trunk/src/functionalCrossings.hpp
+END
+chordFeatures.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svnroot/opensmile/!svn/ver/249/trunk/src/chordFeatures.hpp
+END
+nullSink.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svnroot/opensmile/!svn/ver/304/trunk/src/nullSink.hpp
+END
+vectorHEQ.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svnroot/opensmile/!svn/ver/292/trunk/src/vectorHEQ.hpp
+END
+nnlPlugin.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svnroot/opensmile/!svn/ver/245/trunk/src/nnlPlugin.cpp
+END
+portaudioDuplexS.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svnroot/opensmile/!svn/ver/245/trunk/src/portaudioDuplexS.cpp
+END
+htkSink.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svnroot/opensmile/!svn/ver/292/trunk/src/htkSink.hpp
+END
+framer.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svnroot/opensmile/!svn/ver/292/trunk/src/framer.hpp
+END
+portaudioSource.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/299/trunk/src/portaudioSource.cpp
+END
+vectorOperation.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/292/trunk/src/vectorOperation.hpp
+END
+speexPreprocess.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/245/trunk/src/speexPreprocess.cpp
+END
+echoAttenuator.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svnroot/opensmile/!svn/ver/301/trunk/src/echoAttenuator.hpp
+END
+smileComponent.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svnroot/opensmile/!svn/ver/245/trunk/src/smileComponent.cpp
+END
+pitchSmoother.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svnroot/opensmile/!svn/ver/292/trunk/src/pitchSmoother.hpp
+END
+melspec.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svnroot/opensmile/!svn/ver/304/trunk/src/melspec.hpp
+END
+semaineSpeakerID1.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svnroot/opensmile/!svn/ver/292/trunk/src/semaineSpeakerID1.hpp
+END
+activeMqSource.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svnroot/opensmile/!svn/ver/245/trunk/src/activeMqSource.hpp
+END
+smileTypes.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svnroot/opensmile/!svn/ver/290/trunk/src/smileTypes.hpp
+END
+functionalRegression.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svnroot/opensmile/!svn/ver/315/trunk/src/functionalRegression.cpp
+END
+specScale.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svnroot/opensmile/!svn/ver/292/trunk/src/specScale.hpp
+END
+portaudioSourceS.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svnroot/opensmile/!svn/ver/304/trunk/src/portaudioSourceS.hpp
+END
+exceptions.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svnroot/opensmile/!svn/ver/304/trunk/src/exceptions.hpp
+END
+waveSource.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svnroot/opensmile/!svn/ver/292/trunk/src/waveSource.hpp
+END
+datadumpSink.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svnroot/opensmile/!svn/ver/292/trunk/src/datadumpSink.hpp
+END
+dataSource.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svnroot/opensmile/!svn/ver/301/trunk/src/dataSource.cpp
+END
+fingerprint.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svnroot/opensmile/!svn/ver/292/trunk/src/fingerprint.hpp
+END
+tumkwsjSink.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svnroot/opensmile/!svn/ver/287/trunk/src/tumkwsjSink.hpp
+END
+speechLearn.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svnroot/opensmile/!svn/ver/292/trunk/src/speechLearn.hpp
+END
+pitchJitter.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svnroot/opensmile/!svn/ver/292/trunk/src/pitchJitter.hpp
+END
+chromaPerFrame.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svnroot/opensmile/!svn/ver/292/trunk/src/chromaPerFrame.hpp
+END
+lsp.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svnroot/opensmile/!svn/ver/304/trunk/src/lsp.hpp
+END
+arffSink.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svnroot/opensmile/!svn/ver/310/trunk/src/arffSink.cpp
+END
+windowProcessor.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/292/trunk/src/windowProcessor.cpp
+END
+chroma.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svnroot/opensmile/!svn/ver/321/trunk/src/chroma.cpp
+END
+mzcr.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svnroot/opensmile/!svn/ver/292/trunk/src/mzcr.cpp
+END
+exampleVectorProcessor.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svnroot/opensmile/!svn/ver/245/trunk/src/exampleVectorProcessor.cpp
+END
+pitchBaseExample.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svnroot/opensmile/!svn/ver/261/trunk/src/pitchBaseExample.hpp
+END
+pitchACF.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svnroot/opensmile/!svn/ver/304/trunk/src/pitchACF.hpp
+END
+functionalPeaks.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/302/trunk/src/functionalPeaks.cpp
+END
+waveSink.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svnroot/opensmile/!svn/ver/309/trunk/src/waveSink.cpp
+END
+signalGenerator.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/315/trunk/src/signalGenerator.hpp
+END
+portaudioDuplex.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/304/trunk/src/portaudioDuplex.hpp
+END
+cens.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svnroot/opensmile/!svn/ver/321/trunk/src/cens.hpp
+END
+deltaRegression.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/292/trunk/src/deltaRegression.hpp
+END
+functionalPercentiles.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svnroot/opensmile/!svn/ver/300/trunk/src/functionalPercentiles.cpp
+END
+windowframer.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svnroot/opensmile/!svn/ver/245/trunk/src/windowframer.cpp
+END
+configManager.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svnroot/opensmile/!svn/ver/292/trunk/src/configManager.hpp
+END
+htkSource.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svnroot/opensmile/!svn/ver/299/trunk/src/htkSource.cpp
+END
+pitchDirection.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svnroot/opensmile/!svn/ver/292/trunk/src/pitchDirection.cpp
+END
+buffer.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svnroot/opensmile/!svn/ver/304/trunk/src/buffer.cpp
+END
+functionalTimes.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/300/trunk/src/functionalTimes.hpp
+END
+tonespec.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svnroot/opensmile/!svn/ver/321/trunk/src/tonespec.cpp
+END
+csvSink.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svnroot/opensmile/!svn/ver/304/trunk/src/csvSink.cpp
+END
+configManager2.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svnroot/opensmile/!svn/ver/304/trunk/src/configManager2.cpp
+END
+functionalsVecToVec.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svnroot/opensmile/!svn/ver/245/trunk/src/functionalsVecToVec.cpp
+END
+intensity.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svnroot/opensmile/!svn/ver/315/trunk/src/intensity.cpp
+END
+exampleWindowProcessor.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svnroot/opensmile/!svn/ver/292/trunk/src/exampleWindowProcessor.hpp
+END
+fullinputMean.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svnroot/opensmile/!svn/ver/292/trunk/src/fullinputMean.hpp
+END
+functionalComponent.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svnroot/opensmile/!svn/ver/304/trunk/src/functionalComponent.hpp
+END
+portaudioSink.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svnroot/opensmile/!svn/ver/245/trunk/src/portaudioSink.cpp
+END
+functionalMeans.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/304/trunk/src/functionalMeans.hpp
+END
+portaudioDuplexD.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svnroot/opensmile/!svn/ver/245/trunk/src/portaudioDuplexD.cpp
+END
+formantSmoother.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/292/trunk/src/formantSmoother.hpp
+END
+activeMqSink.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svnroot/opensmile/!svn/ver/245/trunk/src/activeMqSink.cpp
+END
+weightedDiff.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svnroot/opensmile/!svn/ver/292/trunk/src/weightedDiff.hpp
+END
+vectorConcat.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svnroot/opensmile/!svn/ver/245/trunk/src/vectorConcat.hpp
+END
+vecGlMean.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svnroot/opensmile/!svn/ver/292/trunk/src/vecGlMean.cpp
+END
+vectorTransform.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/245/trunk/src/vectorTransform.hpp
+END
+dataWriter.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svnroot/opensmile/!svn/ver/303/trunk/src/dataWriter.cpp
+END
+smileUtil.c
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svnroot/opensmile/!svn/ver/304/trunk/src/smileUtil.c
+END
+amdf.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svnroot/opensmile/!svn/ver/304/trunk/src/amdf.cpp
+END
+contourSmoother.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/301/trunk/src/contourSmoother.cpp
+END
+formantLpc.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svnroot/opensmile/!svn/ver/292/trunk/src/formantLpc.hpp
+END
+smileUtil.h
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svnroot/opensmile/!svn/ver/304/trunk/src/smileUtil.h
+END
+spectral.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svnroot/opensmile/!svn/ver/320/trunk/src/spectral.cpp
+END
+TumFeatureExtractor.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svnroot/opensmile/!svn/ver/288/trunk/src/TumFeatureExtractor.cpp
+END
+lpc.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svnroot/opensmile/!svn/ver/304/trunk/src/lpc.cpp
+END
+exampleSink.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svnroot/opensmile/!svn/ver/304/trunk/src/exampleSink.cpp
+END
+csvSource.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svnroot/opensmile/!svn/ver/292/trunk/src/csvSource.hpp
+END
+pitchShs.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svnroot/opensmile/!svn/ver/304/trunk/src/pitchShs.cpp
+END
+dbA.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svnroot/opensmile/!svn/ver/301/trunk/src/dbA.cpp
+END
+functionals.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svnroot/opensmile/!svn/ver/304/trunk/src/functionals.hpp
+END
+echoCanceller.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svnroot/opensmile/!svn/ver/292/trunk/src/echoCanceller.hpp
+END
+componentTemplate.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svnroot/opensmile/!svn/ver/304/trunk/src/componentTemplate.cpp
+END
+winToVecProcessor.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svnroot/opensmile/!svn/ver/292/trunk/src/winToVecProcessor.cpp
+END
+pitchHpsLinf.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svnroot/opensmile/!svn/ver/292/trunk/src/pitchHpsLinf.hpp
+END
+dataMemory_old.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svnroot/opensmile/!svn/ver/304/trunk/src/dataMemory_old.cpp
+END
+commandlineParser.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svnroot/opensmile/!svn/ver/304/trunk/src/commandlineParser.cpp
+END
+windower.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svnroot/opensmile/!svn/ver/292/trunk/src/windower.hpp
+END
+vectorProcessor.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/321/trunk/src/vectorProcessor.hpp
+END
+functionalSegments.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svnroot/opensmile/!svn/ver/304/trunk/src/functionalSegments.hpp
+END
+vadV1.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svnroot/opensmile/!svn/ver/292/trunk/src/vadV1.cpp
+END
+exampleSource.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svnroot/opensmile/!svn/ver/301/trunk/src/exampleSource.hpp
+END
+multipleWaveSources.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svnroot/opensmile/!svn/ver/304/trunk/src/multipleWaveSources.cpp
+END
+volanalyse.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svnroot/opensmile/!svn/ver/245/trunk/src/volanalyse.hpp
+END
+specResample.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svnroot/opensmile/!svn/ver/304/trunk/src/specResample.cpp
+END
+fftXg.h
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svnroot/opensmile/!svn/ver/245/trunk/src/fftXg.h
+END
+voiceQuality.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svnroot/opensmile/!svn/ver/261/trunk/src/voiceQuality.hpp
+END
+tonefilt.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svnroot/opensmile/!svn/ver/292/trunk/src/tonefilt.cpp
+END
+libSamplerate.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svnroot/opensmile/!svn/ver/245/trunk/src/libSamplerate.cpp
+END
+functionalExtremes.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svnroot/opensmile/!svn/ver/304/trunk/src/functionalExtremes.hpp
+END
+fftmagphase.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svnroot/opensmile/!svn/ver/317/trunk/src/fftmagphase.cpp
+END
+valbasedSelector.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svnroot/opensmile/!svn/ver/304/trunk/src/valbasedSelector.hpp
+END
+dataReader.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svnroot/opensmile/!svn/ver/313/trunk/src/dataReader.cpp
+END
+componentManager.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svnroot/opensmile/!svn/ver/321/trunk/src/componentManager.cpp
+END
+functionalCrossings.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svnroot/opensmile/!svn/ver/300/trunk/src/functionalCrossings.cpp
+END
+chordFeatures.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svnroot/opensmile/!svn/ver/304/trunk/src/chordFeatures.cpp
+END
+nullSink.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svnroot/opensmile/!svn/ver/304/trunk/src/nullSink.cpp
+END
+vectorHEQ.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svnroot/opensmile/!svn/ver/292/trunk/src/vectorHEQ.cpp
+END
+libsvmliveSink.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svnroot/opensmile/!svn/ver/292/trunk/src/libsvmliveSink.hpp
+END
+functionalMoments.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svnroot/opensmile/!svn/ver/304/trunk/src/functionalMoments.hpp
+END
+htkSink.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svnroot/opensmile/!svn/ver/299/trunk/src/htkSink.cpp
+END
+framer.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svnroot/opensmile/!svn/ver/245/trunk/src/framer.cpp
+END
+transformFft.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svnroot/opensmile/!svn/ver/317/trunk/src/transformFft.hpp
+END
+functionalOnset.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/304/trunk/src/functionalOnset.hpp
+END
+vectorOperation.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/305/trunk/src/vectorOperation.cpp
+END
+preemphasis.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svnroot/opensmile/!svn/ver/304/trunk/src/preemphasis.hpp
+END
+echoAttenuator.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svnroot/opensmile/!svn/ver/245/trunk/src/echoAttenuator.cpp
+END
+turnDetector.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svnroot/opensmile/!svn/ver/304/trunk/src/turnDetector.hpp
+END
+pitchSmoother.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svnroot/opensmile/!svn/ver/304/trunk/src/pitchSmoother.cpp
+END
+melspec.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svnroot/opensmile/!svn/ver/304/trunk/src/melspec.cpp
+END
+semaineSpeakerID1.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svnroot/opensmile/!svn/ver/288/trunk/src/semaineSpeakerID1.cpp
+END
+activeMqSource.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svnroot/opensmile/!svn/ver/245/trunk/src/activeMqSource.cpp
+END
+acf.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svnroot/opensmile/!svn/ver/292/trunk/src/acf.hpp
+END
+SMILExtract.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svnroot/opensmile/!svn/ver/303/trunk/src/SMILExtract.cpp
+END
+plp.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svnroot/opensmile/!svn/ver/304/trunk/src/plp.hpp
+END
+specScale.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svnroot/opensmile/!svn/ver/304/trunk/src/specScale.cpp
+END
+dataMemory.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svnroot/opensmile/!svn/ver/312/trunk/src/dataMemory.hpp
+END
+fftsg.c
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svnroot/opensmile/!svn/ver/304/trunk/src/fftsg.c
+END
+portaudioSourceS.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svnroot/opensmile/!svn/ver/245/trunk/src/portaudioSourceS.cpp
+END
+mfcc.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svnroot/opensmile/!svn/ver/304/trunk/src/mfcc.hpp
+END
+chromaFeatures.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svnroot/opensmile/!svn/ver/249/trunk/src/chromaFeatures.hpp
+END
+exceptions.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svnroot/opensmile/!svn/ver/304/trunk/src/exceptions.cpp
+END
+waveSource.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svnroot/opensmile/!svn/ver/304/trunk/src/waveSource.cpp
+END
+datadumpSink.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svnroot/opensmile/!svn/ver/304/trunk/src/datadumpSink.cpp
+END
+fingerprint.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svnroot/opensmile/!svn/ver/245/trunk/src/fingerprint.cpp
+END
+vectorMVN.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svnroot/opensmile/!svn/ver/292/trunk/src/vectorMVN.hpp
+END
+tumkwsjSink.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svnroot/opensmile/!svn/ver/288/trunk/src/tumkwsjSink.cpp
+END
+speechLearn.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svnroot/opensmile/!svn/ver/245/trunk/src/speechLearn.cpp
+END
+pitchJitter.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svnroot/opensmile/!svn/ver/292/trunk/src/pitchJitter.cpp
+END
+chromaPerFrame.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svnroot/opensmile/!svn/ver/304/trunk/src/chromaPerFrame.cpp
+END
+lsp.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svnroot/opensmile/!svn/ver/245/trunk/src/lsp.cpp
+END
+energy.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svnroot/opensmile/!svn/ver/292/trunk/src/energy.hpp
+END
+exampleProcessor.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svnroot/opensmile/!svn/ver/292/trunk/src/exampleProcessor.hpp
+END
+stretchToTime.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svnroot/opensmile/!svn/ver/304/trunk/src/stretchToTime.hpp
+END
+fft4g.c
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svnroot/opensmile/!svn/ver/245/trunk/src/fft4g.c
+END
+pitchBaseExample.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svnroot/opensmile/!svn/ver/261/trunk/src/pitchBaseExample.cpp
+END
+dataProcessor.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svnroot/opensmile/!svn/ver/292/trunk/src/dataProcessor.hpp
+END
+dataSelector.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svnroot/opensmile/!svn/ver/292/trunk/src/dataSelector.hpp
+END
+pitchACF.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svnroot/opensmile/!svn/ver/292/trunk/src/pitchACF.cpp
+END
+speexResample.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svnroot/opensmile/!svn/ver/304/trunk/src/speexResample.hpp
+END
+portaudioSinkS.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svnroot/opensmile/!svn/ver/304/trunk/src/portaudioSinkS.hpp
+END
+signalGenerator.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/315/trunk/src/signalGenerator.cpp
+END
+vectorMVStd.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svnroot/opensmile/!svn/ver/292/trunk/src/vectorMVStd.hpp
+END
+libsvmSink.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svnroot/opensmile/!svn/ver/304/trunk/src/libsvmSink.hpp
+END
+smileCommon.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svnroot/opensmile/!svn/ver/324/trunk/src/smileCommon.hpp
+END
+semaineEmmaSender.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svnroot/opensmile/!svn/ver/245/trunk/src/semaineEmmaSender.hpp
+END
+portaudioDuplex.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/245/trunk/src/portaudioDuplex.cpp
+END
+cens.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svnroot/opensmile/!svn/ver/321/trunk/src/cens.cpp
+END
+deltaRegression.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/301/trunk/src/deltaRegression.cpp
+END
+configManager.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svnroot/opensmile/!svn/ver/312/trunk/src/configManager.cpp
+END
+bowProducer.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svnroot/opensmile/!svn/ver/292/trunk/src/bowProducer.hpp
+END
+functionalDCT.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svnroot/opensmile/!svn/ver/304/trunk/src/functionalDCT.hpp
+END
+dataSink.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svnroot/opensmile/!svn/ver/292/trunk/src/dataSink.hpp
+END
+arffSource.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svnroot/opensmile/!svn/ver/292/trunk/src/arffSource.hpp
+END
+functionalTimes.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/300/trunk/src/functionalTimes.cpp
+END
+vectorPreemphasis.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svnroot/opensmile/!svn/ver/292/trunk/src/vectorPreemphasis.hpp
+END
+waveSinkCut.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svnroot/opensmile/!svn/ver/303/trunk/src/waveSinkCut.hpp
+END
+smileComponentExample.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svnroot/opensmile/!svn/ver/304/trunk/src/smileComponentExample.hpp
+END
+smileLogger.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svnroot/opensmile/!svn/ver/304/trunk/src/smileLogger.hpp
+END
+pitchAmdfAcf.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svnroot/opensmile/!svn/ver/304/trunk/src/pitchAmdfAcf.hpp
+END
+channelMixer.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svnroot/opensmile/!svn/ver/249/trunk/src/channelMixer.hpp
+END
+exampleWindowProcessor.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svnroot/opensmile/!svn/ver/245/trunk/src/exampleWindowProcessor.cpp
+END
+fullinputMean.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svnroot/opensmile/!svn/ver/296/trunk/src/fullinputMean.cpp
+END
+tumkwsaSink.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svnroot/opensmile/!svn/ver/304/trunk/src/tumkwsaSink.hpp
+END
+functionalComponent.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svnroot/opensmile/!svn/ver/300/trunk/src/functionalComponent.cpp
+END
+functionalMeans.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/300/trunk/src/functionalMeans.cpp
+END
+formantSmoother.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/301/trunk/src/formantSmoother.cpp
+END
+weightedDiff.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svnroot/opensmile/!svn/ver/292/trunk/src/weightedDiff.cpp
+END
+vectorConcat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svnroot/opensmile/!svn/ver/296/trunk/src/vectorConcat.cpp
+END
+functionalSamples.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svnroot/opensmile/!svn/ver/274/trunk/src/functionalSamples.hpp
+END
+vectorTransform.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/292/trunk/src/vectorTransform.cpp
+END
+formantLpc.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svnroot/opensmile/!svn/ver/304/trunk/src/formantLpc.cpp
+END
+smileResample.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svnroot/opensmile/!svn/ver/304/trunk/src/smileResample.hpp
+END
+pitchBase.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svnroot/opensmile/!svn/ver/261/trunk/src/pitchBase.hpp
+END
+nnlPlugin.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svnroot/opensmile/!svn/ver/304/trunk/src/nnlPlugin.hpp
+END
+csvSource.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svnroot/opensmile/!svn/ver/304/trunk/src/csvSource.cpp
+END
+portaudioDuplexS.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svnroot/opensmile/!svn/ver/304/trunk/src/portaudioDuplexS.hpp
+END
+functionals.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svnroot/opensmile/!svn/ver/300/trunk/src/functionals.cpp
+END
+echoCanceller.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svnroot/opensmile/!svn/ver/245/trunk/src/echoCanceller.cpp
+END
+pitchHpsLinf.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svnroot/opensmile/!svn/ver/257/trunk/src/pitchHpsLinf.cpp
+END
+portaudioSource.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/292/trunk/src/portaudioSource.hpp
+END

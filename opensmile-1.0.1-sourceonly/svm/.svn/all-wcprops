@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svnroot/opensmile/!svn/ver/245/trunk/svm
+END
+convertAllModels.sh
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/245/trunk/svm/convertAllModels.sh
+END
+svm.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svnroot/opensmile/!svn/ver/245/trunk/svm/svm.cpp
+END
+COPYRIGHT
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svnroot/opensmile/!svn/ver/245/trunk/svm/COPYRIGHT
+END
+compileConverter.sh
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/opensmile/!svn/ver/245/trunk/svm/compileConverter.sh
+END
+modelconverter.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svnroot/opensmile/!svn/ver/245/trunk/svm/modelconverter.cpp
+END
+svm.h
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svnroot/opensmile/!svn/ver/245/trunk/svm/svm.h
+END

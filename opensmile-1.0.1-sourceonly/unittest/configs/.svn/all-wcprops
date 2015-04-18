@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svnroot/opensmile/!svn/ver/321/trunk/unittest/configs
+END
+MFCC12.conf
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svnroot/opensmile/!svn/ver/291/trunk/unittest/configs/MFCC12.conf
+END
+MFCC12_0_nonhtk.conf
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svnroot/opensmile/!svn/ver/291/trunk/unittest/configs/MFCC12_0_nonhtk.conf
+END
+MFCC12_E_D_A_Z.conf
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svnroot/opensmile/!svn/ver/291/trunk/unittest/configs/MFCC12_E_D_A_Z.conf
+END
+emobase.conf
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svnroot/opensmile/!svn/ver/291/trunk/unittest/configs/emobase.conf
+END
+emolarge.conf
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svnroot/opensmile/!svn/ver/321/trunk/unittest/configs/emolarge.conf
+END
+PLP_0_D_A.conf
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svnroot/opensmile/!svn/ver/291/trunk/unittest/configs/PLP_0_D_A.conf
+END
+IS10avic.conf
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svnroot/opensmile/!svn/ver/291/trunk/unittest/configs/IS10avic.conf
+END
+MFCC12_E_D_A.conf
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svnroot/opensmile/!svn/ver/291/trunk/unittest/configs/MFCC12_E_D_A.conf
+END
+MFCC12_0_noncl.conf
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svnroot/opensmile/!svn/ver/291/trunk/unittest/configs/MFCC12_0_noncl.conf
+END
+MFCC12_0_nonhtk_noncl.conf
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svnroot/opensmile/!svn/ver/291/trunk/unittest/configs/MFCC12_0_nonhtk_noncl.conf
+END
+MFCC12_0.conf
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svnroot/opensmile/!svn/ver/291/trunk/unittest/configs/MFCC12_0.conf
+END

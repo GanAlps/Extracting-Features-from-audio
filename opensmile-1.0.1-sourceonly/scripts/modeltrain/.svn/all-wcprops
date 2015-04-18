@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svnroot/opensmile/!svn/ver/290/trunk/scripts/modeltrain
+END
+txtfile-functions.pl
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svnroot/opensmile/!svn/ver/245/trunk/scripts/modeltrain/txtfile-functions.pl
+END
+fsel.pl
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svnroot/opensmile/!svn/ver/245/trunk/scripts/modeltrain/fsel.pl
+END
+arff-standardize.c
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svnroot/opensmile/!svn/ver/245/trunk/scripts/modeltrain/arff-standardize.c
+END
+makemodel.pl
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svnroot/opensmile/!svn/ver/245/trunk/scripts/modeltrain/makemodel.pl
+END
+buildmodel.pl
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svnroot/opensmile/!svn/ver/245/trunk/scripts/modeltrain/buildmodel.pl
+END
+README.txt
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svnroot/opensmile/!svn/ver/245/trunk/scripts/modeltrain/README.txt
+END
+arffToLsvm.pl
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svnroot/opensmile/!svn/ver/245/trunk/scripts/modeltrain/arffToLsvm.pl
+END
+stddirectory_smileextract.pl
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svnroot/opensmile/!svn/ver/290/trunk/scripts/modeltrain/stddirectory_smileextract.pl
+END
+arff-functions.pl
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svnroot/opensmile/!svn/ver/245/trunk/scripts/modeltrain/arff-functions.pl
+END

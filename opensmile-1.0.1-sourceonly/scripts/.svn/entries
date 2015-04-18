@@ -1,0 +1,76 @@
+8
+
+dir
+324
+https://opensmile.svn.sourceforge.net/svnroot/opensmile/trunk/scripts
+https://opensmile.svn.sourceforge.net/svnroot/opensmile
+
+
+
+2010-05-23T20:58:27.113905Z
+321
+feyben
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+085650a7-939c-42df-9e66-e8259269880e
+
+arff_naninfzero_checker.pl
+file
+
+
+
+
+2010-05-23T22:51:27.000000Z
+0b3cbdc79ad458fb99382d03973aa416
+2010-05-07T09:46:33.850839Z
+293
+feyben
+
+gnuplot
+dir
+
+clonecomp.pl
+file
+
+
+
+
+2010-05-23T22:51:27.000000Z
+821fbbfb3145f0734679dd51b3f9b980
+2010-05-23T20:58:27.113905Z
+321
+feyben
+
+vis.m
+file
+
+
+
+
+2010-05-23T22:51:27.000000Z
+987ed522ed41c447ff9a82482dded144
+2010-05-07T09:46:33.850839Z
+293
+feyben
+
+heq
+dir
+
+util
+dir
+
+modeltrain
+dir
+

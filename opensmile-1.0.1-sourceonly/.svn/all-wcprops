@@ -1,0 +1,101 @@
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svnroot/opensmile/!svn/ver/324/trunk
+END
+buildStandalone.sh
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svnroot/opensmile/!svn/ver/321/trunk/buildStandalone.sh
+END
+TODO.txt
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svnroot/opensmile/!svn/ver/290/trunk/TODO.txt
+END
+AUTHORS
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svnroot/opensmile/!svn/ver/299/trunk/AUTHORS
+END
+ChangeLog
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svnroot/opensmile/!svn/ver/245/trunk/ChangeLog
+END
+buildWithPortAudio.sh
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svnroot/opensmile/!svn/ver/299/trunk/buildWithPortAudio.sh
+END
+buildWithInstalledPortAudio.sh
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svnroot/opensmile/!svn/ver/299/trunk/buildWithInstalledPortAudio.sh
+END
+CITING.txt
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svnroot/opensmile/!svn/ver/245/trunk/CITING.txt
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svnroot/opensmile/!svn/ver/299/trunk/README
+END
+CREDITS
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svnroot/opensmile/!svn/ver/299/trunk/CREDITS
+END
+configure.ac
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svnroot/opensmile/!svn/ver/245/trunk/configure.ac
+END
+INSTALL
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svnroot/opensmile/!svn/ver/299/trunk/INSTALL
+END
+COPYING
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svnroot/opensmile/!svn/ver/299/trunk/COPYING
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svnroot/opensmile/!svn/ver/321/trunk/Makefile.am
+END
+autogen.sh
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svnroot/opensmile/!svn/ver/245/trunk/autogen.sh
+END
+NEWS
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svnroot/opensmile/!svn/ver/299/trunk/NEWS
+END
+JULIUS_LICENSE
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svnroot/opensmile/!svn/ver/245/trunk/JULIUS_LICENSE
+END
