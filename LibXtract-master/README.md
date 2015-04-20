@@ -34,8 +34,9 @@ Now, I send this samples chunk by chunk to function extractall() which returns m
 For further help about libxtracts file by file working I refered:
 http://libxtract.sourceforge.net/modules.html
 
-#Original Readme by Jamie Starts here.
+Feel free to contact me regarding any issue at: osho.gupta.ece11@iitbhu.ac.in
 
+#Original Readme by Jamie Starts here.
 
 # LibXtract
 

@@ -39,7 +39,7 @@ I wanted to get back a pointer to all features in SMILExtract.cpp
 OpenSmile uses multithreading and its Mutex lock concept. Its a complicated library to understand relationship between its source files.
 'exampleSink.cpp' have a function named "mytick()". It gets a "reader" type object from which it extracts the feature vector "vec". I am unable to find where it finds "reader" and how "reader" is upadted and from where the "mytick()" is called? Thus I am unable to use that in my main file SMILExtract.cpp
 
-
+Feel free to contact me regarding any issue at: osho.gupta.ece11@iitbhu.ac.in
 
 #Original Opensmile Readme:
 
